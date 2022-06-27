@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Faking persistent component state | bUnit </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Faking persistent component state | bUnit ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+  
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img height="60%" id="logo" class="img" src="../..//images/bunit-logo.png" alt="bUnit">
+                <span>bUnit</span>
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <div id="sponsor-button">
+                <iframe src="https://github.com/sponsors/egil/button" title="Sponsor egil" height="35" width="116" style="border: 0;"></iframe>
+              </div>
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="faking-persistentcomponentstate">
+<h1 id="faking-persistent-component-state">Faking persistent component state</h1>
+
+<p>bUnit comes with fake version of the <code>PersistentComponentState</code> type in Blazor that makes it possible to test components that use the type.</p>
+<h2 id="using-the-fake-persistentcomponentstate">Using the fake <code>PersistentComponentState</code></h2>
+<p>To use the fake <code>PersistentComponentState</code> in bUnit, call the <code>AddFakePersistentComponentState</code> extension method on <code>TestContext</code>:</p>
+<pre><code class="lang-csharp">using var ctx = new TestContext();
+var fakeState = ctx.AddFakePersistentComponentState();
+</code></pre>
+<p>Calling <code>AddFakePersistentComponentState</code> returns a <code>FakePersistentComponentState</code> type, which has three methods; one to persist data, one to get persisted data, and one that triggers any &quot;OnPersisting&quot; callbacks added to the <code>PersistentComponentState</code>.</p>
+<p>To add data to the <code>PersistentComponentState</code> before running a test, i.e. to verify that a component uses the persisted state, use the <code>Persist</code> method:</p>
+<pre><code class="lang-csharp">using var ctx = new TestContext();
+var fakeState = ctx.AddFakePersistentComponentState();
+var key = &quot;STATE KEY&quot;;
+var data = ...; // data to persist
+
+fakeState.Persist(key, data);
+
+// render component
+</code></pre>
+<p>To trigger a callback registered with the <code>PersistentComponentState.RegisterOnPersisting</code> method, use the <code>TriggerOnPersisting</code> method on <code>FakePersistentComponentState</code>:</p>
+<pre><code class="lang-csharp">using var ctx = new TestContext();
+var fakeState = ctx.AddFakePersistentComponentState();
+
+// render component
+
+fakeState.TriggerOnPersisting();
+</code></pre>
+<p>To check if data has been persisted, use the <code>TryTake</code> method:</p>
+<pre><code class="lang-csharp">using var ctx = new TestContext();
+var fakeState = ctx.AddFakePersistentComponentState();
+var key = &quot;STATE KEY&quot;;
+
+// render component, call TriggerOnPersisting
+
+bool foundState = fakeState.TryTake&lt;string&gt;(key, out var data);
+</code></pre>
+<p>The following section has a complete example.</p>
+<h2 id="example---testing-the-fetchdata-component">Example - testing the <code>&lt;FetchData&gt;</code> component</h2>
+<p>In this example, lets test the following <code>&lt;FetchData&gt;</code> component that use <code>PersistentComponentState</code>:</p>
+<pre><code class="lang-cshtml">@page &quot;/fetchdata&quot;
+@inject PersistentComponentState State
+
+@foreach (var f in Forecasts)
+{
+  &lt;p&gt;@f.Temperature&lt;/p&gt;
+}
+
+@code {
+  private WeatherForecast[] Forecasts { get; set; }
+
+  protected override async Task OnInitializedAsync()
+  {
+    State.RegisterOnPersisting(PersistForecasts);
+    
+    if (!State.TryTakeFromJson&lt;WeatherForecast[]&gt;(&quot;weather-data&quot;, out var forecasts))
+    {
+        forecasts = await CreateForecastsAsync();
+    }
+    
+    Forecasts = forecasts;
+  }
+
+  private Task PersistForecasts()
+  {
+    State.PersistAsJson(&quot;weather-data&quot;, Forecasts);
+    return Task.CompletedTask;
+  }
+
+  // Emulates calling an API or database to get forecasts
+  private Task&lt;WeatherForecast[]&gt; CreateForecastsAsync() =&gt;
+    new WeatherForecast[] { ... };
+}
+</code></pre>
+<p>To test that the <code>&lt;FetchData&gt;</code> component uses persisted weather data instead of downloading (generating) it again with the <code>CreateForecastsAsync</code> method, use the <code>Persist</code> method on the <code>FakePersistentComponentState</code> type:</p>
+<pre><code class="lang-csharp">// Arrange
+using var ctx = new TestContext();
+var fakeState = ctx.AddFakePersistentComponentState();
+
+// Persist a single weather forecast with a temperature of 42
+fakeState.Persist(&quot;weather-data&quot;, new [] { new WeatherForecast { Temperature = 42 } });
+
+// Act
+var cut = ctx.RenderComponent&lt;FetchData&gt;();
+
+// Assert - verify that the persisted forecast was rendered out
+cut.MarkupMatches(&quot;&lt;p&gt;42&lt;/p&gt;&quot;);
+</code></pre>
+<p>To test that the <code>&lt;FetchData&gt;</code> component correctly persists weather data when its <code>OnPersisting</code> callback is triggered, do the following:</p>
+<pre><code class="lang-csharp">// Arrange
+using var ctx = new TestContext();
+var fakeState = ctx.AddFakePersistentComponentState();
+var cut = ctx.RenderComponent&lt;FetchData&gt;();
+
+// Act - trigger the FetchData components PersistForecasts method
+fakeState.TriggerOnPersisting();
+
+// Assert that state was saved and there is a non-empty forecast array returned
+var didSaveState = fakeState.TryTake&lt;WeatherForecast[]&gt;(&quot;weather-data&quot;, out var savedState);
+Assert.IsTrue(didSaveState);
+Assert.NotEmpty(savedState);
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="sponsor-highlight supported">
+                <a href="https://www.telerik.com/blazor-ui?utm_source=egilhansen&utm_medium=cpm&utm_campaign=blazor-trial-readme-sponsored-message">
+                  <img width="200" src="/sponsors/progress-blazor-2022-300x300.png">
+                </a>
+                <p>Premium sponsor: <a href="https://www.telerik.com/blazor-ui?utm_source=egilhansen&utm_medium=cpm&utm_campaign=blazor-trial-readme-sponsored-message" title="Progress Telerik">Progress Telerik</a>.</p>
+              </div>
+              <div class="supported">
+                <a href="https://www.packtpub.com/" title="Packt">
+                  <img width="150" src="/sponsors/packt-retina-logo.png">
+                </a>
+                <p>Editorial support provided by <a href="https://www.packtpub.com/" title="Packt">Packt</a>.</p>
+              </div>
+              <div class="supported">
+                <a href="https://dotnetfoundation.org" title=".NET Foundation">
+                  <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg">
+                </a>
+                <p>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</p>
+              </div>
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/test-doubles/faking-persistentcomponentstate.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <small>Documentation updated on 06/27/2022 20:44:01 +00:00 in commit 9a81bc9b93</small>.
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/cshtml-razor.js"></script>
+    <script>
+      hljs.registerLanguage('cshtml-razor', window.hljsDefineCshtmlRazor);
+    </script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Triggering a render life cycle on a component | bUnit </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Triggering a render life cycle on a component | bUnit ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+  
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img height="60%" id="logo" class="img" src="../..//images/bunit-logo.png" alt="bUnit">
+                <span>bUnit</span>
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <div id="sponsor-button">
+                <iframe src="https://github.com/sponsors/egil/button" title="Sponsor egil" height="35" width="116" style="border: 0;"></iframe>
+              </div>
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="trigger-renders">
+<h1 id="triggering-a-render-life-cycle-on-a-component">Triggering a render life cycle on a component</h1>
+
+<p>To trigger a re-render of a component under test, a reference to it through a <a class="xref" href="../../api/Bunit.IRenderedComponent-1.html">IRenderedComponent&lt;TComponent&gt;</a> type is needed. When using the <a class="xref" href="../../api/Bunit.TestContext.html">TestContext</a>'s <code>RenderComponent&lt;TComponent&gt;()</code> method, this is the type returned.</p>
+<p>In <code>.razor</code> based tests, using the <a class="xref" href="../../api/Bunit.TestContext.html">TestContext</a>'s <a class="xref" href="../../api/Bunit.TestContext.html#Bunit_TestContext_Render__1_RenderFragment_">Render&lt;TComponent&gt;(RenderFragment)</a> method also returns an <a class="xref" href="../../api/Bunit.IRenderedComponent-1.html">IRenderedComponent&lt;TComponent&gt;</a> (as opposed to the <a class="xref" href="../../api/Bunit.TestContext.html#Bunit_TestContext_Render_RenderFragment_">Render(RenderFragment)</a> method which returns the more simple <a class="xref" href="../../api/Bunit.IRenderedFragment.html">IRenderedFragment</a>).</p>
+<p>If you have a <a class="xref" href="../../api/Bunit.IRenderedFragment.html">IRenderedFragment</a> or a <a class="xref" href="../../api/Bunit.IRenderedComponent-1.html">IRenderedComponent&lt;TComponent&gt;</a> in a test, but need a child component's <a class="xref" href="../../api/Bunit.IRenderedComponent-1.html">IRenderedComponent&lt;TComponent&gt;</a>, then use the <code>FindComponent&lt;TComponent&gt;()</code> or the <code>FindComponents&lt;TComponent&gt;()</code> methods, which traverse down the render tree and finds rendered components.</p>
+<p>With a <a class="xref" href="../../api/Bunit.IRenderedComponent-1.html">IRenderedComponent&lt;TComponent&gt;</a>, it is possible to cause the component to render again directly through the <a class="xref" href="../../api/Bunit.RenderedComponentRenderExtensions.html#Bunit_RenderedComponentRenderExtensions_Render__1_Bunit_IRenderedComponentBase___0__"><code>Render()</code></a> method or one of the <a href="xref:Bunit.RenderedComponentRenderExtensions.SetParametersAndRender%60%601(Bunit.IRenderedComponentBase%7B%60%600%7D,System.Action%7BBunit.ComponentParameterCollectionBuilder%7B%60%600%7D%7D)"><code>SetParametersAndRender()</code></a> methods, or indirectly through the <a href="xref:Bunit.IRenderedFragmentBase.Bunit.RenderedFragmentInvokeAsyncExtensions.InvokeAsync(System.Action)"><code>InvokeAsync()</code></a> method.</p>
+<p>Let's look at how to use each of these methods to cause a re-render.</p>
+<h2 id="render">Render</h2>
+<p>The <a class="xref" href="../../api/Bunit.RenderedComponentRenderExtensions.html#Bunit_RenderedComponentRenderExtensions_Render__1_Bunit_IRenderedComponentBase___0__"><code>Render()</code></a> method tells the renderer to re-render the component, i.e. go through its life-cycle methods (except for <code>OnInitialized()</code> and <code>OnInitializedAsync()</code> methods). To use it, do the following:</p>
+<pre><code class="lang-csharp" highlight-lines="6">using var ctx = new TestContext();
+var cut = ctx.RenderComponent&lt;Heading&gt;();
+Assert.Equal(1, cut.RenderCount);
+
+// Re-render without new parameters
+cut.Render();
+
+Assert.Equal(2, cut.RenderCount);
+</code></pre>
+<p>The highlighted line shows the call to <a class="xref" href="../../api/Bunit.RenderedComponentRenderExtensions.html#Bunit_RenderedComponentRenderExtensions_Render__1_Bunit_IRenderedComponentBase___0__"><code>Render()</code></a>.</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>The number of renders a component has been through can be inspected and verified using the <a class="xref" href="../../api/Bunit.IRenderedFragmentBase.html#Bunit_IRenderedFragmentBase_RenderCount">RenderCount</a> property.</p>
+</div>
+<h2 id="setparametersandrender">SetParametersAndRender</h2>
+<p>The <a href="xref:Bunit.RenderedComponentRenderExtensions.SetParametersAndRender%60%601(Bunit.IRenderedComponentBase%7B%60%600%7D,System.Action%7BBunit.ComponentParameterCollectionBuilder%7B%60%600%7D%7D)"><code>SetParametersAndRender(...)</code></a> methods tells the renderer to re-render the component with new parameters, i.e. go through its life-cycle methods (except for <code>OnInitialized()</code> and <code>OnInitializedAsync()</code> methods), passing the new parameters — <em>but only the new parameters</em> — to the <code>SetParametersAsync()</code> method. To use it, do the following:</p>
+<pre><code class="lang-csharp" highlight-lines="8-10">using var ctx = new TestContext();
+var cut = ctx.RenderComponent&lt;Item&gt;(parameters =&gt; parameters
+  .Add(p =&gt; p.Value, &quot;Foo&quot;)
+);
+cut.MarkupMatches(&quot;&lt;span&gt;Foo&lt;/span&gt;&quot;);
+
+// Re-render with new parameters
+cut.SetParametersAndRender(parameters =&gt; parameters
+  .Add(p =&gt; p.Value, &quot;Bar&quot;)
+);
+
+cut.MarkupMatches(&quot;&lt;span&gt;Bar&lt;/span&gt;&quot;);
+</code></pre>
+<p>The highlighted line shows the call to <a href="xref:Bunit.RenderedComponentRenderExtensions.SetParametersAndRender%60%601(Bunit.IRenderedComponentBase%7B%60%600%7D,System.Action%7BBunit.ComponentParameterCollectionBuilder%7B%60%600%7D%7D)"><code>SetParametersAndRender()</code></a>, which is also available as a version that takes the zero or more component parameters, e.g. created through the component parameter factory helper methods, if you prefer that method of passing parameters.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Passing parameters to components through the <a href="xref:Bunit.RenderedComponentRenderExtensions.SetParametersAndRender%60%601(Bunit.IRenderedComponentBase%7B%60%600%7D,System.Action%7BBunit.ComponentParameterCollectionBuilder%7B%60%600%7D%7D)"><code>SetParametersAndRender(...)</code></a> methods is identical to doing it with the <code>RenderComponent&lt;TComponent&gt;(...)</code> methods, described in detail on the <a class="xref" href="../providing-input/passing-parameters-to-components.html">Passing parameters to components</a> page.</p>
+</div>
+<h2 id="invokeasync">InvokeAsync</h2>
+<p>Invoking methods on a component under test, which causes a render, e.g. by calling <code>StateHasChanged</code>, can result in the following error, if the caller is running on another thread than the renderer's thread:</p>
+<blockquote>
+<p>The current thread is not associated with the Dispatcher. Use <code>InvokeAsync()</code> to switch execution to the Dispatcher when triggering rendering or component state.</p>
+</blockquote>
+<p>If you receive this error, you need to invoke your method inside an <code>Action</code> delegate passed to the <code>InvokeAsync()</code> method.</p>
+<p>Let’s look at an example of this, using the <code>&lt;Calc&gt;</code> component listed below:</p>
+<pre><code class="lang-cshtml" name="Calc.razor">&lt;output&gt;@result&lt;/output&gt;
+
+@code 
+{
+  int result = 0;
+
+  public void Calculate(int x, int y)
+  {
+    result = x + y;
+    StateHasChanged();
+  }
+}
+</code></pre>
+<p>To invoke the <code>Calculate()</code> method on the component instance, do the following:</p>
+<pre><code class="lang-csharp" highlight-lines="6">using var ctx = new TestContext();
+var cut = ctx.RenderComponent&lt;Calc&gt;();
+
+// Indirectly re-renders through the call to StateHasChanged 
+// in the Calculate(x, y) method.
+cut.InvokeAsync(() =&gt; cut.Instance.Calculate(1, 2));
+
+cut.MarkupMatches(&quot;&lt;output&gt;3&lt;/output&gt;&quot;);
+</code></pre>
+<p>The highlighted line shows the call to <code>InvokeAsync()</code>, which is passed an <code>Action</code> delegate that calls the <code>Calculate</code> method.</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>The instance of a component under test is available through the <a class="xref" href="../../api/Bunit.IRenderedComponentBase-1.html#Bunit_IRenderedComponentBase_1_Instance">Instance</a> property.</p>
+</div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="sponsor-highlight supported">
+                <a href="https://www.telerik.com/blazor-ui?utm_source=egilhansen&utm_medium=cpm&utm_campaign=blazor-trial-readme-sponsored-message">
+                  <img width="200" src="/sponsors/progress-blazor-2022-300x300.png">
+                </a>
+                <p>Premium sponsor: <a href="https://www.telerik.com/blazor-ui?utm_source=egilhansen&utm_medium=cpm&utm_campaign=blazor-trial-readme-sponsored-message" title="Progress Telerik">Progress Telerik</a>.</p>
+              </div>
+              <div class="supported">
+                <a href="https://www.packtpub.com/" title="Packt">
+                  <img width="150" src="/sponsors/packt-retina-logo.png">
+                </a>
+                <p>Editorial support provided by <a href="https://www.packtpub.com/" title="Packt">Packt</a>.</p>
+              </div>
+              <div class="supported">
+                <a href="https://dotnetfoundation.org" title=".NET Foundation">
+                  <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg">
+                </a>
+                <p>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</p>
+              </div>
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/interaction/trigger-renders.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <small>Documentation updated on 06/27/2022 20:44:01 +00:00 in commit 9a81bc9b93</small>.
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/cshtml-razor.js"></script>
+    <script>
+      hljs.registerLanguage('cshtml-razor', window.hljsDefineCshtmlRazor);
+    </script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,409 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class JSRuntimeInvocationHandler&lt;TResult&gt;
+   | bUnit </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class JSRuntimeInvocationHandler&lt;TResult&gt;
+   | bUnit ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+  
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img height="60%" id="logo" class="img" src="..//images/bunit-logo.png" alt="bUnit">
+                <span>bUnit</span>
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <div id="sponsor-button">
+                <iframe src="https://github.com/sponsors/egil/button" title="Sponsor egil" height="35" width="116" style="border: 0;"></iframe>
+              </div>
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Bunit.JSRuntimeInvocationHandler`1">
+  
+  
+  <h1 id="Bunit_JSRuntimeInvocationHandler_1" data-uid="Bunit.JSRuntimeInvocationHandler`1" class="text-break">Class JSRuntimeInvocationHandler&lt;TResult&gt;
+  </h1>
+  <div class="markdown level0 summary"><p>Represents a handler for an invocation of a JavaScript function with specific arguments
+and returns <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code>.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="Bunit.JSRuntimeInvocationHandlerBase-1.html">JSRuntimeInvocationHandlerBase</a>&lt;TResult&gt;</div>
+    <div class="level2"><span class="xref">JSRuntimeInvocationHandler&lt;TResult&gt;</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Bunit.JSRuntimeInvocationHandlerBase-1.html#Bunit_JSRuntimeInvocationHandlerBase_1_IsVoidResultHandler">JSRuntimeInvocationHandlerBase&lt;TResult&gt;.IsVoidResultHandler</a>
+    </div>
+    <div>
+      <a class="xref" href="Bunit.JSRuntimeInvocationHandlerBase-1.html#Bunit_JSRuntimeInvocationHandlerBase_1_IsCatchAllHandler">JSRuntimeInvocationHandlerBase&lt;TResult&gt;.IsCatchAllHandler</a>
+    </div>
+    <div>
+      <a class="xref" href="Bunit.JSRuntimeInvocationHandlerBase-1.html#Bunit_JSRuntimeInvocationHandlerBase_1_Invocations">JSRuntimeInvocationHandlerBase&lt;TResult&gt;.Invocations</a>
+    </div>
+    <div>
+      <a class="xref" href="Bunit.JSRuntimeInvocationHandlerBase-1.html#Bunit_JSRuntimeInvocationHandlerBase_1_SetCanceledBase">JSRuntimeInvocationHandlerBase&lt;TResult&gt;.SetCanceledBase()</a>
+    </div>
+    <div>
+      <a class="xref" href="Bunit.JSRuntimeInvocationHandlerBase-1.html#Bunit_JSRuntimeInvocationHandlerBase_1_SetExceptionBase__1___0_">JSRuntimeInvocationHandlerBase&lt;TResult&gt;.SetExceptionBase&lt;TException&gt;(TException)</a>
+    </div>
+    <div>
+      <a class="xref" href="Bunit.JSRuntimeInvocationHandlerBase-1.html#Bunit_JSRuntimeInvocationHandlerBase_1_SetResultBase__0_">JSRuntimeInvocationHandlerBase&lt;TResult&gt;.SetResultBase(TResult)</a>
+    </div>
+    <div>
+      <a class="xref" href="Bunit.JSRuntimeInvocationHandlerBase-1.html#Bunit_JSRuntimeInvocationHandlerBase_1_HandleAsync_Bunit_JSRuntimeInvocation_">JSRuntimeInvocationHandlerBase&lt;TResult&gt;.HandleAsync(JSRuntimeInvocation)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Bunit.html">Bunit</a></h6>
+  <h6><strong>Assembly</strong>: Bunit.Web.dll</h6>
+  <h5 id="Bunit_JSRuntimeInvocationHandler_1_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class JSRuntimeInvocationHandler&lt;TResult&gt; : JSRuntimeInvocationHandlerBase&lt;TResult&gt;</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td><p>The expect result type.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/bUnit-dev/bUnit/new/stable/apiSpec/new?filename=Bunit_JSRuntimeInvocationHandler_1__ctor_Bunit_InvocationMatcher_System_Boolean_.md&amp;value=---%0Auid%3A%20Bunit.JSRuntimeInvocationHandler%601.%23ctor(Bunit.InvocationMatcher%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/bUnit-dev/bUnit/blob/stable/src/bunit.web/JSInterop/InvocationHandlers/JSRuntimeInvocationHandler{TResult}.cs/#L15">View Source</a>
+  </span>
+  <a id="Bunit_JSRuntimeInvocationHandler_1__ctor_" data-uid="Bunit.JSRuntimeInvocationHandler`1.#ctor*"></a>
+  <h4 id="Bunit_JSRuntimeInvocationHandler_1__ctor_Bunit_InvocationMatcher_System_Boolean_" data-uid="Bunit.JSRuntimeInvocationHandler`1.#ctor(Bunit.InvocationMatcher,System.Boolean)">JSRuntimeInvocationHandler(InvocationMatcher, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Bunit.JSRuntimeInvocationHandler-1.html">JSRuntimeInvocationHandler&lt;TResult&gt;</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected JSRuntimeInvocationHandler(InvocationMatcher matcher, bool isCatchAllHandler)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Bunit.InvocationMatcher.html">InvocationMatcher</a></td>
+        <td><span class="parametername">matcher</span></td>
+        <td><p>An invocation matcher used to determine if the handler should handle an invocation.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isCatchAllHandler</span></td>
+        <td><p>Set to true if this handler is a catch all handler, that should only be used if there are no other non-catch all handlers available.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/bUnit-dev/bUnit/new/stable/apiSpec/new?filename=Bunit_JSRuntimeInvocationHandler_1_SetCanceled.md&amp;value=---%0Auid%3A%20Bunit.JSRuntimeInvocationHandler%601.SetCanceled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/bUnit-dev/bUnit/blob/stable/src/bunit.web/JSInterop/InvocationHandlers/JSRuntimeInvocationHandler{TResult}.cs/#L34">View Source</a>
+  </span>
+  <a id="Bunit_JSRuntimeInvocationHandler_1_SetCanceled_" data-uid="Bunit.JSRuntimeInvocationHandler`1.SetCanceled*"></a>
+  <h4 id="Bunit_JSRuntimeInvocationHandler_1_SetCanceled" data-uid="Bunit.JSRuntimeInvocationHandler`1.SetCanceled">SetCanceled()</h4>
+  <div class="markdown level1 summary"><p>Marks the <see cref="!:Task&lt;TResult>"></see> that invocations will receive as canceled.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JSRuntimeInvocationHandler&lt;TResult&gt; SetCanceled()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Bunit.JSRuntimeInvocationHandler-1.html">JSRuntimeInvocationHandler</a>&lt;TResult&gt;</td>
+        <td><p>This handler to allow calls to be chained.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/bUnit-dev/bUnit/new/stable/apiSpec/new?filename=Bunit_JSRuntimeInvocationHandler_1_SetException__1___0_.md&amp;value=---%0Auid%3A%20Bunit.JSRuntimeInvocationHandler%601.SetException%60%601(%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/bUnit-dev/bUnit/blob/stable/src/bunit.web/JSInterop/InvocationHandlers/JSRuntimeInvocationHandler{TResult}.cs/#L45">View Source</a>
+  </span>
+  <a id="Bunit_JSRuntimeInvocationHandler_1_SetException_" data-uid="Bunit.JSRuntimeInvocationHandler`1.SetException*"></a>
+  <h4 id="Bunit_JSRuntimeInvocationHandler_1_SetException__1___0_" data-uid="Bunit.JSRuntimeInvocationHandler`1.SetException``1(``0)">SetException&lt;TException&gt;(TException)</h4>
+  <div class="markdown level1 summary"><p>Sets the <code data-dev-comment-type="typeparamref" class="typeparamref">TException</code> exception that invocations will receive.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JSRuntimeInvocationHandler&lt;TResult&gt; SetException&lt;TException&gt;(TException exception)
+    where TException : Exception</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TException</span></td>
+        <td><span class="parametername">exception</span></td>
+        <td><p>The exception to set.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Bunit.JSRuntimeInvocationHandler-1.html">JSRuntimeInvocationHandler</a>&lt;TResult&gt;</td>
+        <td><p>This handler to allow calls to be chained.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TException</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/bUnit-dev/bUnit/new/stable/apiSpec/new?filename=Bunit_JSRuntimeInvocationHandler_1_SetResult__0_.md&amp;value=---%0Auid%3A%20Bunit.JSRuntimeInvocationHandler%601.SetResult(%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/bUnit-dev/bUnit/blob/stable/src/bunit.web/JSInterop/InvocationHandlers/JSRuntimeInvocationHandler{TResult}.cs/#L24">View Source</a>
+  </span>
+  <a id="Bunit_JSRuntimeInvocationHandler_1_SetResult_" data-uid="Bunit.JSRuntimeInvocationHandler`1.SetResult*"></a>
+  <h4 id="Bunit_JSRuntimeInvocationHandler_1_SetResult__0_" data-uid="Bunit.JSRuntimeInvocationHandler`1.SetResult(`0)">SetResult(TResult)</h4>
+  <div class="markdown level1 summary"><p>Sets the <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code> result that invocations will receive.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JSRuntimeInvocationHandler&lt;TResult&gt; SetResult(TResult result)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TResult</span></td>
+        <td><span class="parametername">result</span></td>
+        <td><p>The result to pass to callers.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Bunit.JSRuntimeInvocationHandler-1.html">JSRuntimeInvocationHandler</a>&lt;TResult&gt;</td>
+        <td><p>This handler to allow calls to be chained.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_VerifyNotInvoke__1_Bunit_JSRuntimeInvocationHandlerBase___0__System_String_System_Nullable_System_String__">JSRuntimeAssertExtensions.VerifyNotInvoke&lt;TResult&gt;(JSRuntimeInvocationHandlerBase&lt;TResult&gt;, String, Nullable&lt;String&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_VerifyInvoke__1_Bunit_JSRuntimeInvocationHandlerBase___0__System_String_System_Nullable_System_String__">JSRuntimeAssertExtensions.VerifyInvoke&lt;TResult&gt;(JSRuntimeInvocationHandlerBase&lt;TResult&gt;, String, Nullable&lt;String&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_VerifyInvoke__1_Bunit_JSRuntimeInvocationHandlerBase___0__System_String_System_Int32_System_Nullable_System_String__">JSRuntimeAssertExtensions.VerifyInvoke&lt;TResult&gt;(JSRuntimeInvocationHandlerBase&lt;TResult&gt;, String, Int32, Nullable&lt;String&gt;)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="sponsor-highlight supported">
+                <a href="https://www.telerik.com/blazor-ui?utm_source=egilhansen&utm_medium=cpm&utm_campaign=blazor-trial-readme-sponsored-message">
+                  <img width="200" src="/sponsors/progress-blazor-2022-300x300.png">
+                </a>
+                <p>Premium sponsor: <a href="https://www.telerik.com/blazor-ui?utm_source=egilhansen&utm_medium=cpm&utm_campaign=blazor-trial-readme-sponsored-message" title="Progress Telerik">Progress Telerik</a>.</p>
+              </div>
+              <div class="supported">
+                <a href="https://www.packtpub.com/" title="Packt">
+                  <img width="150" src="/sponsors/packt-retina-logo.png">
+                </a>
+                <p>Editorial support provided by <a href="https://www.packtpub.com/" title="Packt">Packt</a>.</p>
+              </div>
+              <div class="supported">
+                <a href="https://dotnetfoundation.org" title=".NET Foundation">
+                  <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg">
+                </a>
+                <p>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</p>
+              </div>
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/bUnit-dev/bUnit/new/stable/apiSpec/new?filename=Bunit_JSRuntimeInvocationHandler_1.md&amp;value=---%0Auid%3A%20Bunit.JSRuntimeInvocationHandler%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/bUnit-dev/bUnit/blob/stable/src/bunit.web/JSInterop/InvocationHandlers/JSRuntimeInvocationHandler{TResult}.cs/#L8" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <small>Documentation updated on 06/27/2022 20:44:01 +00:00 in commit 9a81bc9b93</small>.
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/cshtml-razor.js"></script>
+    <script>
+      hljs.registerLanguage('cshtml-razor', window.hljsDefineCshtmlRazor);
+    </script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
