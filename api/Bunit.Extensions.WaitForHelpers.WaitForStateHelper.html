@@ -1,0 +1,398 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class WaitForStateHelper
+ | bUnit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class WaitForStateHelper
+ | bUnit ">
+      <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" href="/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
+      <link rel="manifest" href="/site.webmanifest">
+
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="..//images/bunit-logo.png" alt="bUnit">
+            bUnit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Bunit.Extensions.WaitForHelpers.WaitForStateHelper">
+
+
+
+  <h1 id="Bunit_Extensions_WaitForHelpers_WaitForStateHelper" data-uid="Bunit.Extensions.WaitForHelpers.WaitForStateHelper" class="text-break">
+    Class WaitForStateHelper
+  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Bunit.html">Bunit</a>.<a class="xref" href="Bunit.Extensions.html">Extensions</a>.<a class="xref" href="Bunit.Extensions.WaitForHelpers.html">WaitForHelpers</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Bunit.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Represents an async wait helper, that will wait for a specified time for a state predicate to pass.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class WaitForStateHelper : WaitForHelper&lt;object?&gt;, IDisposable</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Bunit.Extensions.WaitForHelpers.WaitForHelper-1.html">WaitForHelper</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</div>
+      <div><span class="xref">WaitForStateHelper</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Bunit.Extensions.WaitForHelpers.WaitForHelper-1.html#Bunit_Extensions_WaitForHelpers_WaitForHelper_1_Dispose">WaitForHelper&lt;object&gt;.Dispose()</a>
+    </div>
+    <div>
+      <a class="xref" href="Bunit.Extensions.WaitForHelpers.WaitForHelper-1.html#Bunit_Extensions_WaitForHelpers_WaitForHelper_1_Dispose_System_Boolean_">WaitForHelper&lt;object&gt;.Dispose(bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="Bunit.Extensions.WaitForHelpers.WaitForHelper-1.html#Bunit_Extensions_WaitForHelpers_WaitForHelper_1_WaitTask">WaitForHelper&lt;object&gt;.WaitTask</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_ShouldBeElementReferenceTo_System_Object_AngleSharp_Dom_IElement_">JSRuntimeAssertExtensions.ShouldBeElementReferenceTo(object?, IElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_ShouldBeElementReferenceTo_System_Object_AngleSharp_Dom_IElement_">JSRuntimeAssertExtensions.ShouldBeElementReferenceTo(object?, IElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_ShouldBeElementReferenceTo_System_Object_AngleSharp_Dom_IElement_">JSRuntimeAssertExtensions.ShouldBeElementReferenceTo(object?, IElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_ShouldBeElementReferenceTo_System_Object_AngleSharp_Dom_IElement_">JSRuntimeAssertExtensions.ShouldBeElementReferenceTo(object?, IElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_ShouldBeElementReferenceTo_System_Object_AngleSharp_Dom_IElement_">JSRuntimeAssertExtensions.ShouldBeElementReferenceTo(object?, IElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_ShouldBeElementReferenceTo_System_Object_AngleSharp_Dom_IElement_">JSRuntimeAssertExtensions.ShouldBeElementReferenceTo(object?, IElement)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Bunit_Extensions_WaitForHelpers_WaitForStateHelper__ctor_" data-uid="Bunit.Extensions.WaitForHelpers.WaitForStateHelper.#ctor*"></a>
+
+  <h3 id="Bunit_Extensions_WaitForHelpers_WaitForStateHelper__ctor_Bunit_IRenderedFragmentBase_System_Func_System_Boolean__System_Nullable_System_TimeSpan__" data-uid="Bunit.Extensions.WaitForHelpers.WaitForStateHelper.#ctor(Bunit.IRenderedFragmentBase,System.Func{System.Boolean},System.Nullable{System.TimeSpan})">
+  WaitForStateHelper(IRenderedFragmentBase, Func&lt;bool&gt;, TimeSpan?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Bunit.Extensions.WaitForHelpers.WaitForStateHelper.html">WaitForStateHelper</a> class,
+which will wait until the provided <code class="paramref">statePredicate</code> action returns true,
+or the <code class="paramref">timeout</code> is reached (default is one second).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WaitForStateHelper(IRenderedFragmentBase renderedFragment, Func&lt;bool&gt; statePredicate, TimeSpan? timeout = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>renderedFragment</code> <a class="xref" href="Bunit.IRenderedFragmentBase.html">IRenderedFragmentBase</a></dt>
+    <dd><p>The render fragment or component to attempt to verify state against.</p>
+</dd>
+    <dt><code>statePredicate</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</dt>
+    <dd><p>The predicate to invoke after each render, which must returns <code>true</code> when the desired state has been reached.</p>
+</dd>
+    <dt><code>timeout</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a>?</dt>
+    <dd><p>The maximum time to wait for the desired state.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section" id="Bunit_Extensions_WaitForHelpers_WaitForStateHelper__ctor_Bunit_IRenderedFragmentBase_System_Func_System_Boolean__System_Nullable_System_TimeSpan___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The <code class="paramref">statePredicate</code> is evaluated initially, and then each time the <code class="paramref">renderedFragment</code> renders.</p>
+</div>
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Bunit.Extensions.WaitForHelpers.WaitForFailedException.html">WaitForFailedException</a></dt>
+    <dd><p>Thrown if the <code class="paramref">statePredicate</code> throw an exception during invocation, or if the timeout has been reached. See the inner exception for details.</p>
+</dd>
+  </dl>
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Bunit_Extensions_WaitForHelpers_WaitForStateHelper_CheckThrowErrorMessage_" data-uid="Bunit.Extensions.WaitForHelpers.WaitForStateHelper.CheckThrowErrorMessage*"></a>
+
+  <h3 id="Bunit_Extensions_WaitForHelpers_WaitForStateHelper_CheckThrowErrorMessage" data-uid="Bunit.Extensions.WaitForHelpers.WaitForStateHelper.CheckThrowErrorMessage">
+  CheckThrowErrorMessage
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the error message passed to the user when the wait for checker throws an exception.
+Only used if <a class="xref" href="Bunit.Extensions.WaitForHelpers.WaitForHelper-1.html#Bunit_Extensions_WaitForHelpers_WaitForHelper_1_StopWaitingOnCheckException">StopWaitingOnCheckException</a> is true.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override string? CheckThrowErrorMessage { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Bunit_Extensions_WaitForHelpers_WaitForStateHelper_StopWaitingOnCheckException_" data-uid="Bunit.Extensions.WaitForHelpers.WaitForStateHelper.StopWaitingOnCheckException*"></a>
+
+  <h3 id="Bunit_Extensions_WaitForHelpers_WaitForStateHelper_StopWaitingOnCheckException" data-uid="Bunit.Extensions.WaitForHelpers.WaitForStateHelper.StopWaitingOnCheckException">
+  StopWaitingOnCheckException
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a value indicating whether to continue waiting if the wait condition checker throws.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override bool StopWaitingOnCheckException { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Bunit_Extensions_WaitForHelpers_WaitForStateHelper_TimeoutErrorMessage_" data-uid="Bunit.Extensions.WaitForHelpers.WaitForStateHelper.TimeoutErrorMessage*"></a>
+
+  <h3 id="Bunit_Extensions_WaitForHelpers_WaitForStateHelper_TimeoutErrorMessage" data-uid="Bunit.Extensions.WaitForHelpers.WaitForStateHelper.TimeoutErrorMessage">
+  TimeoutErrorMessage
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the error message passed to the user when the wait for helper times out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override string? TimeoutErrorMessage { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://www.telerik.com/blazor-ui?utm_source=egilhansen&utm_medium=cpm&utm_campaign=blazor-trial-readme-sponsored-message">
+            <img width="240" src="/sponsors/progress-blazor-2022-dec-300x300.png" alt="Progress Telerik">
+          </a>
+          <p class="pt-1"><small>Premium sponsor: <a href="https://www.telerik.com/blazor-ui?utm_source=egilhansen&utm_medium=cpm&utm_campaign=blazor-trial-readme-sponsored-message" title="Progress Telerik">Progress Telerik</a>.</small></p>
+        </div>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://www.packtpub.com/" title="Packt">
+            <img width="150" src="/sponsors/packt-retina-logo.png" alt="Packt">
+          </a>
+          <p class="pt-1"><small>Editorial support provided by <a href="https://www.packtpub.com/" title="Packt">Packt</a>.</small></p>
+        </div>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://dotnetfoundation.org" title=".NET Foundation">
+            <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg" alt=".NET Foundation">
+          </a>
+          <p class="pt-1"><small>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</small></p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary bg-body-tertiary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <small>Documentation updated on #{NBGV_GitCommitDate}# in commit #{NBGV_GitCommitIdShort}#</small>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Namespace Bunit.Rendering
+ | bUnit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace Bunit.Rendering
+ | bUnit ">
+      <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" href="/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
+      <link rel="manifest" href="/site.webmanifest">
+
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="..//images/bunit-logo.png" alt="bUnit">
+            bUnit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Bunit.Rendering">
+
+  <h1 id="Bunit_Rendering" data-uid="Bunit.Rendering" class="text-break">Namespace Bunit.Rendering
+</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+
+    <h3 id="classes">
+Classes
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Bunit.Rendering.BunitHtmlParser.html">BunitHtmlParser</a></dt>
+      <dd><p>A AngleSharp based HTML Parse that can parse markup strings
+into a <span class="xref">AngleSharp.Dom.INodeList</span>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Bunit.Rendering.ComponentDisposedException.html">ComponentDisposedException</a></dt>
+      <dd><p>Represents an exception that is thrown when a <a class="xref" href="Bunit.IRenderedFragmentBase.html">IRenderedFragmentBase</a>'s
+properties is accessed after the underlying component has been disposed by the renderer.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Bunit.Rendering.ComponentNotFoundException.html">ComponentNotFoundException</a></dt>
+      <dd><p>Represents an exception that is thrown when a search for a component did not succeed.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Bunit.Rendering.RenderEvent.html">RenderEvent</a></dt>
+      <dd><p>Represents an render event from a <a class="xref" href="Bunit.Rendering.ITestRenderer.html">ITestRenderer</a>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Bunit.Rendering.RenderTreeFrameDictionary.html">RenderTreeFrameDictionary</a></dt>
+      <dd><p>Represents a dictionary of <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.rendertree.arrayrange-1">ArrayRange&lt;T&gt;</a> keyed by the owning component's component id.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Bunit.Rendering.RenderedComponentActivator.html">RenderedComponentActivator</a></dt>
+      <dd><p>Represents a rendered component activator for bUnit.web.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Bunit.Rendering.RootRenderTree.html">RootRenderTree</a></dt>
+      <dd><p>Represents a root render tree, wherein components under tests will be rendered.
+Components added to the render tree must have either a <code>ChildContent</code> or
+<code>Body</code> parameter.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Bunit.Rendering.RootRenderTreeRegistration.html">RootRenderTreeRegistration</a></dt>
+      <dd><p>Represents an added component with parameters in an <a class="xref" href="Bunit.Rendering.RootRenderTree.html">RootRenderTree</a>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Bunit.Rendering.TestRenderer.html">TestRenderer</a></dt>
+      <dd><p>Represents a bUnit <a class="xref" href="Bunit.Rendering.ITestRenderer.html">ITestRenderer</a> used to render Blazor components and fragments during bUnit tests.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Bunit.Rendering.UnknownEventHandlerIdException.html">UnknownEventHandlerIdException</a></dt>
+      <dd><p>Represents an exception that is thrown when the Blazor <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.rendertree.renderer">Renderer</a>
+does not have any event handler with the specified a given ID.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Bunit.Rendering.WebTestRenderer.html">WebTestRenderer</a></dt>
+      <dd><p>Represents a <a class="xref" href="Bunit.Rendering.ITestRenderer.html">ITestRenderer</a> that is used when rendering
+Blazor components for the web.</p>
+</dd>
+    </dl>
+    <h3 id="interfaces">
+Interfaces
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Bunit.Rendering.IRenderedComponentActivator.html">IRenderedComponentActivator</a></dt>
+      <dd><p>Represents an activator for <a class="xref" href="Bunit.IRenderedFragmentBase.html">IRenderedFragmentBase</a> and <a class="xref" href="Bunit.IRenderedComponentBase-1.html">IRenderedComponentBase&lt;TComponent&gt;</a> types.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Bunit.Rendering.ITestRenderer.html">ITestRenderer</a></dt>
+      <dd><p>Represents a generalized Blazor renderer for testing purposes.</p>
+</dd>
+    </dl>
+
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://www.telerik.com/blazor-ui?utm_source=egilhansen&utm_medium=cpm&utm_campaign=blazor-trial-readme-sponsored-message">
+            <img width="240" src="/sponsors/progress-blazor-2022-dec-300x300.png" alt="Progress Telerik">
+          </a>
+          <p class="pt-1"><small>Premium sponsor: <a href="https://www.telerik.com/blazor-ui?utm_source=egilhansen&utm_medium=cpm&utm_campaign=blazor-trial-readme-sponsored-message" title="Progress Telerik">Progress Telerik</a>.</small></p>
+        </div>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://www.packtpub.com/" title="Packt">
+            <img width="150" src="/sponsors/packt-retina-logo.png" alt="Packt">
+          </a>
+          <p class="pt-1"><small>Editorial support provided by <a href="https://www.packtpub.com/" title="Packt">Packt</a>.</small></p>
+        </div>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://dotnetfoundation.org" title=".NET Foundation">
+            <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg" alt=".NET Foundation">
+          </a>
+          <p class="pt-1"><small>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</small></p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary bg-body-tertiary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <small>Documentation updated on #{NBGV_GitCommitDate}# in commit #{NBGV_GitCommitIdShort}#</small>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
