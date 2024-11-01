@@ -1,0 +1,2059 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class PointerEventDispatchExtensions
+ | bUnit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class PointerEventDispatchExtensions
+ | bUnit ">
+      <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" href="/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
+      <link rel="manifest" href="/site.webmanifest">
+
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="..//images/bunit-logo.png" alt="bUnit">
+            bUnit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Bunit.PointerEventDispatchExtensions">
+
+
+
+  <h1 id="Bunit_PointerEventDispatchExtensions" data-uid="Bunit.PointerEventDispatchExtensions" class="text-break">
+    Class PointerEventDispatchExtensions
+  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Bunit.html">Bunit</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Bunit.Web.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Pointer event dispatch helper extension methods.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class PointerEventDispatchExtensions</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">PointerEventDispatchExtensions</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_GotPointerCapture_" data-uid="Bunit.PointerEventDispatchExtensions.GotPointerCapture*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_GotPointerCapture_AngleSharp_Dom_IElement_Microsoft_AspNetCore_Components_Web_PointerEventArgs_" data-uid="Bunit.PointerEventDispatchExtensions.GotPointerCapture(AngleSharp.Dom.IElement,Microsoft.AspNetCore.Components.Web.PointerEventArgs)">
+  GotPointerCapture(IElement, PointerEventArgs)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@ongotpointercapture</code> event on <code class="paramref">element</code>, passing the provided <code class="paramref">eventArgs</code>
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void GotPointerCapture(this IElement element, PointerEventArgs eventArgs)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>eventArgs</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a></dt>
+    <dd><p>The event arguments to pass to the event handler.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_GotPointerCapture_" data-uid="Bunit.PointerEventDispatchExtensions.GotPointerCapture*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_GotPointerCapture_AngleSharp_Dom_IElement_System_Int64_System_Double_System_Double_System_Double_System_Double_System_Int64_System_Int64_System_Boolean_System_Boolean_System_Boolean_System_Boolean_System_String_System_Int64_System_Single_System_Single_System_Single_System_Single_System_Single_System_String_System_Boolean_" data-uid="Bunit.PointerEventDispatchExtensions.GotPointerCapture(AngleSharp.Dom.IElement,System.Int64,System.Double,System.Double,System.Double,System.Double,System.Int64,System.Int64,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String,System.Int64,System.Single,System.Single,System.Single,System.Single,System.Single,System.String,System.Boolean)">
+  GotPointerCapture(IElement, long, double, double, double, double, long, long, bool, bool, bool, bool, string?, long, float, float, float, float, float, string?, bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@ongotpointercapture</code> event on <code class="paramref">element</code>, passing the provided
+properties to the event handler via a <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a> object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void GotPointerCapture(this IElement element, long detail = 0, double screenX = 0, double screenY = 0, double clientX = 0, double clientY = 0, long button = 0, long buttons = 0, bool ctrlKey = false, bool shiftKey = false, bool altKey = false, bool metaKey = false, string? type = null, long pointerId = 0, float width = 0, float height = 0, float pressure = 0, float tiltX = 0, float tiltY = 0, string? pointerType = null, bool isPrimary = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>detail</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>A count of consecutive clicks that happened in a short amount of time, incremented by one.</p>
+</dd>
+    <dt><code>screenX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The X coordinate of the mouse pointer in global (screen) coordinates.</p>
+</dd>
+    <dt><code>screenY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The Y coordinate of the mouse pointer in global (screen) coordinates.</p>
+</dd>
+    <dt><code>clientX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The X coordinate of the mouse pointer in local (DOM content) coordinates.</p>
+</dd>
+    <dt><code>clientY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The Y coordinate of the mouse pointer in local (DOM content) coordinates.</p>
+</dd>
+    <dt><code>button</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The button number that was pressed when the mouse event was fired: Left button=0,
+middle button=1 (if present), right button=2. For mice configured for left handed
+use in which the button actions are reversed the values are instead read from
+right to left.</p>
+</dd>
+    <dt><code>buttons</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The buttons being pressed when the mouse event was fired: Left button=1, Right
+button=2, Middle (wheel) button=4, 4th button (typically, &quot;Browser Back&quot; button)=8,
+5th button (typically, &quot;Browser Forward&quot; button)=16. If two or more buttons are
+pressed, returns the logical sum of the values. E.g., if Left button and Right
+button are pressed, returns 3 (=1 | 2).</p>
+</dd>
+    <dt><code>ctrlKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the control key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>shiftKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the shift key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>altKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the alt key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>metaKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the meta key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Gets or sets the type of the event.</p>
+</dd>
+    <dt><code>pointerId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>A unique identifier for the pointer causing the event.</p>
+</dd>
+    <dt><code>width</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The width (magnitude on the X axis), in CSS pixels, of the contact geometry of the pointer.</p>
+</dd>
+    <dt><code>height</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The height (magnitude on the Y axis), in CSS pixels, of the contact geometry of the pointer.</p>
+</dd>
+    <dt><code>pressure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The normalized pressure of the pointer input in the range of 0 to 1, where 0
+and 1 represent the minimum and maximum pressure the hardware is capable of detecting, respectively.</p>
+</dd>
+    <dt><code>tiltX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The plane angle (in degrees, in the range of -90 to 90) between the Y-Z plane
+and the plane containing both the transducer (e.g. pen stylus) axis and the Y axis.</p>
+</dd>
+    <dt><code>tiltY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The plane angle (in degrees, in the range of -90 to 90) between the X-Z plane
+and the plane containing both the transducer (e.g. pen stylus) axis and the X axis.</p>
+</dd>
+    <dt><code>pointerType</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Indicates the device type that caused the event. Must be one of the strings mouse,
+pen or touch, or an empty string.</p>
+</dd>
+    <dt><code>isPrimary</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Indicates if the pointer represents the primary pointer of this pointer type.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_GotPointerCaptureAsync_" data-uid="Bunit.PointerEventDispatchExtensions.GotPointerCaptureAsync*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_GotPointerCaptureAsync_AngleSharp_Dom_IElement_Microsoft_AspNetCore_Components_Web_PointerEventArgs_" data-uid="Bunit.PointerEventDispatchExtensions.GotPointerCaptureAsync(AngleSharp.Dom.IElement,Microsoft.AspNetCore.Components.Web.PointerEventArgs)">
+  GotPointerCaptureAsync(IElement, PointerEventArgs)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@ongotpointercapture</code> event on <code class="paramref">element</code>, passing the provided <code class="paramref">eventArgs</code>
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task GotPointerCaptureAsync(this IElement element, PointerEventArgs eventArgs)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>eventArgs</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a></dt>
+    <dd><p>The event arguments to pass to the event handler.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_LostPointerCapture_" data-uid="Bunit.PointerEventDispatchExtensions.LostPointerCapture*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_LostPointerCapture_AngleSharp_Dom_IElement_Microsoft_AspNetCore_Components_Web_PointerEventArgs_" data-uid="Bunit.PointerEventDispatchExtensions.LostPointerCapture(AngleSharp.Dom.IElement,Microsoft.AspNetCore.Components.Web.PointerEventArgs)">
+  LostPointerCapture(IElement, PointerEventArgs)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onlostpointercapture</code> event on <code class="paramref">element</code>, passing the provided <code class="paramref">eventArgs</code>
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void LostPointerCapture(this IElement element, PointerEventArgs eventArgs)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>eventArgs</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a></dt>
+    <dd><p>The event arguments to pass to the event handler.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_LostPointerCapture_" data-uid="Bunit.PointerEventDispatchExtensions.LostPointerCapture*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_LostPointerCapture_AngleSharp_Dom_IElement_System_Int64_System_Double_System_Double_System_Double_System_Double_System_Int64_System_Int64_System_Boolean_System_Boolean_System_Boolean_System_Boolean_System_String_System_Int64_System_Single_System_Single_System_Single_System_Single_System_Single_System_String_System_Boolean_" data-uid="Bunit.PointerEventDispatchExtensions.LostPointerCapture(AngleSharp.Dom.IElement,System.Int64,System.Double,System.Double,System.Double,System.Double,System.Int64,System.Int64,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String,System.Int64,System.Single,System.Single,System.Single,System.Single,System.Single,System.String,System.Boolean)">
+  LostPointerCapture(IElement, long, double, double, double, double, long, long, bool, bool, bool, bool, string?, long, float, float, float, float, float, string?, bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onlostpointercapture</code> event on <code class="paramref">element</code>, passing the provided
+properties to the event handler via a <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a> object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void LostPointerCapture(this IElement element, long detail = 0, double screenX = 0, double screenY = 0, double clientX = 0, double clientY = 0, long button = 0, long buttons = 0, bool ctrlKey = false, bool shiftKey = false, bool altKey = false, bool metaKey = false, string? type = null, long pointerId = 0, float width = 0, float height = 0, float pressure = 0, float tiltX = 0, float tiltY = 0, string? pointerType = null, bool isPrimary = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>detail</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>A count of consecutive clicks that happened in a short amount of time, incremented by one.</p>
+</dd>
+    <dt><code>screenX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The X coordinate of the mouse pointer in global (screen) coordinates.</p>
+</dd>
+    <dt><code>screenY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The Y coordinate of the mouse pointer in global (screen) coordinates.</p>
+</dd>
+    <dt><code>clientX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The X coordinate of the mouse pointer in local (DOM content) coordinates.</p>
+</dd>
+    <dt><code>clientY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The Y coordinate of the mouse pointer in local (DOM content) coordinates.</p>
+</dd>
+    <dt><code>button</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The button number that was pressed when the mouse event was fired: Left button=0,
+middle button=1 (if present), right button=2. For mice configured for left handed
+use in which the button actions are reversed the values are instead read from
+right to left.</p>
+</dd>
+    <dt><code>buttons</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The buttons being pressed when the mouse event was fired: Left button=1, Right
+button=2, Middle (wheel) button=4, 4th button (typically, &quot;Browser Back&quot; button)=8,
+5th button (typically, &quot;Browser Forward&quot; button)=16. If two or more buttons are
+pressed, returns the logical sum of the values. E.g., if Left button and Right
+button are pressed, returns 3 (=1 | 2).</p>
+</dd>
+    <dt><code>ctrlKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the control key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>shiftKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the shift key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>altKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the alt key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>metaKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the meta key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Gets or sets the type of the event.</p>
+</dd>
+    <dt><code>pointerId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>A unique identifier for the pointer causing the event.</p>
+</dd>
+    <dt><code>width</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The width (magnitude on the X axis), in CSS pixels, of the contact geometry of the pointer.</p>
+</dd>
+    <dt><code>height</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The height (magnitude on the Y axis), in CSS pixels, of the contact geometry of the pointer.</p>
+</dd>
+    <dt><code>pressure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The normalized pressure of the pointer input in the range of 0 to 1, where 0
+and 1 represent the minimum and maximum pressure the hardware is capable of detecting, respectively.</p>
+</dd>
+    <dt><code>tiltX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The plane angle (in degrees, in the range of -90 to 90) between the Y-Z plane
+and the plane containing both the transducer (e.g. pen stylus) axis and the Y axis.</p>
+</dd>
+    <dt><code>tiltY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The plane angle (in degrees, in the range of -90 to 90) between the X-Z plane
+and the plane containing both the transducer (e.g. pen stylus) axis and the X axis.</p>
+</dd>
+    <dt><code>pointerType</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Indicates the device type that caused the event. Must be one of the strings mouse,
+pen or touch, or an empty string.</p>
+</dd>
+    <dt><code>isPrimary</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Indicates if the pointer represents the primary pointer of this pointer type.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_LostPointerCaptureAsync_" data-uid="Bunit.PointerEventDispatchExtensions.LostPointerCaptureAsync*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_LostPointerCaptureAsync_AngleSharp_Dom_IElement_Microsoft_AspNetCore_Components_Web_PointerEventArgs_" data-uid="Bunit.PointerEventDispatchExtensions.LostPointerCaptureAsync(AngleSharp.Dom.IElement,Microsoft.AspNetCore.Components.Web.PointerEventArgs)">
+  LostPointerCaptureAsync(IElement, PointerEventArgs)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onlostpointercapture</code> event on <code class="paramref">element</code>, passing the provided <code class="paramref">eventArgs</code>
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task LostPointerCaptureAsync(this IElement element, PointerEventArgs eventArgs)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>eventArgs</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a></dt>
+    <dd><p>The event arguments to pass to the event handler.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerCancel_" data-uid="Bunit.PointerEventDispatchExtensions.PointerCancel*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerCancel_AngleSharp_Dom_IElement_Microsoft_AspNetCore_Components_Web_PointerEventArgs_" data-uid="Bunit.PointerEventDispatchExtensions.PointerCancel(AngleSharp.Dom.IElement,Microsoft.AspNetCore.Components.Web.PointerEventArgs)">
+  PointerCancel(IElement, PointerEventArgs)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointercancel</code> event on <code class="paramref">element</code>, passing the provided <code class="paramref">eventArgs</code>
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void PointerCancel(this IElement element, PointerEventArgs eventArgs)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>eventArgs</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a></dt>
+    <dd><p>The event arguments to pass to the event handler.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerCancel_" data-uid="Bunit.PointerEventDispatchExtensions.PointerCancel*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerCancel_AngleSharp_Dom_IElement_System_Int64_System_Double_System_Double_System_Double_System_Double_System_Int64_System_Int64_System_Boolean_System_Boolean_System_Boolean_System_Boolean_System_String_System_Int64_System_Single_System_Single_System_Single_System_Single_System_Single_System_String_System_Boolean_" data-uid="Bunit.PointerEventDispatchExtensions.PointerCancel(AngleSharp.Dom.IElement,System.Int64,System.Double,System.Double,System.Double,System.Double,System.Int64,System.Int64,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String,System.Int64,System.Single,System.Single,System.Single,System.Single,System.Single,System.String,System.Boolean)">
+  PointerCancel(IElement, long, double, double, double, double, long, long, bool, bool, bool, bool, string?, long, float, float, float, float, float, string?, bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointercancel</code> event on <code class="paramref">element</code>, passing the provided
+properties to the event handler via a <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a> object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void PointerCancel(this IElement element, long detail = 0, double screenX = 0, double screenY = 0, double clientX = 0, double clientY = 0, long button = 0, long buttons = 0, bool ctrlKey = false, bool shiftKey = false, bool altKey = false, bool metaKey = false, string? type = null, long pointerId = 0, float width = 0, float height = 0, float pressure = 0, float tiltX = 0, float tiltY = 0, string? pointerType = null, bool isPrimary = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>detail</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>A count of consecutive clicks that happened in a short amount of time, incremented by one.</p>
+</dd>
+    <dt><code>screenX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The X coordinate of the mouse pointer in global (screen) coordinates.</p>
+</dd>
+    <dt><code>screenY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The Y coordinate of the mouse pointer in global (screen) coordinates.</p>
+</dd>
+    <dt><code>clientX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The X coordinate of the mouse pointer in local (DOM content) coordinates.</p>
+</dd>
+    <dt><code>clientY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The Y coordinate of the mouse pointer in local (DOM content) coordinates.</p>
+</dd>
+    <dt><code>button</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The button number that was pressed when the mouse event was fired: Left button=0,
+middle button=1 (if present), right button=2. For mice configured for left handed
+use in which the button actions are reversed the values are instead read from
+right to left.</p>
+</dd>
+    <dt><code>buttons</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The buttons being pressed when the mouse event was fired: Left button=1, Right
+button=2, Middle (wheel) button=4, 4th button (typically, &quot;Browser Back&quot; button)=8,
+5th button (typically, &quot;Browser Forward&quot; button)=16. If two or more buttons are
+pressed, returns the logical sum of the values. E.g., if Left button and Right
+button are pressed, returns 3 (=1 | 2).</p>
+</dd>
+    <dt><code>ctrlKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the control key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>shiftKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the shift key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>altKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the alt key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>metaKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the meta key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Gets or sets the type of the event.</p>
+</dd>
+    <dt><code>pointerId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>A unique identifier for the pointer causing the event.</p>
+</dd>
+    <dt><code>width</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The width (magnitude on the X axis), in CSS pixels, of the contact geometry of the pointer.</p>
+</dd>
+    <dt><code>height</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The height (magnitude on the Y axis), in CSS pixels, of the contact geometry of the pointer.</p>
+</dd>
+    <dt><code>pressure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The normalized pressure of the pointer input in the range of 0 to 1, where 0
+and 1 represent the minimum and maximum pressure the hardware is capable of detecting, respectively.</p>
+</dd>
+    <dt><code>tiltX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The plane angle (in degrees, in the range of -90 to 90) between the Y-Z plane
+and the plane containing both the transducer (e.g. pen stylus) axis and the Y axis.</p>
+</dd>
+    <dt><code>tiltY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The plane angle (in degrees, in the range of -90 to 90) between the X-Z plane
+and the plane containing both the transducer (e.g. pen stylus) axis and the X axis.</p>
+</dd>
+    <dt><code>pointerType</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Indicates the device type that caused the event. Must be one of the strings mouse,
+pen or touch, or an empty string.</p>
+</dd>
+    <dt><code>isPrimary</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Indicates if the pointer represents the primary pointer of this pointer type.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerCancelAsync_" data-uid="Bunit.PointerEventDispatchExtensions.PointerCancelAsync*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerCancelAsync_AngleSharp_Dom_IElement_Microsoft_AspNetCore_Components_Web_PointerEventArgs_" data-uid="Bunit.PointerEventDispatchExtensions.PointerCancelAsync(AngleSharp.Dom.IElement,Microsoft.AspNetCore.Components.Web.PointerEventArgs)">
+  PointerCancelAsync(IElement, PointerEventArgs)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointercancel</code> event on <code class="paramref">element</code>, passing the provided <code class="paramref">eventArgs</code>
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task PointerCancelAsync(this IElement element, PointerEventArgs eventArgs)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>eventArgs</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a></dt>
+    <dd><p>The event arguments to pass to the event handler.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerDown_" data-uid="Bunit.PointerEventDispatchExtensions.PointerDown*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerDown_AngleSharp_Dom_IElement_Microsoft_AspNetCore_Components_Web_PointerEventArgs_" data-uid="Bunit.PointerEventDispatchExtensions.PointerDown(AngleSharp.Dom.IElement,Microsoft.AspNetCore.Components.Web.PointerEventArgs)">
+  PointerDown(IElement, PointerEventArgs)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointerdown</code> event on <code class="paramref">element</code>, passing the provided <code class="paramref">eventArgs</code>
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void PointerDown(this IElement element, PointerEventArgs eventArgs)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>eventArgs</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a></dt>
+    <dd><p>The event arguments to pass to the event handler.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerDown_" data-uid="Bunit.PointerEventDispatchExtensions.PointerDown*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerDown_AngleSharp_Dom_IElement_System_Int64_System_Double_System_Double_System_Double_System_Double_System_Int64_System_Int64_System_Boolean_System_Boolean_System_Boolean_System_Boolean_System_String_System_Int64_System_Single_System_Single_System_Single_System_Single_System_Single_System_String_System_Boolean_" data-uid="Bunit.PointerEventDispatchExtensions.PointerDown(AngleSharp.Dom.IElement,System.Int64,System.Double,System.Double,System.Double,System.Double,System.Int64,System.Int64,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String,System.Int64,System.Single,System.Single,System.Single,System.Single,System.Single,System.String,System.Boolean)">
+  PointerDown(IElement, long, double, double, double, double, long, long, bool, bool, bool, bool, string?, long, float, float, float, float, float, string?, bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointerdown</code> event on <code class="paramref">element</code>, passing the provided
+properties to the event handler via a <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a> object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void PointerDown(this IElement element, long detail = 0, double screenX = 0, double screenY = 0, double clientX = 0, double clientY = 0, long button = 0, long buttons = 0, bool ctrlKey = false, bool shiftKey = false, bool altKey = false, bool metaKey = false, string? type = null, long pointerId = 0, float width = 0, float height = 0, float pressure = 0, float tiltX = 0, float tiltY = 0, string? pointerType = null, bool isPrimary = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>detail</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>A count of consecutive clicks that happened in a short amount of time, incremented by one.</p>
+</dd>
+    <dt><code>screenX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The X coordinate of the mouse pointer in global (screen) coordinates.</p>
+</dd>
+    <dt><code>screenY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The Y coordinate of the mouse pointer in global (screen) coordinates.</p>
+</dd>
+    <dt><code>clientX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The X coordinate of the mouse pointer in local (DOM content) coordinates.</p>
+</dd>
+    <dt><code>clientY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The Y coordinate of the mouse pointer in local (DOM content) coordinates.</p>
+</dd>
+    <dt><code>button</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The button number that was pressed when the mouse event was fired: Left button=0,
+middle button=1 (if present), right button=2. For mice configured for left handed
+use in which the button actions are reversed the values are instead read from
+right to left.</p>
+</dd>
+    <dt><code>buttons</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The buttons being pressed when the mouse event was fired: Left button=1, Right
+button=2, Middle (wheel) button=4, 4th button (typically, &quot;Browser Back&quot; button)=8,
+5th button (typically, &quot;Browser Forward&quot; button)=16. If two or more buttons are
+pressed, returns the logical sum of the values. E.g., if Left button and Right
+button are pressed, returns 3 (=1 | 2).</p>
+</dd>
+    <dt><code>ctrlKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the control key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>shiftKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the shift key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>altKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the alt key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>metaKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the meta key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Gets or sets the type of the event.</p>
+</dd>
+    <dt><code>pointerId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>A unique identifier for the pointer causing the event.</p>
+</dd>
+    <dt><code>width</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The width (magnitude on the X axis), in CSS pixels, of the contact geometry of the pointer.</p>
+</dd>
+    <dt><code>height</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The height (magnitude on the Y axis), in CSS pixels, of the contact geometry of the pointer.</p>
+</dd>
+    <dt><code>pressure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The normalized pressure of the pointer input in the range of 0 to 1, where 0
+and 1 represent the minimum and maximum pressure the hardware is capable of detecting, respectively.</p>
+</dd>
+    <dt><code>tiltX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The plane angle (in degrees, in the range of -90 to 90) between the Y-Z plane
+and the plane containing both the transducer (e.g. pen stylus) axis and the Y axis.</p>
+</dd>
+    <dt><code>tiltY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The plane angle (in degrees, in the range of -90 to 90) between the X-Z plane
+and the plane containing both the transducer (e.g. pen stylus) axis and the X axis.</p>
+</dd>
+    <dt><code>pointerType</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Indicates the device type that caused the event. Must be one of the strings mouse,
+pen or touch, or an empty string.</p>
+</dd>
+    <dt><code>isPrimary</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Indicates if the pointer represents the primary pointer of this pointer type.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerDownAsync_" data-uid="Bunit.PointerEventDispatchExtensions.PointerDownAsync*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerDownAsync_AngleSharp_Dom_IElement_Microsoft_AspNetCore_Components_Web_PointerEventArgs_" data-uid="Bunit.PointerEventDispatchExtensions.PointerDownAsync(AngleSharp.Dom.IElement,Microsoft.AspNetCore.Components.Web.PointerEventArgs)">
+  PointerDownAsync(IElement, PointerEventArgs)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointerdown</code> event on <code class="paramref">element</code>, passing the provided <code class="paramref">eventArgs</code>
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task PointerDownAsync(this IElement element, PointerEventArgs eventArgs)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>eventArgs</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a></dt>
+    <dd><p>The event arguments to pass to the event handler.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerEnter_" data-uid="Bunit.PointerEventDispatchExtensions.PointerEnter*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerEnter_AngleSharp_Dom_IElement_Microsoft_AspNetCore_Components_Web_PointerEventArgs_" data-uid="Bunit.PointerEventDispatchExtensions.PointerEnter(AngleSharp.Dom.IElement,Microsoft.AspNetCore.Components.Web.PointerEventArgs)">
+  PointerEnter(IElement, PointerEventArgs)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointerenter</code> event on <code class="paramref">element</code>, passing the provided <code class="paramref">eventArgs</code>
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void PointerEnter(this IElement element, PointerEventArgs eventArgs)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>eventArgs</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a></dt>
+    <dd><p>The event arguments to pass to the event handler.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerEnter_" data-uid="Bunit.PointerEventDispatchExtensions.PointerEnter*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerEnter_AngleSharp_Dom_IElement_System_Int64_System_Double_System_Double_System_Double_System_Double_System_Int64_System_Int64_System_Boolean_System_Boolean_System_Boolean_System_Boolean_System_String_System_Int64_System_Single_System_Single_System_Single_System_Single_System_Single_System_String_System_Boolean_" data-uid="Bunit.PointerEventDispatchExtensions.PointerEnter(AngleSharp.Dom.IElement,System.Int64,System.Double,System.Double,System.Double,System.Double,System.Int64,System.Int64,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String,System.Int64,System.Single,System.Single,System.Single,System.Single,System.Single,System.String,System.Boolean)">
+  PointerEnter(IElement, long, double, double, double, double, long, long, bool, bool, bool, bool, string?, long, float, float, float, float, float, string?, bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointerenter</code> event on <code class="paramref">element</code>, passing the provided
+properties to the event handler via a <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a> object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void PointerEnter(this IElement element, long detail = 0, double screenX = 0, double screenY = 0, double clientX = 0, double clientY = 0, long button = 0, long buttons = 0, bool ctrlKey = false, bool shiftKey = false, bool altKey = false, bool metaKey = false, string? type = null, long pointerId = 0, float width = 0, float height = 0, float pressure = 0, float tiltX = 0, float tiltY = 0, string? pointerType = null, bool isPrimary = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>detail</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>A count of consecutive clicks that happened in a short amount of time, incremented by one.</p>
+</dd>
+    <dt><code>screenX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The X coordinate of the mouse pointer in global (screen) coordinates.</p>
+</dd>
+    <dt><code>screenY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The Y coordinate of the mouse pointer in global (screen) coordinates.</p>
+</dd>
+    <dt><code>clientX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The X coordinate of the mouse pointer in local (DOM content) coordinates.</p>
+</dd>
+    <dt><code>clientY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The Y coordinate of the mouse pointer in local (DOM content) coordinates.</p>
+</dd>
+    <dt><code>button</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The button number that was pressed when the mouse event was fired: Left button=0,
+middle button=1 (if present), right button=2. For mice configured for left handed
+use in which the button actions are reversed the values are instead read from
+right to left.</p>
+</dd>
+    <dt><code>buttons</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The buttons being pressed when the mouse event was fired: Left button=1, Right
+button=2, Middle (wheel) button=4, 4th button (typically, &quot;Browser Back&quot; button)=8,
+5th button (typically, &quot;Browser Forward&quot; button)=16. If two or more buttons are
+pressed, returns the logical sum of the values. E.g., if Left button and Right
+button are pressed, returns 3 (=1 | 2).</p>
+</dd>
+    <dt><code>ctrlKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the control key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>shiftKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the shift key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>altKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the alt key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>metaKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the meta key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Gets or sets the type of the event.</p>
+</dd>
+    <dt><code>pointerId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>A unique identifier for the pointer causing the event.</p>
+</dd>
+    <dt><code>width</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The width (magnitude on the X axis), in CSS pixels, of the contact geometry of the pointer.</p>
+</dd>
+    <dt><code>height</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The height (magnitude on the Y axis), in CSS pixels, of the contact geometry of the pointer.</p>
+</dd>
+    <dt><code>pressure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The normalized pressure of the pointer input in the range of 0 to 1, where 0
+and 1 represent the minimum and maximum pressure the hardware is capable of detecting, respectively.</p>
+</dd>
+    <dt><code>tiltX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The plane angle (in degrees, in the range of -90 to 90) between the Y-Z plane
+and the plane containing both the transducer (e.g. pen stylus) axis and the Y axis.</p>
+</dd>
+    <dt><code>tiltY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The plane angle (in degrees, in the range of -90 to 90) between the X-Z plane
+and the plane containing both the transducer (e.g. pen stylus) axis and the X axis.</p>
+</dd>
+    <dt><code>pointerType</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Indicates the device type that caused the event. Must be one of the strings mouse,
+pen or touch, or an empty string.</p>
+</dd>
+    <dt><code>isPrimary</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Indicates if the pointer represents the primary pointer of this pointer type.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerEnterAsync_" data-uid="Bunit.PointerEventDispatchExtensions.PointerEnterAsync*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerEnterAsync_AngleSharp_Dom_IElement_Microsoft_AspNetCore_Components_Web_PointerEventArgs_" data-uid="Bunit.PointerEventDispatchExtensions.PointerEnterAsync(AngleSharp.Dom.IElement,Microsoft.AspNetCore.Components.Web.PointerEventArgs)">
+  PointerEnterAsync(IElement, PointerEventArgs)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointerenter</code> event on <code class="paramref">element</code>, passing the provided <code class="paramref">eventArgs</code>
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task PointerEnterAsync(this IElement element, PointerEventArgs eventArgs)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>eventArgs</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a></dt>
+    <dd><p>The event arguments to pass to the event handler.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerLeave_" data-uid="Bunit.PointerEventDispatchExtensions.PointerLeave*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerLeave_AngleSharp_Dom_IElement_Microsoft_AspNetCore_Components_Web_PointerEventArgs_" data-uid="Bunit.PointerEventDispatchExtensions.PointerLeave(AngleSharp.Dom.IElement,Microsoft.AspNetCore.Components.Web.PointerEventArgs)">
+  PointerLeave(IElement, PointerEventArgs)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointerleave</code> event on <code class="paramref">element</code>, passing the provided <code class="paramref">eventArgs</code>
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void PointerLeave(this IElement element, PointerEventArgs eventArgs)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>eventArgs</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a></dt>
+    <dd><p>The event arguments to pass to the event handler.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerLeave_" data-uid="Bunit.PointerEventDispatchExtensions.PointerLeave*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerLeave_AngleSharp_Dom_IElement_System_Int64_System_Double_System_Double_System_Double_System_Double_System_Int64_System_Int64_System_Boolean_System_Boolean_System_Boolean_System_Boolean_System_String_System_Int64_System_Single_System_Single_System_Single_System_Single_System_Single_System_String_System_Boolean_" data-uid="Bunit.PointerEventDispatchExtensions.PointerLeave(AngleSharp.Dom.IElement,System.Int64,System.Double,System.Double,System.Double,System.Double,System.Int64,System.Int64,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String,System.Int64,System.Single,System.Single,System.Single,System.Single,System.Single,System.String,System.Boolean)">
+  PointerLeave(IElement, long, double, double, double, double, long, long, bool, bool, bool, bool, string?, long, float, float, float, float, float, string?, bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointerleave</code> event on <code class="paramref">element</code>, passing the provided
+properties to the event handler via a <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a> object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void PointerLeave(this IElement element, long detail = 0, double screenX = 0, double screenY = 0, double clientX = 0, double clientY = 0, long button = 0, long buttons = 0, bool ctrlKey = false, bool shiftKey = false, bool altKey = false, bool metaKey = false, string? type = null, long pointerId = 0, float width = 0, float height = 0, float pressure = 0, float tiltX = 0, float tiltY = 0, string? pointerType = null, bool isPrimary = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>detail</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>A count of consecutive clicks that happened in a short amount of time, incremented by one.</p>
+</dd>
+    <dt><code>screenX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The X coordinate of the mouse pointer in global (screen) coordinates.</p>
+</dd>
+    <dt><code>screenY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The Y coordinate of the mouse pointer in global (screen) coordinates.</p>
+</dd>
+    <dt><code>clientX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The X coordinate of the mouse pointer in local (DOM content) coordinates.</p>
+</dd>
+    <dt><code>clientY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The Y coordinate of the mouse pointer in local (DOM content) coordinates.</p>
+</dd>
+    <dt><code>button</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The button number that was pressed when the mouse event was fired: Left button=0,
+middle button=1 (if present), right button=2. For mice configured for left handed
+use in which the button actions are reversed the values are instead read from
+right to left.</p>
+</dd>
+    <dt><code>buttons</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The buttons being pressed when the mouse event was fired: Left button=1, Right
+button=2, Middle (wheel) button=4, 4th button (typically, &quot;Browser Back&quot; button)=8,
+5th button (typically, &quot;Browser Forward&quot; button)=16. If two or more buttons are
+pressed, returns the logical sum of the values. E.g., if Left button and Right
+button are pressed, returns 3 (=1 | 2).</p>
+</dd>
+    <dt><code>ctrlKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the control key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>shiftKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the shift key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>altKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the alt key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>metaKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the meta key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Gets or sets the type of the event.</p>
+</dd>
+    <dt><code>pointerId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>A unique identifier for the pointer causing the event.</p>
+</dd>
+    <dt><code>width</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The width (magnitude on the X axis), in CSS pixels, of the contact geometry of the pointer.</p>
+</dd>
+    <dt><code>height</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The height (magnitude on the Y axis), in CSS pixels, of the contact geometry of the pointer.</p>
+</dd>
+    <dt><code>pressure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The normalized pressure of the pointer input in the range of 0 to 1, where 0
+and 1 represent the minimum and maximum pressure the hardware is capable of detecting, respectively.</p>
+</dd>
+    <dt><code>tiltX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The plane angle (in degrees, in the range of -90 to 90) between the Y-Z plane
+and the plane containing both the transducer (e.g. pen stylus) axis and the Y axis.</p>
+</dd>
+    <dt><code>tiltY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The plane angle (in degrees, in the range of -90 to 90) between the X-Z plane
+and the plane containing both the transducer (e.g. pen stylus) axis and the X axis.</p>
+</dd>
+    <dt><code>pointerType</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Indicates the device type that caused the event. Must be one of the strings mouse,
+pen or touch, or an empty string.</p>
+</dd>
+    <dt><code>isPrimary</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Indicates if the pointer represents the primary pointer of this pointer type.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerLeaveAsync_" data-uid="Bunit.PointerEventDispatchExtensions.PointerLeaveAsync*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerLeaveAsync_AngleSharp_Dom_IElement_Microsoft_AspNetCore_Components_Web_PointerEventArgs_" data-uid="Bunit.PointerEventDispatchExtensions.PointerLeaveAsync(AngleSharp.Dom.IElement,Microsoft.AspNetCore.Components.Web.PointerEventArgs)">
+  PointerLeaveAsync(IElement, PointerEventArgs)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointerleave</code> event on <code class="paramref">element</code>, passing the provided <code class="paramref">eventArgs</code>
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task PointerLeaveAsync(this IElement element, PointerEventArgs eventArgs)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>eventArgs</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a></dt>
+    <dd><p>The event arguments to pass to the event handler.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerMove_" data-uid="Bunit.PointerEventDispatchExtensions.PointerMove*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerMove_AngleSharp_Dom_IElement_Microsoft_AspNetCore_Components_Web_PointerEventArgs_" data-uid="Bunit.PointerEventDispatchExtensions.PointerMove(AngleSharp.Dom.IElement,Microsoft.AspNetCore.Components.Web.PointerEventArgs)">
+  PointerMove(IElement, PointerEventArgs)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointermove</code> event on <code class="paramref">element</code>, passing the provided <code class="paramref">eventArgs</code>
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void PointerMove(this IElement element, PointerEventArgs eventArgs)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>eventArgs</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a></dt>
+    <dd><p>The event arguments to pass to the event handler.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerMove_" data-uid="Bunit.PointerEventDispatchExtensions.PointerMove*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerMove_AngleSharp_Dom_IElement_System_Int64_System_Double_System_Double_System_Double_System_Double_System_Int64_System_Int64_System_Boolean_System_Boolean_System_Boolean_System_Boolean_System_String_System_Int64_System_Single_System_Single_System_Single_System_Single_System_Single_System_String_System_Boolean_" data-uid="Bunit.PointerEventDispatchExtensions.PointerMove(AngleSharp.Dom.IElement,System.Int64,System.Double,System.Double,System.Double,System.Double,System.Int64,System.Int64,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String,System.Int64,System.Single,System.Single,System.Single,System.Single,System.Single,System.String,System.Boolean)">
+  PointerMove(IElement, long, double, double, double, double, long, long, bool, bool, bool, bool, string?, long, float, float, float, float, float, string?, bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointermove</code> event on <code class="paramref">element</code>, passing the provided
+properties to the event handler via a <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a> object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void PointerMove(this IElement element, long detail = 0, double screenX = 0, double screenY = 0, double clientX = 0, double clientY = 0, long button = 0, long buttons = 0, bool ctrlKey = false, bool shiftKey = false, bool altKey = false, bool metaKey = false, string? type = null, long pointerId = 0, float width = 0, float height = 0, float pressure = 0, float tiltX = 0, float tiltY = 0, string? pointerType = null, bool isPrimary = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>detail</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>A count of consecutive clicks that happened in a short amount of time, incremented by one.</p>
+</dd>
+    <dt><code>screenX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The X coordinate of the mouse pointer in global (screen) coordinates.</p>
+</dd>
+    <dt><code>screenY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The Y coordinate of the mouse pointer in global (screen) coordinates.</p>
+</dd>
+    <dt><code>clientX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The X coordinate of the mouse pointer in local (DOM content) coordinates.</p>
+</dd>
+    <dt><code>clientY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The Y coordinate of the mouse pointer in local (DOM content) coordinates.</p>
+</dd>
+    <dt><code>button</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The button number that was pressed when the mouse event was fired: Left button=0,
+middle button=1 (if present), right button=2. For mice configured for left handed
+use in which the button actions are reversed the values are instead read from
+right to left.</p>
+</dd>
+    <dt><code>buttons</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The buttons being pressed when the mouse event was fired: Left button=1, Right
+button=2, Middle (wheel) button=4, 4th button (typically, &quot;Browser Back&quot; button)=8,
+5th button (typically, &quot;Browser Forward&quot; button)=16. If two or more buttons are
+pressed, returns the logical sum of the values. E.g., if Left button and Right
+button are pressed, returns 3 (=1 | 2).</p>
+</dd>
+    <dt><code>ctrlKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the control key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>shiftKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the shift key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>altKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the alt key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>metaKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the meta key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Gets or sets the type of the event.</p>
+</dd>
+    <dt><code>pointerId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>A unique identifier for the pointer causing the event.</p>
+</dd>
+    <dt><code>width</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The width (magnitude on the X axis), in CSS pixels, of the contact geometry of the pointer.</p>
+</dd>
+    <dt><code>height</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The height (magnitude on the Y axis), in CSS pixels, of the contact geometry of the pointer.</p>
+</dd>
+    <dt><code>pressure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The normalized pressure of the pointer input in the range of 0 to 1, where 0
+and 1 represent the minimum and maximum pressure the hardware is capable of detecting, respectively.</p>
+</dd>
+    <dt><code>tiltX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The plane angle (in degrees, in the range of -90 to 90) between the Y-Z plane
+and the plane containing both the transducer (e.g. pen stylus) axis and the Y axis.</p>
+</dd>
+    <dt><code>tiltY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The plane angle (in degrees, in the range of -90 to 90) between the X-Z plane
+and the plane containing both the transducer (e.g. pen stylus) axis and the X axis.</p>
+</dd>
+    <dt><code>pointerType</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Indicates the device type that caused the event. Must be one of the strings mouse,
+pen or touch, or an empty string.</p>
+</dd>
+    <dt><code>isPrimary</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Indicates if the pointer represents the primary pointer of this pointer type.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerMoveAsync_" data-uid="Bunit.PointerEventDispatchExtensions.PointerMoveAsync*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerMoveAsync_AngleSharp_Dom_IElement_Microsoft_AspNetCore_Components_Web_PointerEventArgs_" data-uid="Bunit.PointerEventDispatchExtensions.PointerMoveAsync(AngleSharp.Dom.IElement,Microsoft.AspNetCore.Components.Web.PointerEventArgs)">
+  PointerMoveAsync(IElement, PointerEventArgs)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointermove</code> event on <code class="paramref">element</code>, passing the provided <code class="paramref">eventArgs</code>
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task PointerMoveAsync(this IElement element, PointerEventArgs eventArgs)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>eventArgs</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a></dt>
+    <dd><p>The event arguments to pass to the event handler.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerOut_" data-uid="Bunit.PointerEventDispatchExtensions.PointerOut*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerOut_AngleSharp_Dom_IElement_Microsoft_AspNetCore_Components_Web_PointerEventArgs_" data-uid="Bunit.PointerEventDispatchExtensions.PointerOut(AngleSharp.Dom.IElement,Microsoft.AspNetCore.Components.Web.PointerEventArgs)">
+  PointerOut(IElement, PointerEventArgs)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointerout</code> event on <code class="paramref">element</code>, passing the provided <code class="paramref">eventArgs</code>
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void PointerOut(this IElement element, PointerEventArgs eventArgs)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>eventArgs</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a></dt>
+    <dd><p>The event arguments to pass to the event handler.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerOut_" data-uid="Bunit.PointerEventDispatchExtensions.PointerOut*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerOut_AngleSharp_Dom_IElement_System_Int64_System_Double_System_Double_System_Double_System_Double_System_Int64_System_Int64_System_Boolean_System_Boolean_System_Boolean_System_Boolean_System_String_System_Int64_System_Single_System_Single_System_Single_System_Single_System_Single_System_String_System_Boolean_" data-uid="Bunit.PointerEventDispatchExtensions.PointerOut(AngleSharp.Dom.IElement,System.Int64,System.Double,System.Double,System.Double,System.Double,System.Int64,System.Int64,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String,System.Int64,System.Single,System.Single,System.Single,System.Single,System.Single,System.String,System.Boolean)">
+  PointerOut(IElement, long, double, double, double, double, long, long, bool, bool, bool, bool, string?, long, float, float, float, float, float, string?, bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointerout</code> event on <code class="paramref">element</code>, passing the provided
+properties to the event handler via a <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a> object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void PointerOut(this IElement element, long detail = 0, double screenX = 0, double screenY = 0, double clientX = 0, double clientY = 0, long button = 0, long buttons = 0, bool ctrlKey = false, bool shiftKey = false, bool altKey = false, bool metaKey = false, string? type = null, long pointerId = 0, float width = 0, float height = 0, float pressure = 0, float tiltX = 0, float tiltY = 0, string? pointerType = null, bool isPrimary = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>detail</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>A count of consecutive clicks that happened in a short amount of time, incremented by one.</p>
+</dd>
+    <dt><code>screenX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The X coordinate of the mouse pointer in global (screen) coordinates.</p>
+</dd>
+    <dt><code>screenY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The Y coordinate of the mouse pointer in global (screen) coordinates.</p>
+</dd>
+    <dt><code>clientX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The X coordinate of the mouse pointer in local (DOM content) coordinates.</p>
+</dd>
+    <dt><code>clientY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The Y coordinate of the mouse pointer in local (DOM content) coordinates.</p>
+</dd>
+    <dt><code>button</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The button number that was pressed when the mouse event was fired: Left button=0,
+middle button=1 (if present), right button=2. For mice configured for left handed
+use in which the button actions are reversed the values are instead read from
+right to left.</p>
+</dd>
+    <dt><code>buttons</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The buttons being pressed when the mouse event was fired: Left button=1, Right
+button=2, Middle (wheel) button=4, 4th button (typically, &quot;Browser Back&quot; button)=8,
+5th button (typically, &quot;Browser Forward&quot; button)=16. If two or more buttons are
+pressed, returns the logical sum of the values. E.g., if Left button and Right
+button are pressed, returns 3 (=1 | 2).</p>
+</dd>
+    <dt><code>ctrlKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the control key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>shiftKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the shift key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>altKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the alt key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>metaKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the meta key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Gets or sets the type of the event.</p>
+</dd>
+    <dt><code>pointerId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>A unique identifier for the pointer causing the event.</p>
+</dd>
+    <dt><code>width</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The width (magnitude on the X axis), in CSS pixels, of the contact geometry of the pointer.</p>
+</dd>
+    <dt><code>height</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The height (magnitude on the Y axis), in CSS pixels, of the contact geometry of the pointer.</p>
+</dd>
+    <dt><code>pressure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The normalized pressure of the pointer input in the range of 0 to 1, where 0
+and 1 represent the minimum and maximum pressure the hardware is capable of detecting, respectively.</p>
+</dd>
+    <dt><code>tiltX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The plane angle (in degrees, in the range of -90 to 90) between the Y-Z plane
+and the plane containing both the transducer (e.g. pen stylus) axis and the Y axis.</p>
+</dd>
+    <dt><code>tiltY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The plane angle (in degrees, in the range of -90 to 90) between the X-Z plane
+and the plane containing both the transducer (e.g. pen stylus) axis and the X axis.</p>
+</dd>
+    <dt><code>pointerType</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Indicates the device type that caused the event. Must be one of the strings mouse,
+pen or touch, or an empty string.</p>
+</dd>
+    <dt><code>isPrimary</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Indicates if the pointer represents the primary pointer of this pointer type.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerOutAsync_" data-uid="Bunit.PointerEventDispatchExtensions.PointerOutAsync*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerOutAsync_AngleSharp_Dom_IElement_Microsoft_AspNetCore_Components_Web_PointerEventArgs_" data-uid="Bunit.PointerEventDispatchExtensions.PointerOutAsync(AngleSharp.Dom.IElement,Microsoft.AspNetCore.Components.Web.PointerEventArgs)">
+  PointerOutAsync(IElement, PointerEventArgs)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointerout</code> event on <code class="paramref">element</code>, passing the provided <code class="paramref">eventArgs</code>
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task PointerOutAsync(this IElement element, PointerEventArgs eventArgs)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>eventArgs</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a></dt>
+    <dd><p>The event arguments to pass to the event handler.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerOver_" data-uid="Bunit.PointerEventDispatchExtensions.PointerOver*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerOver_AngleSharp_Dom_IElement_Microsoft_AspNetCore_Components_Web_PointerEventArgs_" data-uid="Bunit.PointerEventDispatchExtensions.PointerOver(AngleSharp.Dom.IElement,Microsoft.AspNetCore.Components.Web.PointerEventArgs)">
+  PointerOver(IElement, PointerEventArgs)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointerover</code> event on <code class="paramref">element</code>, passing the provided <code class="paramref">eventArgs</code>
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void PointerOver(this IElement element, PointerEventArgs eventArgs)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>eventArgs</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a></dt>
+    <dd><p>The event arguments to pass to the event handler.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerOver_" data-uid="Bunit.PointerEventDispatchExtensions.PointerOver*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerOver_AngleSharp_Dom_IElement_System_Int64_System_Double_System_Double_System_Double_System_Double_System_Int64_System_Int64_System_Boolean_System_Boolean_System_Boolean_System_Boolean_System_String_System_Int64_System_Single_System_Single_System_Single_System_Single_System_Single_System_String_System_Boolean_" data-uid="Bunit.PointerEventDispatchExtensions.PointerOver(AngleSharp.Dom.IElement,System.Int64,System.Double,System.Double,System.Double,System.Double,System.Int64,System.Int64,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String,System.Int64,System.Single,System.Single,System.Single,System.Single,System.Single,System.String,System.Boolean)">
+  PointerOver(IElement, long, double, double, double, double, long, long, bool, bool, bool, bool, string?, long, float, float, float, float, float, string?, bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointerover</code> event on <code class="paramref">element</code>, passing the provided
+properties to the event handler via a <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a> object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void PointerOver(this IElement element, long detail = 0, double screenX = 0, double screenY = 0, double clientX = 0, double clientY = 0, long button = 0, long buttons = 0, bool ctrlKey = false, bool shiftKey = false, bool altKey = false, bool metaKey = false, string? type = null, long pointerId = 0, float width = 0, float height = 0, float pressure = 0, float tiltX = 0, float tiltY = 0, string? pointerType = null, bool isPrimary = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>detail</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>A count of consecutive clicks that happened in a short amount of time, incremented by one.</p>
+</dd>
+    <dt><code>screenX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The X coordinate of the mouse pointer in global (screen) coordinates.</p>
+</dd>
+    <dt><code>screenY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The Y coordinate of the mouse pointer in global (screen) coordinates.</p>
+</dd>
+    <dt><code>clientX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The X coordinate of the mouse pointer in local (DOM content) coordinates.</p>
+</dd>
+    <dt><code>clientY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The Y coordinate of the mouse pointer in local (DOM content) coordinates.</p>
+</dd>
+    <dt><code>button</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The button number that was pressed when the mouse event was fired: Left button=0,
+middle button=1 (if present), right button=2. For mice configured for left handed
+use in which the button actions are reversed the values are instead read from
+right to left.</p>
+</dd>
+    <dt><code>buttons</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The buttons being pressed when the mouse event was fired: Left button=1, Right
+button=2, Middle (wheel) button=4, 4th button (typically, &quot;Browser Back&quot; button)=8,
+5th button (typically, &quot;Browser Forward&quot; button)=16. If two or more buttons are
+pressed, returns the logical sum of the values. E.g., if Left button and Right
+button are pressed, returns 3 (=1 | 2).</p>
+</dd>
+    <dt><code>ctrlKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the control key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>shiftKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the shift key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>altKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the alt key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>metaKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the meta key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Gets or sets the type of the event.</p>
+</dd>
+    <dt><code>pointerId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>A unique identifier for the pointer causing the event.</p>
+</dd>
+    <dt><code>width</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The width (magnitude on the X axis), in CSS pixels, of the contact geometry of the pointer.</p>
+</dd>
+    <dt><code>height</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The height (magnitude on the Y axis), in CSS pixels, of the contact geometry of the pointer.</p>
+</dd>
+    <dt><code>pressure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The normalized pressure of the pointer input in the range of 0 to 1, where 0
+and 1 represent the minimum and maximum pressure the hardware is capable of detecting, respectively.</p>
+</dd>
+    <dt><code>tiltX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The plane angle (in degrees, in the range of -90 to 90) between the Y-Z plane
+and the plane containing both the transducer (e.g. pen stylus) axis and the Y axis.</p>
+</dd>
+    <dt><code>tiltY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The plane angle (in degrees, in the range of -90 to 90) between the X-Z plane
+and the plane containing both the transducer (e.g. pen stylus) axis and the X axis.</p>
+</dd>
+    <dt><code>pointerType</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Indicates the device type that caused the event. Must be one of the strings mouse,
+pen or touch, or an empty string.</p>
+</dd>
+    <dt><code>isPrimary</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Indicates if the pointer represents the primary pointer of this pointer type.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerOverAsync_" data-uid="Bunit.PointerEventDispatchExtensions.PointerOverAsync*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerOverAsync_AngleSharp_Dom_IElement_Microsoft_AspNetCore_Components_Web_PointerEventArgs_" data-uid="Bunit.PointerEventDispatchExtensions.PointerOverAsync(AngleSharp.Dom.IElement,Microsoft.AspNetCore.Components.Web.PointerEventArgs)">
+  PointerOverAsync(IElement, PointerEventArgs)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointerover</code> event on <code class="paramref">element</code>, passing the provided <code class="paramref">eventArgs</code>
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task PointerOverAsync(this IElement element, PointerEventArgs eventArgs)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>eventArgs</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a></dt>
+    <dd><p>The event arguments to pass to the event handler.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerUp_" data-uid="Bunit.PointerEventDispatchExtensions.PointerUp*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerUp_AngleSharp_Dom_IElement_Microsoft_AspNetCore_Components_Web_PointerEventArgs_" data-uid="Bunit.PointerEventDispatchExtensions.PointerUp(AngleSharp.Dom.IElement,Microsoft.AspNetCore.Components.Web.PointerEventArgs)">
+  PointerUp(IElement, PointerEventArgs)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointerup</code> event on <code class="paramref">element</code>, passing the provided <code class="paramref">eventArgs</code>
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void PointerUp(this IElement element, PointerEventArgs eventArgs)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>eventArgs</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a></dt>
+    <dd><p>The event arguments to pass to the event handler.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerUp_" data-uid="Bunit.PointerEventDispatchExtensions.PointerUp*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerUp_AngleSharp_Dom_IElement_System_Int64_System_Double_System_Double_System_Double_System_Double_System_Int64_System_Int64_System_Boolean_System_Boolean_System_Boolean_System_Boolean_System_String_System_Int64_System_Single_System_Single_System_Single_System_Single_System_Single_System_String_System_Boolean_" data-uid="Bunit.PointerEventDispatchExtensions.PointerUp(AngleSharp.Dom.IElement,System.Int64,System.Double,System.Double,System.Double,System.Double,System.Int64,System.Int64,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String,System.Int64,System.Single,System.Single,System.Single,System.Single,System.Single,System.String,System.Boolean)">
+  PointerUp(IElement, long, double, double, double, double, long, long, bool, bool, bool, bool, string?, long, float, float, float, float, float, string?, bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointerup</code> event on <code class="paramref">element</code>, passing the provided
+properties to the event handler via a <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a> object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void PointerUp(this IElement element, long detail = 0, double screenX = 0, double screenY = 0, double clientX = 0, double clientY = 0, long button = 0, long buttons = 0, bool ctrlKey = false, bool shiftKey = false, bool altKey = false, bool metaKey = false, string? type = null, long pointerId = 0, float width = 0, float height = 0, float pressure = 0, float tiltX = 0, float tiltY = 0, string? pointerType = null, bool isPrimary = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>detail</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>A count of consecutive clicks that happened in a short amount of time, incremented by one.</p>
+</dd>
+    <dt><code>screenX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The X coordinate of the mouse pointer in global (screen) coordinates.</p>
+</dd>
+    <dt><code>screenY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The Y coordinate of the mouse pointer in global (screen) coordinates.</p>
+</dd>
+    <dt><code>clientX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The X coordinate of the mouse pointer in local (DOM content) coordinates.</p>
+</dd>
+    <dt><code>clientY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The Y coordinate of the mouse pointer in local (DOM content) coordinates.</p>
+</dd>
+    <dt><code>button</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The button number that was pressed when the mouse event was fired: Left button=0,
+middle button=1 (if present), right button=2. For mice configured for left handed
+use in which the button actions are reversed the values are instead read from
+right to left.</p>
+</dd>
+    <dt><code>buttons</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The buttons being pressed when the mouse event was fired: Left button=1, Right
+button=2, Middle (wheel) button=4, 4th button (typically, &quot;Browser Back&quot; button)=8,
+5th button (typically, &quot;Browser Forward&quot; button)=16. If two or more buttons are
+pressed, returns the logical sum of the values. E.g., if Left button and Right
+button are pressed, returns 3 (=1 | 2).</p>
+</dd>
+    <dt><code>ctrlKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the control key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>shiftKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the shift key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>altKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the alt key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>metaKey</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the meta key was down when the event was fired. false otherwise.</p>
+</dd>
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Gets or sets the type of the event.</p>
+</dd>
+    <dt><code>pointerId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>A unique identifier for the pointer causing the event.</p>
+</dd>
+    <dt><code>width</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The width (magnitude on the X axis), in CSS pixels, of the contact geometry of the pointer.</p>
+</dd>
+    <dt><code>height</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The height (magnitude on the Y axis), in CSS pixels, of the contact geometry of the pointer.</p>
+</dd>
+    <dt><code>pressure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The normalized pressure of the pointer input in the range of 0 to 1, where 0
+and 1 represent the minimum and maximum pressure the hardware is capable of detecting, respectively.</p>
+</dd>
+    <dt><code>tiltX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The plane angle (in degrees, in the range of -90 to 90) between the Y-Z plane
+and the plane containing both the transducer (e.g. pen stylus) axis and the Y axis.</p>
+</dd>
+    <dt><code>tiltY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The plane angle (in degrees, in the range of -90 to 90) between the X-Z plane
+and the plane containing both the transducer (e.g. pen stylus) axis and the X axis.</p>
+</dd>
+    <dt><code>pointerType</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Indicates the device type that caused the event. Must be one of the strings mouse,
+pen or touch, or an empty string.</p>
+</dd>
+    <dt><code>isPrimary</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Indicates if the pointer represents the primary pointer of this pointer type.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_PointerEventDispatchExtensions_PointerUpAsync_" data-uid="Bunit.PointerEventDispatchExtensions.PointerUpAsync*"></a>
+
+  <h3 id="Bunit_PointerEventDispatchExtensions_PointerUpAsync_AngleSharp_Dom_IElement_Microsoft_AspNetCore_Components_Web_PointerEventArgs_" data-uid="Bunit.PointerEventDispatchExtensions.PointerUpAsync(AngleSharp.Dom.IElement,Microsoft.AspNetCore.Components.Web.PointerEventArgs)">
+  PointerUpAsync(IElement, PointerEventArgs)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpointerup</code> event on <code class="paramref">element</code>, passing the provided <code class="paramref">eventArgs</code>
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task PointerUpAsync(this IElement element, PointerEventArgs eventArgs)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+    <dt><code>eventArgs</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.pointereventargs">PointerEventArgs</a></dt>
+    <dd><p>The event arguments to pass to the event handler.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://www.telerik.com/blazor-ui?utm_source=egilhansen&utm_medium=cpm&utm_campaign=blazor-trial-readme-sponsored-message">
+            <img width="240" src="/sponsors/progress-blazor-2022-dec-300x300.png" alt="Progress Telerik">
+          </a>
+          <p class="pt-1"><small>Premium sponsor: <a href="https://www.telerik.com/blazor-ui?utm_source=egilhansen&utm_medium=cpm&utm_campaign=blazor-trial-readme-sponsored-message" title="Progress Telerik">Progress Telerik</a>.</small></p>
+        </div>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://www.packtpub.com/" title="Packt">
+            <img width="150" src="/sponsors/packt-retina-logo.png" alt="Packt">
+          </a>
+          <p class="pt-1"><small>Editorial support provided by <a href="https://www.packtpub.com/" title="Packt">Packt</a>.</small></p>
+        </div>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://dotnetfoundation.org" title=".NET Foundation">
+            <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg" alt=".NET Foundation">
+          </a>
+          <p class="pt-1"><small>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</small></p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary bg-body-tertiary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <small>Documentation updated on 2024-11-01T08:23:14.0000000+00:00 in commit ee3e229206</small>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
