@@ -1,0 +1,1455 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class MediaEventDispatchExtensions
+ | bUnit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class MediaEventDispatchExtensions
+ | bUnit ">
+      <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" href="/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
+      <link rel="manifest" href="/site.webmanifest">
+
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="..//images/bunit-logo.png" alt="bUnit">
+            bUnit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Bunit.MediaEventDispatchExtensions">
+
+
+
+  <h1 id="Bunit_MediaEventDispatchExtensions" data-uid="Bunit.MediaEventDispatchExtensions" class="text-break">
+    Class MediaEventDispatchExtensions
+  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Bunit.html">Bunit</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Bunit.Web.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Media event dispatch helper extension methods.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class MediaEventDispatchExtensions</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">MediaEventDispatchExtensions</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_CanPlay_" data-uid="Bunit.MediaEventDispatchExtensions.CanPlay*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_CanPlay_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.CanPlay(AngleSharp.Dom.IElement)">
+  CanPlay(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@oncanplay</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void CanPlay(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_CanPlayAsync_" data-uid="Bunit.MediaEventDispatchExtensions.CanPlayAsync*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_CanPlayAsync_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.CanPlayAsync(AngleSharp.Dom.IElement)">
+  CanPlayAsync(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@oncanplay</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task CanPlayAsync(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_CanPlayThrough_" data-uid="Bunit.MediaEventDispatchExtensions.CanPlayThrough*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_CanPlayThrough_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.CanPlayThrough(AngleSharp.Dom.IElement)">
+  CanPlayThrough(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@oncanplaythrough</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void CanPlayThrough(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_CanPlayThroughAsync_" data-uid="Bunit.MediaEventDispatchExtensions.CanPlayThroughAsync*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_CanPlayThroughAsync_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.CanPlayThroughAsync(AngleSharp.Dom.IElement)">
+  CanPlayThroughAsync(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@oncanplaythrough</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task CanPlayThroughAsync(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_CueChange_" data-uid="Bunit.MediaEventDispatchExtensions.CueChange*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_CueChange_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.CueChange(AngleSharp.Dom.IElement)">
+  CueChange(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@oncuechange</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void CueChange(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_CueChangeAsync_" data-uid="Bunit.MediaEventDispatchExtensions.CueChangeAsync*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_CueChangeAsync_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.CueChangeAsync(AngleSharp.Dom.IElement)">
+  CueChangeAsync(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@oncuechange</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task CueChangeAsync(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_DurationChange_" data-uid="Bunit.MediaEventDispatchExtensions.DurationChange*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_DurationChange_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.DurationChange(AngleSharp.Dom.IElement)">
+  DurationChange(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@ondurationchange</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void DurationChange(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_DurationChangeAsync_" data-uid="Bunit.MediaEventDispatchExtensions.DurationChangeAsync*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_DurationChangeAsync_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.DurationChangeAsync(AngleSharp.Dom.IElement)">
+  DurationChangeAsync(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@ondurationchange</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task DurationChangeAsync(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_Emptied_" data-uid="Bunit.MediaEventDispatchExtensions.Emptied*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_Emptied_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.Emptied(AngleSharp.Dom.IElement)">
+  Emptied(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onemptied</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Emptied(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_EmptiedAsync_" data-uid="Bunit.MediaEventDispatchExtensions.EmptiedAsync*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_EmptiedAsync_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.EmptiedAsync(AngleSharp.Dom.IElement)">
+  EmptiedAsync(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onemptied</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task EmptiedAsync(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_Pause_" data-uid="Bunit.MediaEventDispatchExtensions.Pause*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_Pause_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.Pause(AngleSharp.Dom.IElement)">
+  Pause(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpause</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Pause(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_PauseAsync_" data-uid="Bunit.MediaEventDispatchExtensions.PauseAsync*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_PauseAsync_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.PauseAsync(AngleSharp.Dom.IElement)">
+  PauseAsync(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onpause</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task PauseAsync(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_Play_" data-uid="Bunit.MediaEventDispatchExtensions.Play*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_Play_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.Play(AngleSharp.Dom.IElement)">
+  Play(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onplay</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Play(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_PlayAsync_" data-uid="Bunit.MediaEventDispatchExtensions.PlayAsync*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_PlayAsync_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.PlayAsync(AngleSharp.Dom.IElement)">
+  PlayAsync(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onplay</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task PlayAsync(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_Playing_" data-uid="Bunit.MediaEventDispatchExtensions.Playing*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_Playing_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.Playing(AngleSharp.Dom.IElement)">
+  Playing(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onplaying</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Playing(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_PlayingAsync_" data-uid="Bunit.MediaEventDispatchExtensions.PlayingAsync*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_PlayingAsync_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.PlayingAsync(AngleSharp.Dom.IElement)">
+  PlayingAsync(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onplaying</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task PlayingAsync(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_RateChange_" data-uid="Bunit.MediaEventDispatchExtensions.RateChange*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_RateChange_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.RateChange(AngleSharp.Dom.IElement)">
+  RateChange(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onratechange</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RateChange(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_RateChangeAsync_" data-uid="Bunit.MediaEventDispatchExtensions.RateChangeAsync*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_RateChangeAsync_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.RateChangeAsync(AngleSharp.Dom.IElement)">
+  RateChangeAsync(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onratechange</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task RateChangeAsync(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_Seeked_" data-uid="Bunit.MediaEventDispatchExtensions.Seeked*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_Seeked_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.Seeked(AngleSharp.Dom.IElement)">
+  Seeked(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onseeked</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Seeked(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_SeekedAsync_" data-uid="Bunit.MediaEventDispatchExtensions.SeekedAsync*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_SeekedAsync_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.SeekedAsync(AngleSharp.Dom.IElement)">
+  SeekedAsync(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onseeked</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task SeekedAsync(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_Seeking_" data-uid="Bunit.MediaEventDispatchExtensions.Seeking*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_Seeking_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.Seeking(AngleSharp.Dom.IElement)">
+  Seeking(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onseeking</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Seeking(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_SeekingAsync_" data-uid="Bunit.MediaEventDispatchExtensions.SeekingAsync*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_SeekingAsync_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.SeekingAsync(AngleSharp.Dom.IElement)">
+  SeekingAsync(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onseeking</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task SeekingAsync(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_Stalled_" data-uid="Bunit.MediaEventDispatchExtensions.Stalled*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_Stalled_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.Stalled(AngleSharp.Dom.IElement)">
+  Stalled(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onstalled</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Stalled(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_StalledAsync_" data-uid="Bunit.MediaEventDispatchExtensions.StalledAsync*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_StalledAsync_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.StalledAsync(AngleSharp.Dom.IElement)">
+  StalledAsync(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onstalled</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task StalledAsync(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_Stop_" data-uid="Bunit.MediaEventDispatchExtensions.Stop*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_Stop_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.Stop(AngleSharp.Dom.IElement)">
+  Stop(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onstop</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Stop(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_StopAsync_" data-uid="Bunit.MediaEventDispatchExtensions.StopAsync*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_StopAsync_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.StopAsync(AngleSharp.Dom.IElement)">
+  StopAsync(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onstop</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task StopAsync(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_Suspend_" data-uid="Bunit.MediaEventDispatchExtensions.Suspend*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_Suspend_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.Suspend(AngleSharp.Dom.IElement)">
+  Suspend(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onsuspend</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Suspend(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_SuspendAsync_" data-uid="Bunit.MediaEventDispatchExtensions.SuspendAsync*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_SuspendAsync_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.SuspendAsync(AngleSharp.Dom.IElement)">
+  SuspendAsync(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onsuspend</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task SuspendAsync(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_TimeUpdate_" data-uid="Bunit.MediaEventDispatchExtensions.TimeUpdate*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_TimeUpdate_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.TimeUpdate(AngleSharp.Dom.IElement)">
+  TimeUpdate(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@ontimeupdate</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void TimeUpdate(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_TimeUpdateAsync_" data-uid="Bunit.MediaEventDispatchExtensions.TimeUpdateAsync*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_TimeUpdateAsync_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.TimeUpdateAsync(AngleSharp.Dom.IElement)">
+  TimeUpdateAsync(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@ontimeupdate</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task TimeUpdateAsync(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_VolumeChange_" data-uid="Bunit.MediaEventDispatchExtensions.VolumeChange*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_VolumeChange_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.VolumeChange(AngleSharp.Dom.IElement)">
+  VolumeChange(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onvolumechange</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void VolumeChange(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_VolumeChangeAsync_" data-uid="Bunit.MediaEventDispatchExtensions.VolumeChangeAsync*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_VolumeChangeAsync_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.VolumeChangeAsync(AngleSharp.Dom.IElement)">
+  VolumeChangeAsync(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onvolumechange</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task VolumeChangeAsync(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_Waiting_" data-uid="Bunit.MediaEventDispatchExtensions.Waiting*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_Waiting_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.Waiting(AngleSharp.Dom.IElement)">
+  Waiting(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onwaiting</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Waiting(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_MediaEventDispatchExtensions_WaitingAsync_" data-uid="Bunit.MediaEventDispatchExtensions.WaitingAsync*"></a>
+
+  <h3 id="Bunit_MediaEventDispatchExtensions_WaitingAsync_AngleSharp_Dom_IElement_" data-uid="Bunit.MediaEventDispatchExtensions.WaitingAsync(AngleSharp.Dom.IElement)">
+  WaitingAsync(IElement)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <code>@onwaiting</code> event on <code class="paramref">element</code>, passing an empty (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">Empty</a>)
+to the event handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task WaitingAsync(this IElement element)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>element</code> <span class="xref">IElement</span></dt>
+    <dd><p>The element to raise the event on.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that completes when the event handler is done.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://dotnetfoundation.org" title=".NET Foundation">
+            <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg" alt=".NET Foundation">
+          </a>
+          <p class="pt-1"><small>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</small></p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary bg-body-tertiary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <small>Documentation updated on 2024-12-13T16:09:56.0000000+00:00 in commit 1bb0b011c2</small>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
