@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Adding IWebAssemblyHostEnvironment | bUnit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Adding IWebAssemblyHostEnvironment | bUnit ">
+      <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" href="/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
+      <link rel="manifest" href="/site.webmanifest">
+
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/test-doubles/fake-webassemblyhostenvironment.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../..//images/bunit-logo.png" alt="bUnit">
+            bUnit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="bunit-webassemblyhostenvironment">
+<h1 id="adding-iwebassemblyhostenvironment">Adding <code>IWebAssemblyHostEnvironment</code></h1>
+
+<p>bUnit has itws own implementation of Blazor's <code>IWebAssemblyHostEnvironment</code> built-in, which is added by default to bUnit's <code>BunitContext.Services</code> service provider. That means nothing special is needed to test components that depend on <code>IWebAssemblyHostEnvironment</code>, as it is already available by default.</p>
+<p>Out of the box, the implementation has its <code>Environment</code> property set to <code>production</code>, and its <code>BaseAddress</code> set to <code>/</code>.</p>
+<h2 id="setting-environment-and-baseaddress">Setting <code>Environment</code> and <code>BaseAddress</code></h2>
+<p>Lets look at a few examples of how to set the two <code>IWebAssemblyHostEnvironment</code> properties <code>Environment</code> and <code>BaseAddress</code> via the built-in object.</p>
+<p>In the examples, we'll use the following <code>&lt;HelloWorld&gt;</code> component:</p>
+<pre><code class="lang-cshtml">@inject IWebAssemblyHostEnvironment HostEnvironment
+
+&lt;p id=&quot;message&quot;&gt;
+  Hello @(HostEnvironment.IsDevelopment() ? &quot;Developers&quot; : &quot;World&quot;). 
+&lt;/p&gt;
+&lt;p id=&quot;address&quot;&gt;
+  The base URL is: @HostEnvironment.BaseAddress
+&lt;/p&gt;
+</code></pre>
+<p>To verify that the <code>&lt;HelloWorld&gt;</code> component correctly says hello to the developers, do the following:</p>
+<pre><code class="lang-csharp">// Arrange
+var hostEnvironment = Services.GetRequiredService&lt;BunitWebAssemblyHostEnvironment&gt;();
+
+// Sets the environment to &quot;Development&quot;. There are two other helper 
+// methods available as well, SetEnvironmentToProduction() and 
+// set SetEnvironmentToStaging(), or environment can also be changed
+// directly through the hostEnvironment.Environment property.
+hostEnvironment.SetEnvironmentToDevelopment();
+
+var cut = Render&lt;SimpleUsingWebAssemblyHostEnvironment&gt;();
+
+// Assert - inspects markup to verify the message
+cut.Find(&quot;#message&quot;).MarkupMatches($&quot;&lt;p&gt;Hello Developers.&lt;/p&gt;&quot;);
+</code></pre>
+<p>To verify that the <code>&lt;HelloWorld&gt;</code> component correctly uses the current <code>BaseAddress</code>, do the following:</p>
+<pre><code class="lang-csharp">// Arrange
+var hostEnvironment = Services.GetRequiredService&lt;BunitWebAssemblyHostEnvironment&gt;();
+
+// Sets a new base address directly on the BaseAddress property.
+hostEnvironment.BaseAddress = &quot;myBaseUrl/&quot;;
+
+// Act
+var cut = Render&lt;SimpleUsingWebAssemblyHostEnvironment&gt;();
+
+// Assert - inspect markup to verify that the BaseAddress is used correctly.
+cut.Find(&quot;#address&quot;).MarkupMatches($&quot;&lt;p&gt;The base URL is: myBaseUrl/&lt;/p&gt;&quot;);
+</code></pre>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/test-doubles/fake-webassemblyhostenvironment.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://dotnetfoundation.org" title=".NET Foundation">
+            <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg" alt=".NET Foundation">
+          </a>
+          <p class="pt-1"><small>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</small></p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary bg-body-tertiary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <small>Documentation updated on 2026-02-27T14:38:27.0000000+00:00 in commit a452cce29f</small>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

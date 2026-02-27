@@ -1,0 +1,355 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Substituting (mocking) component | bUnit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Substituting (mocking) component | bUnit ">
+      <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" href="/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
+      <link rel="manifest" href="/site.webmanifest">
+
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/providing-input/substituting-components.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../..//images/bunit-logo.png" alt="bUnit">
+            bUnit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="substituting-components">
+<h1 id="substituting-mocking-components">Substituting (mocking) components</h1>
+
+<p>bUnit makes it possible to substitute child components of a component under test with other components, e.g. mock components. This makes it possible to isolate a component under test from other components it depends on, e.g. 3rd party components.</p>
+<p>To substitute a component during a test, you must register the substitute, or a substitute factory, with the <code>ComponentFactories</code> collection on bUnit's <code>BunitContext</code>.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>This feature is only available for test projects that target .NET 5 or later.</p>
+</div>
+<p>The following sections will explain how to create substitute components and how to register them with the <code>ComponentFactories</code> collection.</p>
+<h2 id="creating-substitute-mock-components">Creating substitute (mock) components</h2>
+<p>These are the requirements substitute components must meet:</p>
+<ol>
+<li>A substitute component must implement <code>IComponent</code>, i.e. be a Blazor component.</li>
+<li>A substitute component must have the same parameters as the original component, <em>OR</em> have a <code>CaptureUnmatchedValues</code> parameter that Blazor can pass all parameters to.</li>
+<li><em>If</em> the original component is assigned to a variable in component under test, e.g. via the <code>@ref</code> attribute, a substitute must be assignable to the original component (inherit from it).</li>
+</ol>
+<p>Most popular mocking libraries are able to create substitute/mock components easily, based on the original component, that follow the requirement specified above.</p>
+<p>If the substitute only has to match the two first requirements, bUnit's built-in <code>Stub&lt;T&gt;</code> can be used.</p>
+<p>Finally, for complex scenarios, a hand-coded substitute component can be created.</p>
+<h3 id="substituting-components-with-bunits-stubt">Substituting components with bUnit's <code>Stub&lt;T&gt;</code></h3>
+<p>When the component that should be substitute out is not referenced in the component under test with <code>@ref</code>, use bUnit's built-in &quot;stubbing&quot; capability.</p>
+<p>For example, supposed you want to test the <code>&lt;Foo&gt;</code> component and substitute out it's child component <code>&lt;Bar&gt;</code>:</p>
+<pre><code class="lang-cshtml">&lt;Foo&gt;
+  &lt;Bar /&gt;
+&lt;/Foo&gt;
+</code></pre>
+<p>To stub it out, use the <code>AddStub&lt;T&gt;()</code> method:</p>
+<pre><code class="lang-csharp">[Fact]
+public void Foo_Doesnt_Have_A_Bar_But_Stub()
+{
+  // Register the a stub substitution.
+  ComponentFactories.AddStub&lt;Bar&gt;();
+
+  // Render the component under test.
+  RenderedFragment cut = Render(@&lt;Foo /&gt;);
+  
+  // Verify that the Bar component has 
+  // been substituted in the render tree.
+  Assert.False(cut.HasComponent&lt;Bar&gt;());
+  Assert.True(cut.HasComponent&lt;Stub&lt;Bar&gt;&gt;());
+}
+</code></pre>
+<p>It is also possible to specify a base type/component for the component you want to substitute. For example, if <code>&lt;Bar&gt;</code> inherits from <code>&lt;BarBase&gt;</code>, you can specify <code>&lt;BarBase&gt;</code> and all components that inherit from <code>&lt;BarBase&gt;</code> will be substituted.</p>
+<pre><code class="lang-csharp">ComponentFactories.AddStub&lt;BarBase&gt;();
+</code></pre>
+<p>To add substitute markup to the output, pass it in one of the following ways:</p>
+<pre><code class="lang-csharp">// Add the markup specified in the string to the rendered output
+// instead of that from &lt;Bar&gt;.
+ComponentFactories.AddStub&lt;Bar&gt;(&quot;&lt;div&gt;NOT FROM BAR&lt;/div&gt;&quot;);
+
+// Add the markup specified in the render fragment to the rendered
+// output instead of that from &lt;Bar&gt;.
+ComponentFactories.AddStub&lt;Bar&gt;(@&lt;div&gt;NOT FROM BAR&lt;/div&gt;);
+</code></pre>
+<p>It is also possible to access the parameter that is passed to the substituted component, both when specifying alternative render output or when verifying the correct parameters was passed to the substituted component. For example, suppose <code>&lt;Foo&gt;</code> has a parameter named <code>Baz</code>:</p>
+<pre><code class="lang-csharp">// Add the markup specified in the template function to the rendered output
+// instead of that from &lt;Bar&gt;.
+ComponentFactories.AddStub&lt;Bar&gt;(parameters =&gt; $&quot;&lt;div&gt;{parameters.Get(x =&gt; Baz)}&lt;/div&gt;&quot;);
+
+// Add the markup produced by the render template to the rendered
+// output instead of that from &lt;Bar&gt;.
+ComponentFactories.AddStub&lt;Bar&gt;(parameters =&gt; @&lt;div&gt;@(parameters.Get(x =&gt; Baz))&lt;/div&gt;);
+</code></pre>
+<p>To verify that the expected value was passed to the <code>Baz</code> parameter of <code>&lt;Foo&gt;</code>, first find the substituted component in the render tree using the <code>FindComponent</code>/<code>FindComponents</code> methods, and then inspect the <code>Parameters</code> property. E.g.:</p>
+<pre><code class="lang-csharp">[Fact]
+public void Foo_Doesnt_Have_A_Bar_But_Stub()
+{
+  ComponentFactories.AddStub&lt;Bar&gt;();
+
+  RenderedFragment cut = Render(@&lt;Foo /&gt;);
+
+  // Find the stubbed component in the render tree
+  RenderedComponent&lt;Stub&lt;Bar&gt;&gt; barStub = cut.FindComponent&lt;Stub&lt;Bar&gt;&gt;();
+
+  // Access parameters passed to it through the stubbed components
+  // Parameters property, using the selector to pick out the parameter.  
+  var valuePassedToBaz = barStub.Instance.Parameters.Get(x =&gt; x.Baz);
+  
+  // assert valuePassedToBaz is as expected...
+}
+</code></pre>
+<h4 id="dynamic-matching-components-to-stub">Dynamic matching components to stub</h4>
+<p>To stub more than one component, e.g. all components from a 3rd party component library, pass a <code>Predicate&lt;Type&gt;</code> to the <code>AddStub</code> method, that returns <code>true</code> for all components that should be stubbed. For example:</p>
+<pre><code class="lang-csharp">// Stub all components of type `Bar`
+ComponentFactories.AddStub(type =&gt; type == typeof(Bar));
+
+// Stub all components in the Third.Party.Lib namespace
+ComponentFactories.AddStub(type =&gt; type.Namespace == &quot;Third.Party.Lib&quot;);
+</code></pre>
+<p>It is also possible to specify replacement markup or a <code>RenderFragment</code> for components substituted using the &quot;component predicate&quot; method:</p>
+<pre><code class="lang-csharp">// Add the markup specified in the string to the rendered output
+// instead of the components that match the predicate,
+ComponentFactories.AddStub(type =&gt; type.Namespace == &quot;Third.Party.Lib&quot;,
+                               &quot;&lt;div&gt;NOT FROM BAR&lt;/div&gt;&quot;);
+
+// Add the markup produced by the render fragment to the rendered
+// output instead of the components that match the predicate.
+ComponentFactories.AddStub(type =&gt; type.Namespace == &quot;Third.Party.Lib&quot;,
+                               @&lt;div&gt;NOT FROM BAR&lt;/div&gt;);
+</code></pre>
+<h3 id="creating-a-mock-component-with-mocking-libraries">Creating a mock component with mocking libraries</h3>
+<p>To get more control over the substituted component or when having a reference to it in the component under test, use a mock created by a mocking library.</p>
+<p>Mocking libraries usually offer options of setting up expectations and specify responses to calls made to their methods and properties, as long as these are virtual.</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>To learn how to configure a mock object, consult your favorite mocking frameworks documentation.</p>
+</div>
+<h4 id="mocking-limitations">Mocking limitations</h4>
+<p>Since the standard life-cycle methods in Blazor are all virtual, i.e. <code>OnInitialized</code> or <code>OnAfterRender</code>, etc., components in Blazor are generally very mock friendly.</p>
+<p>However, if a mocked component has a <em>constructor</em>, <em>field</em> or <em>property initializers</em>, or implements <code>Dispose</code>/<code>DisposeAsync</code>, these will usually not be overridable by the mocking framework and will run when the component is instantiated and disposed.</p>
+<p>If that is undesirable, consider creating a wrapper component around the component you wish to mock, or, if you own the component, avoid using a constructor and make use of virtual where ever possible.</p>
+<h4 id="mocking-examples">Mocking examples</h4>
+<p>Supposed you want to test the <code>&lt;Foo&gt;</code> component and substitute out it's child component <code>&lt;Bar&gt;</code>:</p>
+<pre><code class="lang-cshtml">&lt;Foo&gt;
+  &lt;Bar /&gt;
+&lt;/Foo&gt;
+</code></pre>
+<p>Here are two examples of using the <a href="https://github.com/Moq">Moq</a> and <a href="https://github.com/nsubstitute/NSubstitute">NSubstitute</a> mocking libraries to substitute <code>&lt;Bar&gt;</code>:</p>
+<div class="tabGroup" id="tabgroup_1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_1_moq" role="tab" aria-controls="tabpanel_1_moq" data-tab="moq" tabindex="0" aria-selected="true">MOQ</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_nsubstitute" role="tab" aria-controls="tabpanel_1_nsubstitute" data-tab="nsubstitute" tabindex="-1">NSubstitute</a>
+</li>
+</ul>
+<section id="tabpanel_1_moq" role="tabpanel" data-tab="moq">
+
+<pre><code class="lang-csharp">[Fact]
+public void Foo_Doesnt_Have_A_Bar_But_Mock()
+{
+  // Register the mock instance for Bar
+  Mock&lt;Bar&gt; barMock = new Mock&lt;Bar&gt;();
+  ComponentFactories.Add&lt;Bar&gt;(barMock.Object);
+  
+  // Render the component under test
+  RenderedFragment cut = Render(@&lt;Foo /&gt;);
+ 
+  // Verify that the Bar component has 
+  // been substituted in the render tree
+  RenderedComponent&lt;Bar&gt; bar = cut.FindComponent&lt;Bar&gt;();  
+  Assert.Same(barMock.Object, bar.Instance);
+}
+</code></pre>
+<p>Moq the exposes the mocked component instance through the <code>Object</code> property.</p>
+</section>
+<section id="tabpanel_1_nsubstitute" role="tabpanel" data-tab="nsubstitute" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-csharp">[Fact]
+public void Foo_Doesnt_Have_A_Bar_But_Mock()
+{
+  // Register the mock instance for Bar
+  Bar barMock = Substitute.For&lt;FancyParagraph&gt;();
+  ComponentFactories.Add&lt;Bar&gt;(barMock);
+  
+  // Render the component under test
+  RenderedFragment cut = Render(@&lt;Foo /&gt;);
+ 
+  // Verify that the Bar component has 
+  // been substituted in the render tree
+  RenderedComponent&lt;Bar&gt; bar = cut.FindComponent&lt;Bar&gt;();  
+  Assert.Same(barMock, bar.Instance);
+}
+</code></pre>
+</section>
+</div>
+
+<div class="WARNING">
+<h5>Warning</h5>
+<p>A mock instance can only be used once, i.e. can only be used substitute a single component in the render tree. To substitute more components with one <code>Add</code> call on <code>ComponentFactories</code>, pass a mock component factory in instead. See below for example.</p>
+</div>
+<p>To mock multiple components of the same type, pass in a mocking component factory:</p>
+<div class="tabGroup" id="tabgroup_2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_2_moq" role="tab" aria-controls="tabpanel_2_moq" data-tab="moq" tabindex="0" aria-selected="true">MOQ</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_2_nsubstitute" role="tab" aria-controls="tabpanel_2_nsubstitute" data-tab="nsubstitute" tabindex="-1">NSubstitute</a>
+</li>
+</ul>
+<section id="tabpanel_2_moq" role="tabpanel" data-tab="moq">
+
+<pre><code class="lang-csharp">// Register a mock component factory to replace multiple Bar components
+ComponentFactories.Add&lt;Bar&gt;(() =&gt; Mock.Of&lt;Bar&gt;());
+</code></pre>
+</section>
+<section id="tabpanel_2_nsubstitute" role="tabpanel" data-tab="nsubstitute" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-csharp">// Register a mock component factory to replace multiple Bar components
+ComponentFactories.Add&lt;Bar&gt;(() =&gt; Substitute.For&lt;FancyParagraph&gt;()));
+</code></pre>
+</section>
+</div>
+
+<p>To mock components conditionally, pass a type predicate to the add method, along with a mock component factory. The mock component factory will be passed the type to create a mock of.</p>
+<p>In the example below, an extension method is used to create a mock using Moq with reflection. The example also uses Moq's <code>MockRepository</code> type that makes it possible to set up the mocked components separately from when they are created. Other mocking frameworks may need similar helper method:</p>
+<pre><code class="lang-csharp">var mockRepo = new MockRepository(MockBehavior.Loose);
+ComponentFactories.Add(type =&gt; type.Namespace == &quot;Thrid.Party.Lib&quot;,
+                       type =&gt; mockRepo.CreateComponent(type));
+</code></pre>
+<p>And this is the extension method that can create mock components dynamically based on a type:</p>
+<pre><code class="lang-csharp">// Extension method that can create mock components dynamically
+// based on a type.
+internal static class MockRepositoryExtensions
+{
+  private static readonly MethodInfo CreateMethodInfo = typeof(MockRepository)
+    .GetMethod(nameof(MockRepository.Create), Array.Empty&lt;Type&gt;());
+
+  public static IComponent CreateComponent(this MockRepository repository, Type type)
+  {
+    var genericCreateMethod = CreateMethodInfo.MakeGenericMethod(type);
+    var mock = (Mock)genericCreateMethod.Invoke(repository, null);
+    return (IComponent)mock.Object;
+  }
+}
+</code></pre>
+<h3 id="shallow-rendering">Shallow rendering</h3>
+<p>A popular technique in JavaScript-based frontend testing is &quot;shallow rendering&quot;.</p>
+<blockquote>
+<p><em>&quot;Shallow rendering lets you render a component &quot;one level deep&quot; and assert facts about what its render method returns, without worrying about the behavior of child components, which are not instantiated or rendered&quot;.</em> -- <a href="https://reactjs.org/docs/shallow-renderer.html">React.js docs</a>.</p>
+</blockquote>
+<p>This is possible in bUnit as well, using the type predicate technique discussed above. For example, to shallow render <code>&lt;Foo&gt;</code> using the built-in stub in bUnit, do the following:</p>
+<pre><code class="lang-csharp">ComponentFactories.AddStub(type =&gt; type != typeof(Foo));
+</code></pre>
+<p>This will tell bUnit to stub out all components in the render tree that is NOT <code>&lt;Foo&gt;</code>. This can also be achieved using a mocking framework. See the example in the previous section above for how to dynamically create component mocks using Moq.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/providing-input/substituting-components.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://dotnetfoundation.org" title=".NET Foundation">
+            <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg" alt=".NET Foundation">
+          </a>
+          <p class="pt-1"><small>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</small></p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary bg-body-tertiary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <small>Documentation updated on 2026-02-27T14:38:27.0000000+00:00 in commit a452cce29f</small>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

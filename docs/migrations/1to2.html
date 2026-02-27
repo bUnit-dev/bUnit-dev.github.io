@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Migrating from 1.x to 2.x | bUnit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Migrating from 1.x to 2.x | bUnit ">
+      <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" href="/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
+      <link rel="manifest" href="/site.webmanifest">
+
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/migrations/1to2.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../..//images/bunit-logo.png" alt="bUnit">
+            bUnit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="migrating-from-1-to-2">
+<h1 id="migrating-from-bunit-1x-to-2x">Migrating from bUnit 1.x to 2.x</h1>
+
+<p>This document describes the changes made in bUnit 2.x that may affect  existing tests written for bUnit 1.x. The old documentation for bUnit 1.x is available at: <a href="https://v1.bunit.dev">https://v1.bunit.dev</a>.</p>
+<h2 id="one-package-to-rule-them-all">One package to rule them all</h2>
+<p><code>bunit.core</code> and <code>bunit.web</code> have be merged into a single package called <code>bunit</code>. The seperation was used to allow for extensibitlity, which isn't used anymore. Therefore <code>bunit.core</code> and <code>bunit.web</code> will stay on version 1.x, while <code>bunit</code> will be the only package going forward. To migrate, simply remove the <code>bunit.core</code> and <code>bunit.web</code> packages and add the <code>bunit</code> package. We don't expect many users to have used the <code>bunit.core</code> or <code>bunit.web</code>  package directly, but may hit 3rd party packages that depend on them.</p>
+<h2 id="testcontext-renamed-to-bunitcontext"><code>TestContext</code> renamed to <code>BunitContext</code></h2>
+<p>The <code>TestContext</code> class has been renamed to <code>BunitContext</code>. To migrate tests, rename all instances of <code>TestContext</code> to <code>BunitContext</code>:</p>
+<pre><code class="lang-diff">- public class MyTestClass : TestContext
++ public class MyTestClass : BunitContext
+</code></pre>
+<h2 id="bunitcontext-offers-dispose-and-disposeasync-methods"><code>BunitContext</code> offers <code>Dispose</code> and <code>DisposeAsync</code> methods</h2>
+<p>In version 1, the <code>TestContext</code> class only implemented <code>IDisposable</code>, but in version 2, it also implements <code>IAsyncDisposable</code>. Therefore, if there are asynchronous disposable inside the container for example, the asynchronous version should be used.</p>
+<h2 id="the-fake-prefix-was-renamed-to-bunit-eg-fakenavigationmanager-to-bunitnavigationmanager">The <code>Fake</code> prefix was renamed to <code>Bunit</code> (e.g. <code>FakeNavigationManager</code> to <code>BunitNavigationManager</code>)</h2>
+<p>The <code>Fake</code> prefix used for various fake implementations has been renamed to <code>Bunit</code>. This includes the following types:</p>
+<ul>
+<li><code>FakeNavigationManager</code> to <code>BunitNavigationManager</code></li>
+<li><code>FakeJSRuntime</code> to <code>BunitJSRuntime</code></li>
+<li><code>FakeAuthenticationStateProvider</code> to <code>BunitAuthenticationStateProvider</code></li>
+<li><code>FakeAuthrozitationContext</code> to <code>BunitAuthorizationContext</code></li>
+<li><code>FakeuthorizationPolicyProvider</code> to <code>BunitAuthorizationPolicyProvider</code></li>
+</ul>
+<h2 id="unified-the-render-methods">Unified the <code>Render</code> methods</h2>
+<p>In v1 there were multiple <code>RenderXXX</code>methods (like <code>RenderComponent</code>, <code>Render</code> and <code>SetParametersAndRender</code>) that were used to render components and markup. In v2, these methods have been unified into a single <code>Render</code> method that can handle both components and markup) via the simple <code>Render</code> method:</p>
+<pre><code class="lang-diff">- var cut = RenderComponent&lt;MyComponent&gt;();
++ var cut = Render&lt;MyComponent&gt;();
+</code></pre>
+<h2 id="removed-some-abstraction">Removed some abstraction</h2>
+<p>Many types were removed in favor of one public type:</p>
+<ul>
+<li><code>IRenderedComponent&lt;TComponent&gt;</code> - where <code>TComponent</code> is the type of the component rendered (or the a <code>ContainerFragment</code> if markup was rendered).</li>
+</ul>
+<p>The removed types were:</p>
+<ul>
+<li><code>IRenderedFragment</code></li>
+<li><code>IRenderedComponent</code></li>
+<li><code>IRenderedMarkup</code></li>
+<li><code>IRenderedComponentBase</code></li>
+</ul>
+<p>If any of the types were used (for example in extensions methods), they should be replaced with <code>IRenderedComponent</code>.</p>
+<h2 id="removed-of-isnullorempty-extension-method-on-ienumerablet-and-createlogger-on-iserviceprovider">Removed of <code>IsNullOrEmpty</code> extension method on <code>IEnumerable&lt;T&gt;</code> and <code>CreateLogger</code> on <code>IServiceProvider</code></h2>
+<p>The <code>IsNullOrEmpty</code> extension method on <code>IEnumerable&lt;T&gt;</code> has been removed, as well as the <code>CreateLogger</code> extension method on <code>IServiceProvider</code>. These extension methods are pretty common and conflict with other libraries. These methods can be recreated like this:</p>
+<pre><code class="lang-csharp">public static class Extensions
+{
+    public static bool IsNullOrEmpty&lt;T&gt;(this IEnumerable&lt;T&gt; enumerable)
+        =&gt; enumerable == null || !enumerable.Any();
+    
+    public static ILogger&lt;T&gt; CreateLogger&lt;T&gt;(this IServiceProvider serviceProvider)
+    {
+        var loggerFactory = serviceProvider.GetRequiredService&lt;ILoggerFactory&gt;() ?? NullLoggerFactory.Instance;
+        return loggerFactory.CreateLogger&lt;T&gt;();
+    }
+}
+</code></pre>
+<h2 id="event-dispatcher-does-not-offer-overload-with-all-parameters">Event dispatcher does not offer overload with all parameters</h2>
+<p>In version 1.x, bUnit offered for example the following methods to invoke <code>onclick</code> on a component:</p>
+<pre><code class="lang-csharp">cut.Find(&quot;button&quot;).Click();
+cut.Find(&quot;button&quot;).ClickAsync(new MouseEventArgs());
+cut.Find(&quot;button&quot;).Click(detail: 2, ctrlKey: true);
+</code></pre>
+<p>The last one was a method with all parameters of <code>MouseEventArgs</code> as optional parameters. This method has been removed in favor of using the <code>MouseEventArgs</code> directly.</p>
+<p>Also <code>ClickAsync</code> - to align with its synchronous counterpart - doesn't take <code>MouseEventArgs</code> as mandatory parameter anymore. If not set, a default instance will be created.</p>
+<h2 id="disposecomponents-is-now-async-and-called-disposecomponentsasync"><code>DisposeComponents</code> is now async and called <code>DisposeComponentsAsync</code></h2>
+<p>The <code>DisposeComponents</code> method has been renamed to <code>DisposeComponentsAsync</code> and is now asynchronous. To migrate, simply rename the method and add <code>await</code>:</p>
+<pre><code class="lang-diff">- DisposeComponents();
++ await DisposeComponentsAsync();
+</code></pre>
+<p>## The <code>ComponentParameterFactory</code> and <code>ComponentParameter</code> has been removed
+The <code>ComponentParameterFactory</code> class has been removed (and therefore the usage of <code>ComponentParameter</code>).
+Instead, use the <code>Render</code> method (and its overloads) to pass parameters to components.</p>
+<h2 id="irefreshableelementcollection-was-removed"><code>IRefreshableElementCollection</code> was removed</h2>
+<p>The <code>IRefreshableElementCollection</code> interface has been removed. With that, the overload in <code>FindAll</code> doesn't accept a <code>bool refresh</code> parameter anymore. Instead, simply call <code>FindAll</code> again to get a refreshed collection.</p>
+<pre><code class="lang-csharp">var items = cut.FindAll(&quot;li&quot;, refresh: true);
+items.Count.ShouldBe(3);
+cut.Find(&quot;button&quot;).Click(); // This changes the list items
+
+items.Count.ShouldBe(4);
+</code></pre>
+<p>Should be changed to:</p>
+<pre><code class="lang-csharp">var items = cut.FindAll(&quot;li&quot;);
+items.Count.ShouldBe(3);
+cut.Find(&quot;button&quot;).Click(); // This changes the list items
+items = cut.FindAll(&quot;li&quot;); // Call FindAll again to refresh
+items.Count.ShouldBe(4);
+</code></pre>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/migrations/1to2.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://dotnetfoundation.org" title=".NET Foundation">
+            <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg" alt=".NET Foundation">
+          </a>
+          <p class="pt-1"><small>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</small></p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary bg-body-tertiary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <small>Documentation updated on 2026-02-27T14:38:27.0000000+00:00 in commit a452cce29f</small>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

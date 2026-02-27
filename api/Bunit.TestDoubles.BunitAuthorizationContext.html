@@ -1,0 +1,700 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class BunitAuthorizationContext
+ | bUnit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class BunitAuthorizationContext
+ | bUnit ">
+      <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" href="/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
+      <link rel="manifest" href="/site.webmanifest">
+
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="..//images/bunit-logo.png" alt="bUnit">
+            bUnit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Bunit.TestDoubles.BunitAuthorizationContext">
+
+
+
+  <h1 id="Bunit_TestDoubles_BunitAuthorizationContext" data-uid="Bunit.TestDoubles.BunitAuthorizationContext" class="text-break">
+    Class BunitAuthorizationContext
+  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Bunit.html">Bunit</a>.<a class="xref" href="Bunit.TestDoubles.html">TestDoubles</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>bunit.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Root authorization service that manages different authentication/authorization state
+in the system.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class BunitAuthorizationContext</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">BunitAuthorizationContext</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_ShouldBeElementReferenceTo_System_Object_AngleSharp_Dom_IElement_">JSRuntimeAssertExtensions.ShouldBeElementReferenceTo(object?, IElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_ShouldBeElementReferenceTo_System_Object_AngleSharp_Dom_IElement_">JSRuntimeAssertExtensions.ShouldBeElementReferenceTo(object?, IElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_ShouldBeElementReferenceTo_System_Object_AngleSharp_Dom_IElement_">JSRuntimeAssertExtensions.ShouldBeElementReferenceTo(object?, IElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_ShouldBeElementReferenceTo_System_Object_AngleSharp_Dom_IElement_">JSRuntimeAssertExtensions.ShouldBeElementReferenceTo(object?, IElement)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Bunit_TestDoubles_BunitAuthorizationContext_Claims_" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.Claims*"></a>
+
+  <h3 id="Bunit_TestDoubles_BunitAuthorizationContext_Claims" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.Claims">
+  Claims
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the set of principal claims for the current user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;Claim&gt; Claims { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.claims.claim">Claim</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Bunit_TestDoubles_BunitAuthorizationContext_IsAuthenticated_" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.IsAuthenticated*"></a>
+
+  <h3 id="Bunit_TestDoubles_BunitAuthorizationContext_IsAuthenticated" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.IsAuthenticated">
+  IsAuthenticated
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a value indicating whether user is authenticated.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsAuthenticated { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Bunit_TestDoubles_BunitAuthorizationContext_Policies_" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.Policies*"></a>
+
+  <h3 id="Bunit_TestDoubles_BunitAuthorizationContext_Policies" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.Policies">
+  Policies
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the set of authentication policies for the current user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;string&gt; Policies { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Bunit_TestDoubles_BunitAuthorizationContext_PolicySchemeName_" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.PolicySchemeName*"></a>
+
+  <h3 id="Bunit_TestDoubles_BunitAuthorizationContext_PolicySchemeName" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.PolicySchemeName">
+  PolicySchemeName
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the policy schemeName. Defaults to TestScheme and usually doesn't
+need to be changed by user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string PolicySchemeName { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Bunit_TestDoubles_BunitAuthorizationContext_Roles_" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.Roles*"></a>
+
+  <h3 id="Bunit_TestDoubles_BunitAuthorizationContext_Roles" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.Roles">
+  Roles
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the set of roles for the current user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;string&gt; Roles { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Bunit_TestDoubles_BunitAuthorizationContext_State_" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.State*"></a>
+
+  <h3 id="Bunit_TestDoubles_BunitAuthorizationContext_State" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.State">
+  State
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the authorization state for the user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AuthorizationState State { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Bunit.TestDoubles.AuthorizationState.html">AuthorizationState</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Bunit_TestDoubles_BunitAuthorizationContext_UserName_" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.UserName*"></a>
+
+  <h3 id="Bunit_TestDoubles_BunitAuthorizationContext_UserName" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.UserName">
+  UserName
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the authorization context user name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string UserName { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Bunit_TestDoubles_BunitAuthorizationContext_SetAuthenticationType_" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.SetAuthenticationType*"></a>
+
+  <h3 id="Bunit_TestDoubles_BunitAuthorizationContext_SetAuthenticationType_System_String_" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.SetAuthenticationType(System.String)">
+  SetAuthenticationType(string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets the Identity.AuthenticationType for the current user/principa;.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BunitAuthorizationContext SetAuthenticationType(string authenticationType)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>authenticationType</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The authentication type to set.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Bunit.TestDoubles.BunitAuthorizationContext.html">BunitAuthorizationContext</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_TestDoubles_BunitAuthorizationContext_SetAuthorized_" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.SetAuthorized*"></a>
+
+  <h3 id="Bunit_TestDoubles_BunitAuthorizationContext_SetAuthorized_System_String_Bunit_TestDoubles_AuthorizationState_" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.SetAuthorized(System.String,Bunit.TestDoubles.AuthorizationState)">
+  SetAuthorized(string, AuthorizationState)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Authenticates the user with specified name and authorization state.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BunitAuthorizationContext SetAuthorized(string userName, AuthorizationState state = AuthorizationState.Authorized)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>userName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>User name for the principal identity.</p>
+</dd>
+    <dt><code>state</code> <a class="xref" href="Bunit.TestDoubles.AuthorizationState.html">AuthorizationState</a></dt>
+    <dd><p>Authorization state.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Bunit.TestDoubles.BunitAuthorizationContext.html">BunitAuthorizationContext</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_TestDoubles_BunitAuthorizationContext_SetAuthorizing_" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.SetAuthorizing*"></a>
+
+  <h3 id="Bunit_TestDoubles_BunitAuthorizationContext_SetAuthorizing" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.SetAuthorizing">
+  SetAuthorizing()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Puts the authorization services into the authorizing state.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BunitAuthorizationContext SetAuthorizing()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Bunit.TestDoubles.BunitAuthorizationContext.html">BunitAuthorizationContext</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_TestDoubles_BunitAuthorizationContext_SetClaims_" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.SetClaims*"></a>
+
+  <h3 id="Bunit_TestDoubles_BunitAuthorizationContext_SetClaims_System_Security_Claims_Claim___" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.SetClaims(System.Security.Claims.Claim[])">
+  SetClaims(params Claim[])
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets the claims on the current user/principal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BunitAuthorizationContext SetClaims(params Claim[] claims)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>claims</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.claims.claim">Claim</a>[]</dt>
+    <dd><p>Claims to set.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Bunit.TestDoubles.BunitAuthorizationContext.html">BunitAuthorizationContext</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_TestDoubles_BunitAuthorizationContext_SetNotAuthorized_" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.SetNotAuthorized*"></a>
+
+  <h3 id="Bunit_TestDoubles_BunitAuthorizationContext_SetNotAuthorized" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.SetNotAuthorized">
+  SetNotAuthorized()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Puts the authorization services into an unauthenticated and unauthorized state.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BunitAuthorizationContext SetNotAuthorized()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Bunit.TestDoubles.BunitAuthorizationContext.html">BunitAuthorizationContext</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_TestDoubles_BunitAuthorizationContext_SetPolicies_" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.SetPolicies*"></a>
+
+  <h3 id="Bunit_TestDoubles_BunitAuthorizationContext_SetPolicies_System_String___" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.SetPolicies(System.String[])">
+  SetPolicies(params string[])
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets the authorization policies supported for the current user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BunitAuthorizationContext SetPolicies(params string[] policies)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>policies</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd><p>Supported authorization policies.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Bunit.TestDoubles.BunitAuthorizationContext.html">BunitAuthorizationContext</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_TestDoubles_BunitAuthorizationContext_SetRoles_" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.SetRoles*"></a>
+
+  <h3 id="Bunit_TestDoubles_BunitAuthorizationContext_SetRoles_System_String___" data-uid="Bunit.TestDoubles.BunitAuthorizationContext.SetRoles(System.String[])">
+  SetRoles(params string[])
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets the user roles in this context..</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BunitAuthorizationContext SetRoles(params string[] roles)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>roles</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd><p>Roles for the claims principal.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Bunit.TestDoubles.BunitAuthorizationContext.html">BunitAuthorizationContext</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://dotnetfoundation.org" title=".NET Foundation">
+            <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg" alt=".NET Foundation">
+          </a>
+          <p class="pt-1"><small>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</small></p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary bg-body-tertiary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <small>Documentation updated on 2026-02-27T14:38:27.0000000+00:00 in commit a452cce29f</small>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

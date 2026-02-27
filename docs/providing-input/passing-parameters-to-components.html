@@ -1,0 +1,1183 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Passing parameters to components | bUnit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Passing parameters to components | bUnit ">
+      <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" href="/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
+      <link rel="manifest" href="/site.webmanifest">
+
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/providing-input/passing-parameters-to-components.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../..//images/bunit-logo.png" alt="bUnit">
+            bUnit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="passing-parameters-to-components">
+<h1 id="passing-parameters-to-components">Passing parameters to components</h1>
+
+<p>bUnit comes with a number of ways to pass parameters to components under test:</p>
+<ol>
+<li><p>In tests written in <code>.razor</code> files, passing parameters is most easily done with inside an inline Razor template passed to the <code>Render</code> method, although the parameter passing option available in tests written in C# files is also available here.</p>
+</li>
+<li><p>In tests written in <code>.cs</code> files, bUnit includes a strongly typed builder. There are two methods in bUnit that allow passing parameters in C#-based test code:</p>
+<ul>
+<li><code>Render</code> method on the test context, which is used to render a component initially.</li>
+<li><code>Render</code> method on a rendered component, which is used to pass new parameters to an already rendered component.</li>
+</ul>
+</li>
+</ol>
+<p>In the following sub sections, we will show both <code>.cs</code>- and <code>.razor</code>-based test code; just click between them using the tabs.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The examples below are written using <strong>xUnit</strong>, but the code is the same with <strong>NUnit</strong> and <strong>MSTest</strong>.</p>
+<p>The example tests are inheriting from the <code>BunitContext</code> as described in the <a class="xref" href="../getting-started/writing-tests.html">Writing tests for Blazor components</a> page. If your test class is not inheriting from the <code>BunitContext</code>, then you should explicitly instantiate the <code>BunitContext</code> in your tests. The recommended way is to inherit from the <code>BunitContext</code>. An example below will demonstrate how to instantiate a <code>BunitContext</code> per test method.</p>
+</div>
+<h2 id="regular-parameters">Regular parameters</h2>
+<p>A regular parameter is one that is declared using the <code>[Parameter]</code> attribute. The following subsections will cover both <em>non</em>-Blazor type parameters, e.g. <code>int</code> and <code>List&lt;string&gt;</code>, and the special Blazor types like <code>EventCallback</code> and <code>RenderFragment</code>.</p>
+<h3 id="non-blazor-type-parameters">Non-Blazor type parameters</h3>
+<p>Let's look at an example of passing parameters that takes types which are <em>not</em> special to Blazor, i.e.:</p>
+<pre><code class="lang-csharp" name="NonBlazorTypesParams">public class NonBlazorTypesParams : ComponentBase
+{
+  [Parameter]
+  public int Numbers { get; set; }
+
+  [Parameter]
+  public List&lt;string&gt; Lines { get; set; }
+}
+</code></pre>
+<p>This can be done like this:</p>
+<div class="tabGroup" id="tabgroup_1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_1_csharp" role="tab" aria-controls="tabpanel_1_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C# test code</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_razor" role="tab" aria-controls="tabpanel_1_razor" data-tab="razor" tabindex="-1">Razor test code</a>
+</li>
+</ul>
+<section id="tabpanel_1_csharp" role="tabpanel" data-tab="csharp">
+<pre><code class="lang-csharp" name="NonBlazorTypesParamsTest.cs">public class NonBlazorTypesParamsTest : BunitContext
+{
+  [Fact]
+  public void Test()
+  {
+    var lines = new List&lt;string&gt; { &quot;Hello&quot;, &quot;World&quot; };
+
+    var cut = Render&lt;NonBlazorTypesParams&gt;(parameters =&gt; parameters
+      .Add(p =&gt; p.Numbers, 42)
+      .Add(p =&gt; p.Lines, lines)
+    );
+  }
+}
+</code></pre>
+<p>The example uses the <a class="xref" href="../../api/Bunit.ComponentParameterCollectionBuilder-1.html">ComponentParameterCollectionBuilder&lt;TComponent&gt;</a>'s <code>Add</code> method, which takes a parameter selector expression that selects the parameter using a lambda, and forces you to provide the correct type for the value. This makes the builder's methods strongly typed and refactor-safe.</p>
+</section>
+<section id="tabpanel_1_razor" role="tabpanel" data-tab="razor" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-cshtml" name="NonBlazorTypesParamsTest.razor">@inherits BunitContext
+
+@code
+{
+  [Fact]
+  public void Test()
+  {
+    var lines = new List&lt;string&gt; { &quot;Hello&quot;, &quot;World&quot; };
+
+    var cut = Render(@&lt;NonBlazorTypesParams
+                            Numbers=&quot;42&quot;
+                            Lines=&quot;lines&quot; /&gt;);
+  }
+}
+</code></pre>
+<p>The example passes a inline Razor template to the <code>Render()</code> method. The parameters to the component is just passed like normal in Razor code.</p>
+</section>
+</div>
+<h3 id="eventcallback-parameters">EventCallback parameters</h3>
+<p>This example will pass parameters to the following two <code>EventCallback</code> parameters:</p>
+<pre><code class="lang-csharp" name="EventCallbackParams">public class EventCallbackParams : ComponentBase
+{
+  [Parameter]
+  public EventCallback&lt;MouseEventArgs&gt; OnClick { get; set; }
+
+  [Parameter]
+  public EventCallback OnSomething { get; set; }
+}
+</code></pre>
+<p>This can be done like this:</p>
+<div class="tabGroup" id="tabgroup_2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_2_csharp" role="tab" aria-controls="tabpanel_2_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C# test code</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_2_razor" role="tab" aria-controls="tabpanel_2_razor" data-tab="razor" tabindex="-1">Razor test code</a>
+</li>
+</ul>
+<section id="tabpanel_2_csharp" role="tabpanel" data-tab="csharp">
+<pre><code class="lang-csharp" name="EventCallbackParamsTest.cs">public class EventCallbackParamsTest : BunitContext
+{
+  [Fact]
+  public void Test()
+  {
+    Action&lt;MouseEventArgs&gt; onClickHandler = _ =&gt; { };
+    Action onSomethingHandler = () =&gt; { };
+
+    var cut = Render&lt;EventCallbackParams&gt;(parameters =&gt; parameters
+      .Add(p =&gt; p.OnClick, onClickHandler)
+      .Add(p =&gt; p.OnSomething, onSomethingHandler)
+    );
+  }
+}
+</code></pre>
+<p>The example uses the <a class="xref" href="../../api/Bunit.ComponentParameterCollectionBuilder-1.html">ComponentParameterCollectionBuilder&lt;TComponent&gt;</a>'s <code>Add</code> method, which takes a parameter selector expression that selects the parameter using a lambda, and forces you to provide the correct type of callback method. This makes the builder's methods strongly typed and refactor-safe.</p>
+</section>
+<section id="tabpanel_2_razor" role="tabpanel" data-tab="razor" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-cshtml" name="EventCallbackParamsTest.razor">@inherits BunitContext
+
+@code
+{
+  [Fact]
+  public void Test()
+  {
+    Action&lt;MouseEventArgs&gt; onClickHandler = _ =&gt; { };
+    Action onSomethingHandler = () =&gt; { };
+
+    var cut = Render(@&lt;EventCallbackParams
+                          OnClick=&quot;onClickHandler&quot;
+                          OnSomething=&quot;onSomethingHandler&quot; /&gt;);
+  }
+}
+</code></pre>
+<p>The example passes a inline Razor template to the <a class="xref" href="../../api/Bunit.BunitContext.html#Bunit_BunitContext_Render_Microsoft_AspNetCore_Components_RenderFragment_">Render(RenderFragment)</a> method. The parameters to the component is just passed like normal in Razor code.</p>
+</section>
+</div>
+<h3 id="childcontent-parameters">ChildContent parameters</h3>
+<p>The <code>ChildContent</code> parameter in Blazor is represented by a <code>RenderFragment</code>. In Blazor, this can be regular HTML markup, it can be Razor markup, e.g. other component declarations, or a mix of the two. If it is another component, then that component can also receive child content, and so forth.</p>
+<p>The following subsections have different examples of child content being passed to the following component:</p>
+<pre><code class="lang-csharp" name="ChildContentParams.razor">public class ChildContentParams : ComponentBase
+{
+  [Parameter]
+  public RenderFragment ChildContent { get; set; }
+}
+</code></pre><h4 id="passing-html-to-the-childcontent-parameter">Passing HTML to the ChildContent parameter</h4>
+<div class="tabGroup" id="tabgroup_3">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_3_csharp" role="tab" aria-controls="tabpanel_3_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C# test code</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_3_razor" role="tab" aria-controls="tabpanel_3_razor" data-tab="razor" tabindex="-1">Razor test code</a>
+</li>
+</ul>
+<section id="tabpanel_3_csharp" role="tabpanel" data-tab="csharp">
+<pre><code class="lang-csharp" name="ChildContentParamsTest.cs">public class ChildContentParams1Test : BunitContext
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render&lt;ChildContentParams&gt;(parameters =&gt; parameters
+      .AddChildContent(&quot;&lt;h1&gt;Hello World&lt;/h1&gt;&quot;)
+    );
+  }
+}
+</code></pre>
+<p>The example uses the <a class="xref" href="../../api/Bunit.ComponentParameterCollectionBuilder-1.html">ComponentParameterCollectionBuilder&lt;TComponent&gt;</a>'s <code>AddChildContent</code> method to pass an HTML markup string as the input to the <code>ChildContent</code> parameter.</p>
+</section>
+<section id="tabpanel_3_razor" role="tabpanel" data-tab="razor" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-cshtml" name="ChildContentParamsTest.razor">@inherits BunitContext
+
+@code
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render(@&lt;ChildContentParams&gt;
+                          &lt;h1&gt;Hello World&lt;/h1&gt;
+                      &lt;/ChildContentParams&gt;);
+  }
+}
+</code></pre>
+<p>The example passes a inline Razor template to the <a class="xref" href="../../api/Bunit.BunitContext.html#Bunit_BunitContext_Render_Microsoft_AspNetCore_Components_RenderFragment_">Render(RenderFragment)</a> method. The child content, some HTML markup, is just passed like normal in Razor code.</p>
+</section>
+</div>
+<h4 id="passing-a-component-without-parameters-to-the-childcontent-parameter">Passing a component without parameters to the ChildContent parameter</h4>
+<p>To pass a component, e.g. the classic <code>&lt;Counter&gt;</code> component, which does not take any parameters itself, to a <code>ChildContent</code> parameter, do the following:</p>
+<div class="tabGroup" id="tabgroup_4">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_4_csharp" role="tab" aria-controls="tabpanel_4_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C# test code</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_4_razor" role="tab" aria-controls="tabpanel_4_razor" data-tab="razor" tabindex="-1">Razor test code</a>
+</li>
+</ul>
+<section id="tabpanel_4_csharp" role="tabpanel" data-tab="csharp">
+<pre><code class="lang-csharp" name="ChildContentParamsTest.cs">public class ChildContentParams2Test : BunitContext
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render&lt;ChildContentParams&gt;(parameters =&gt; parameters
+      .AddChildContent&lt;Counter&gt;()
+    );
+  }
+}
+</code></pre>
+<p>The example uses the <a class="xref" href="../../api/Bunit.ComponentParameterCollectionBuilder-1.html">ComponentParameterCollectionBuilder&lt;TComponent&gt;</a>'s <code>AddChildContent&lt;TChildComponent&gt;</code> method, where <code>TChildComponent</code> is the (child) component that should be passed to the component under test's <code>ChildContent</code> parameter.</p>
+</section>
+<section id="tabpanel_4_razor" role="tabpanel" data-tab="razor" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-cshtml" name="ChildContentParamsTest.razor">@inherits BunitContext
+
+@code
+{
+  [Fact]
+  public void Test()
+  {
+      var cut = Render(@&lt;ChildContentParams&gt;
+                          &lt;Counter /&gt;
+                        &lt;/ChildContentParams&gt;);
+  }
+}
+</code></pre>
+<p>The example passes a inline Razor template to the <a class="xref" href="../../api/Bunit.BunitContext.html#Bunit_BunitContext_Render_Microsoft_AspNetCore_Components_RenderFragment_">Render(RenderFragment)</a> method. The child content, some Razor markup, is just passed like normal in Razor code.</p>
+</section>
+</div>
+<h4 id="passing-a-component-with-parameters-to-the-childcontent-parameter">Passing a component with parameters to the ChildContent parameter</h4>
+<p>To pass a component with parameters to a component under test, e.g. the <code>&lt;Alert&gt;</code> component with the following parameters, do the following:</p>
+<pre><code class="lang-csharp" name="Alert.razor">[Parameter] public string Heading { get; set; }
+[Parameter] public AlertType Type { get; set; }
+[Parameter] public RenderFragment ChildContent { get; set; }
+</code></pre><div class="tabGroup" id="tabgroup_5">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_5_csharp" role="tab" aria-controls="tabpanel_5_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C# test code</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_5_razor" role="tab" aria-controls="tabpanel_5_razor" data-tab="razor" tabindex="-1">Razor test code</a>
+</li>
+</ul>
+<section id="tabpanel_5_csharp" role="tabpanel" data-tab="csharp">
+<pre><code class="lang-csharp" name="ChildContentParamsTest.cs">public class ChildContentParams3Test : BunitContext
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render&lt;ChildContentParams&gt;(parameters =&gt; parameters
+      .AddChildContent&lt;Alert&gt;(alertParameters =&gt; alertParameters
+        .Add(p =&gt; p.Heading, &quot;Alert heading&quot;)
+        .Add(p =&gt; p.Type, AlertType.Warning)
+        .AddChildContent(&quot;&lt;p&gt;Hello World&lt;/p&gt;&quot;)
+      )
+    );
+  }
+}
+</code></pre>
+<p>The example uses the <a class="xref" href="../../api/Bunit.ComponentParameterCollectionBuilder-1.html">ComponentParameterCollectionBuilder&lt;TComponent&gt;</a>'s <code>AddChildContent&lt;TChildComponent&gt;</code> method, where <code>TChildComponent</code> is the (child) component that should be passed to the component under test. The <code>AddChildContent&lt;TChildComponent&gt;</code> method takes an optional <a class="xref" href="../../api/Bunit.ComponentParameterCollectionBuilder-1.html">ComponentParameterCollectionBuilder&lt;TComponent&gt;</a> as input, which can be used to pass parameters to the <code>TChildComponent</code> component, which in this case is the <code>&lt;Alert&gt;</code> component.</p>
+</section>
+<section id="tabpanel_5_razor" role="tabpanel" data-tab="razor" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-cshtml" name="ChildContentParamsTest.razor">@inherits BunitContext
+
+@code
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render(@&lt;ChildContentParams&gt;
+                        &lt;Alert Heading=&quot;Alert heading&quot; Type=@AlertType.Warning&gt;
+                          &lt;p&gt;Hello World&lt;/p&gt;
+                        &lt;/Alert&gt;
+                      &lt;/ChildContentParams&gt;);
+  }
+}
+</code></pre>
+<p>The example passes a inline Razor template to the <a class="xref" href="../../api/Bunit.BunitContext.html#Bunit_BunitContext_Render_Microsoft_AspNetCore_Components_RenderFragment_">Render(RenderFragment)</a> method. The child content, some Razor markup, and parameters to the child component, is just passed like normal in Razor code.</p>
+</section>
+</div>
+<h4 id="passing-a-mix-of-razor-and-html-to-a-childcontent-parameter">Passing a mix of Razor and HTML to a ChildContent parameter</h4>
+<p>Some times you need to pass multiple different types of content to a ChildContent parameter, e.g. both some markup and a component. This can be done in the following way:</p>
+<div class="tabGroup" id="tabgroup_6">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_6_csharp" role="tab" aria-controls="tabpanel_6_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C# test code</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_6_razor" role="tab" aria-controls="tabpanel_6_razor" data-tab="razor" tabindex="-1">Razor test code</a>
+</li>
+</ul>
+<section id="tabpanel_6_csharp" role="tabpanel" data-tab="csharp">
+<pre><code class="lang-csharp" name="ChildContentParamsTest.cs">public class ChildContentParams4Test : BunitContext
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render&lt;ChildContentParams&gt;(parameters =&gt; parameters
+      .AddChildContent(&quot;&lt;h1&gt;Below you will find a most interesting alert!&lt;/h1&gt;&quot;)
+      .AddChildContent&lt;Alert&gt;(childParams =&gt; childParams
+        .Add(p =&gt; p.Heading, &quot;Alert heading&quot;)
+        .Add(p =&gt; p.Type, AlertType.Warning)
+        .AddChildContent(&quot;&lt;p&gt;Hello World&lt;/p&gt;&quot;)
+      )
+    );
+  }
+}
+</code></pre>
+<p>Passing a mix of markup and components to a <code>ChildContent</code> parameter is done by simply calling the <a class="xref" href="../../api/Bunit.ComponentParameterCollectionBuilder-1.html">ComponentParameterCollectionBuilder&lt;TComponent&gt;</a>'s <code>AddChildContent()</code> methods as seen here.</p>
+</section>
+<section id="tabpanel_6_razor" role="tabpanel" data-tab="razor" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-cshtml" name="ChildContentParamsTest.razor">@inherits BunitContext
+
+@code
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render(@&lt;ChildContentParams&gt;
+                        &lt;h1&gt;Below you will find a most interesting alert!&lt;/h1&gt;
+                        &lt;Alert Heading=&quot;Alert heading&quot; Type=@AlertType.Warning&gt;
+                          &lt;p&gt;Hello World&lt;/p&gt;
+                        &lt;/Alert&gt;
+                      &lt;/ChildContentParams&gt;);
+  }
+}
+</code></pre>
+<p>The example passes a inline Razor template to the <a class="xref" href="../../api/Bunit.BunitContext.html#Bunit_BunitContext_Render_Microsoft_AspNetCore_Components_RenderFragment_">Render(RenderFragment)</a> method. The child content, some Razor markup, and parameters to the child component, is just passed like normal in Razor code.</p>
+</section>
+</div>
+<h3 id="renderfragment-parameters">RenderFragment parameters</h3>
+<p>A <code>RenderFragment</code> parameter is very similar to the special <code>ChildContent</code> parameter described in the previous section, since a <code>ChildContent</code> parameter <em>is</em> of type <code>RenderFragment</code>. The only difference is the name, which must be anything other than <code>ChildContent</code>.</p>
+<p>In Blazor, a <code>RenderFragment</code> parameter can be regular HTML markup, it can be Razor markup, e.g. other component declarations, or it can be a mix of the two. If it is another component, then that component can also receive child content, and so forth.</p>
+<p>The following subsections have different examples of content being passed to the following component's <code>RenderFragment</code> parameter:</p>
+<pre><code class="lang-csharp" name="RenderFragmentParams.razor">public class RenderFragmentParams : ComponentBase
+{
+  [Parameter]
+  public RenderFragment Content { get; set; }
+}
+</code></pre><h4 id="passing-html-to-a-renderfragment-parameter">Passing HTML to a RenderFragment parameter</h4>
+<div class="tabGroup" id="tabgroup_7">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_7_csharp" role="tab" aria-controls="tabpanel_7_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C# test code</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_7_razor" role="tab" aria-controls="tabpanel_7_razor" data-tab="razor" tabindex="-1">Razor test code</a>
+</li>
+</ul>
+<section id="tabpanel_7_csharp" role="tabpanel" data-tab="csharp">
+<pre><code class="lang-csharp" name="RenderFragmentParamsTest.cs">public class RenderFragmentParams1Test : BunitContext
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render&lt;RenderFragmentParams&gt;(parameters =&gt; parameters
+      .Add(p =&gt; p.Content, &quot;&lt;h1&gt;Hello World&lt;/h1&gt;&quot;)
+    );
+  }
+}
+</code></pre>
+<p>The example uses the <a class="xref" href="../../api/Bunit.ComponentParameterCollectionBuilder-1.html">ComponentParameterCollectionBuilder&lt;TComponent&gt;</a>'s <code>Add</code> method to pass an HTML markup string as the input to the <code>RenderFragment</code> parameter.</p>
+</section>
+<section id="tabpanel_7_razor" role="tabpanel" data-tab="razor" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-cshtml" name="RenderFragmentParamsTest.razor">@inherits BunitContext
+
+@code
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render(@&lt;RenderFragmentParams&gt;
+                        &lt;Content&gt;&lt;h1&gt;Hello World&lt;/h1&gt;&lt;/Content&gt;
+                      &lt;/RenderFragmentParams&gt;);
+  }
+}
+</code></pre>
+<p>The example passes a inline Razor template to the <a class="xref" href="../../api/Bunit.BunitContext.html#Bunit_BunitContext_Render_Microsoft_AspNetCore_Components_RenderFragment_">Render(RenderFragment)</a> method. The child content, some HTML markup, is just passed like normal in Razor code.</p>
+</section>
+</div>
+<h4 id="passing-a-component-without-parameters-to-a-renderfragment-parameter">Passing a component without parameters to a RenderFragment parameter</h4>
+<p>To pass a component such as the classic <code>&lt;Counter&gt;</code> component, which does not take any parameters, to a <code>RenderFragment</code> parameter, do the following:</p>
+<div class="tabGroup" id="tabgroup_8">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_8_csharp" role="tab" aria-controls="tabpanel_8_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C# test code</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_8_razor" role="tab" aria-controls="tabpanel_8_razor" data-tab="razor" tabindex="-1">Razor test code</a>
+</li>
+</ul>
+<section id="tabpanel_8_csharp" role="tabpanel" data-tab="csharp">
+<pre><code class="lang-csharp" name="RenderFragmentParamsTest.cs">public class RenderFragmentParams2Test : BunitContext
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render&lt;RenderFragmentParams&gt;(parameters =&gt; parameters
+      .Add&lt;Counter&gt;(p =&gt; p.Content)
+    );
+  }
+}
+</code></pre>
+<p>The example uses the <a class="xref" href="../../api/Bunit.ComponentParameterCollectionBuilder-1.html">ComponentParameterCollectionBuilder&lt;TComponent&gt;</a>'s <code>Add&lt;TChildComponent&gt;</code> method, where <code>TChildComponent</code> is the (child) component that should be passed to the <code>RenderFragment</code> parameter.</p>
+</section>
+<section id="tabpanel_8_razor" role="tabpanel" data-tab="razor" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-cshtml" name="RenderFragmentParamsTest.razor">@inherits BunitContext
+
+@code
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render(@&lt;RenderFragmentParams&gt;
+                        &lt;Content&gt;&lt;Counter /&gt;&lt;/Content&gt;
+                      &lt;/RenderFragmentParams&gt;);
+  }
+}
+</code></pre>
+<p>The example passes a inline Razor template to the <a class="xref" href="../../api/Bunit.BunitContext.html#Bunit_BunitContext_Render_Microsoft_AspNetCore_Components_RenderFragment_">Render(RenderFragment)</a> method. The child content, some Razor markup, is just passed like normal in Razor code.</p>
+</section>
+</div>
+<h4 id="passing-a-component-with-parameters-to-a-renderfragment-parameter">Passing a component with parameters to a RenderFragment parameter</h4>
+<p>To pass a component with parameters to a <code>RenderFragment</code> parameter, e.g. the <code>&lt;Alert&gt;</code> component with the following parameters, do the following:</p>
+<pre><code class="lang-csharp" name="Alert.razor">[Parameter] public string Heading { get; set; }
+[Parameter] public AlertType Type { get; set; }
+[Parameter] public RenderFragment ChildContent { get; set; }
+</code></pre><div class="tabGroup" id="tabgroup_9">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_9_csharp" role="tab" aria-controls="tabpanel_9_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C# test code</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_9_razor" role="tab" aria-controls="tabpanel_9_razor" data-tab="razor" tabindex="-1">Razor test code</a>
+</li>
+</ul>
+<section id="tabpanel_9_csharp" role="tabpanel" data-tab="csharp">
+<pre><code class="lang-csharp" name="RenderFragmentParamsTest.cs">public class RenderFragmentParams3Test : BunitContext
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render&lt;RenderFragmentParams&gt;(parameters =&gt; parameters
+      .Add&lt;Alert&gt;(p =&gt; p.Content, alertParameters =&gt; alertParameters
+        .Add(p =&gt; p.Heading, &quot;Alert heading&quot;)
+        .Add(p =&gt; p.Type, AlertType.Warning)
+        .AddChildContent(&quot;&lt;p&gt;Hello World&lt;/p&gt;&quot;)
+      )
+    );
+  }
+}
+</code></pre>
+<p>The example uses the <a class="xref" href="../../api/Bunit.ComponentParameterCollectionBuilder-1.html">ComponentParameterCollectionBuilder&lt;TComponent&gt;</a>'s <code>Add&lt;TChildComponent&gt;</code> method, where <code>TChildComponent</code> is the (child) component that should be passed to the <code>RenderFragment</code> parameter. The <code>Add&lt;TChildComponent&gt;</code> method takes an optional <a class="xref" href="../../api/Bunit.ComponentParameterCollectionBuilder-1.html">ComponentParameterCollectionBuilder&lt;TComponent&gt;</a> as input, which can be used to pass parameters to the <code>TChildComponent</code> component, which in this case is the <code>&lt;Alert&gt;</code> component.</p>
+</section>
+<section id="tabpanel_9_razor" role="tabpanel" data-tab="razor" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-cshtml" name="RenderFragmentParamsTest.razor">@inherits BunitContext
+
+@code
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render(@&lt;RenderFragmentParams&gt;
+                        &lt;Content&gt;
+                          &lt;Alert Heading=&quot;Alert heading&quot; Type=@AlertType.Warning&gt;
+                            &lt;p&gt;Hello World&lt;/p&gt;
+                          &lt;/Alert&gt;
+                        &lt;/Content&gt;
+                      &lt;/RenderFragmentParams&gt;);
+  }
+}
+</code></pre>
+<p>The example passes a inline Razor template to the <a class="xref" href="../../api/Bunit.BunitContext.html#Bunit_BunitContext_Render_Microsoft_AspNetCore_Components_RenderFragment_">Render(RenderFragment)</a> method. The child content, some Razor markup, and parameters to the child component, is just passed like normal in Razor code.</p>
+</section>
+</div>
+<h4 id="passing-a-mix-of-razor-and-html-to-a-renderfragment-parameter">Passing a mix of Razor and HTML to a RenderFragment parameter</h4>
+<p>Some times you need to pass multiple different types of content to a <code>RenderFragment</code> parameter, e.g. both markup and and a component. This can be done in the following way:</p>
+<div class="tabGroup" id="tabgroup_10">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_10_csharp" role="tab" aria-controls="tabpanel_10_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C# test code</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_10_razor" role="tab" aria-controls="tabpanel_10_razor" data-tab="razor" tabindex="-1">Razor test code</a>
+</li>
+</ul>
+<section id="tabpanel_10_csharp" role="tabpanel" data-tab="csharp">
+<pre><code class="lang-csharp" name="RenderFragmentParamsTest.cs">public class RenderFragmentParams4Test : BunitContext
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render&lt;RenderFragmentParams&gt;(parameters =&gt; parameters
+      .Add(p =&gt; p.Content, &quot;&lt;h1&gt;Below you will find a most interesting alert!&lt;/h1&gt;&quot;)
+      .Add&lt;Alert&gt;(p =&gt; p.Content, childParams =&gt; childParams
+        .Add(p =&gt; p.Heading, &quot;Alert heading&quot;)
+        .Add(p =&gt; p.Type, AlertType.Warning)
+        .AddChildContent(&quot;&lt;p&gt;Hello World&lt;/p&gt;&quot;)
+      )
+    );
+  }
+}
+</code></pre>
+<p>Passing a mix of markup and components to a <code>RenderFragment</code> parameter is simply done by calling the <a class="xref" href="../../api/Bunit.ComponentParameterCollectionBuilder-1.html">ComponentParameterCollectionBuilder&lt;TComponent&gt;</a>'s <code>Add()</code> methods or using the <code>AddChildContent</code> factory methods.</p>
+</section>
+<section id="tabpanel_10_razor" role="tabpanel" data-tab="razor" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-cshtml" name="RenderFragmentParamsTest.razor">@inherits BunitContext
+
+@code
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render(@&lt;RenderFragmentParams&gt;
+                        &lt;Content&gt;
+                          &lt;h1&gt;Below you will find a most interesting alert!&lt;/h1&gt;
+                          &lt;Alert Heading=&quot;Alert heading&quot; Type=@AlertType.Warning&gt;
+                            &lt;p&gt;Hello World&lt;/p&gt;
+                          &lt;/Alert&gt;
+                        &lt;/Content&gt;
+                      &lt;/RenderFragmentParams&gt;);
+  }
+}
+</code></pre>
+<p>The example passes a inline Razor template to the <a class="xref" href="../../api/Bunit.BunitContext.html#Bunit_BunitContext_Render_Microsoft_AspNetCore_Components_RenderFragment_">Render(RenderFragment)</a> method. The child content, some HTML and Razor markup, and parameters to the child component, is just passed like normal in Razor code.</p>
+</section>
+</div>
+<h3 id="templates-parameters">Templates parameters</h3>
+<p>Template parameters are closely related to the <code>RenderFragment</code> parameters described in the previous section. The difference is that a template parameter is of type <code>RenderFragment&lt;TValue&gt;</code>. As with a regular <code>RenderFragment</code>, a <code>RenderFragment&lt;TValue&gt;</code> template parameter can consist of regular HTML markup, it can be Razor markup, e.g. other component declarations, or it can be a mix of the two. If it is another component, then that component can also receive child content, and so forth.</p>
+<p>The following examples renders a template component which has a <code>RenderFragment&lt;TValue&gt;</code> template parameter:</p>
+<pre><code class="lang-csharp" name="TemplateParams.razor">@typeparam TItem
+
+&lt;div id=&quot;generic-list&quot;&gt;
+  @foreach (var item in Items)
+  {
+    @Template(item)
+  }
+&lt;/div&gt;
+
+@code 
+{
+  [Parameter]
+  public IEnumerable&lt;TItem&gt; Items { get; set; }
+
+  [Parameter]
+  public RenderFragment&lt;TItem&gt; Template { get; set; }
+}
+</code></pre><h4 id="passing-html-based-templates">Passing HTML-based templates</h4>
+<p>To pass a template into a <code>RenderFragment&lt;TValue&gt;</code> parameter that just consists of regular HTML markup, do the following:</p>
+<div class="tabGroup" id="tabgroup_11">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_11_csharp" role="tab" aria-controls="tabpanel_11_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C# test code</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_11_razor" role="tab" aria-controls="tabpanel_11_razor" data-tab="razor" tabindex="-1">Razor test code</a>
+</li>
+</ul>
+<section id="tabpanel_11_csharp" role="tabpanel" data-tab="csharp">
+<pre><code class="lang-csharp" name="TemplateParamsTest.cs">public class TemplateParams1Test : BunitContext
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render&lt;TemplateParams&lt;string&gt;&gt;(parameters =&gt; parameters
+      .Add(p =&gt; p.Items, new[] { &quot;Foo&quot;, &quot;Bar&quot;, &quot;Baz&quot; })
+      .Add(p =&gt; p.Template, item =&gt; $&quot;&lt;span&gt;{item}&lt;/span&gt;&quot;)
+    );
+  }
+}
+</code></pre>
+<p>The examples pass a HTML markup template into the component under test. This is done with the help of a <code>Func&lt;TValue, string&gt;</code> delegate which takes whatever the template value is as input, and returns a (markup) string. The delegate is automatically turned into a <code>RenderFragment&lt;TValue&gt;</code> type and passed to the template parameter.</p>
+<p>The example uses the <a class="xref" href="../../api/Bunit.ComponentParameterCollectionBuilder-1.html">ComponentParameterCollectionBuilder&lt;TComponent&gt;</a>'s <code>Add</code> method to first add the data to the <code>Items</code> parameter and then to a <code>Func&lt;TValue, string&gt;</code> delegate.</p>
+<p>The delegate creates a simple markup string in the example.</p>
+</section>
+<section id="tabpanel_11_razor" role="tabpanel" data-tab="razor" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-cshtml" name="TemplateParamsTest.razor">@inherits BunitContext
+
+@code
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render(@&lt;TemplateParams Items=@(new[] { &quot;Foo&quot;, &quot;Bar&quot;, &quot;Baz&quot; }) TItem=&quot;string&quot;&gt;
+                       &lt;Template&gt;
+                         &lt;span&gt;@context&lt;/span&gt;
+                       &lt;/Template&gt;
+                     &lt;/TemplateParams&gt;);
+  }
+}
+</code></pre>
+<p>The example passes a inline Razor template to the <a class="xref" href="../../api/Bunit.BunitContext.html#Bunit_BunitContext_Render_Microsoft_AspNetCore_Components_RenderFragment_">Render(RenderFragment)</a> method. The child template content, some HTML markup, is just passed like normal in Razor code.</p>
+<p><strong>NOTE:</strong> Before the .NET 6 version of the Blazor compiler, this example does not work.</p>
+</section>
+</div>
+<h4 id="passing-a-component-based-template">Passing a component-based template</h4>
+<p>To pass a template into a <code>RenderFragment&lt;TValue&gt;</code> parameter, which is based on a component that receives the template value as input (in this case, the <code>&lt;Item&gt;</code> component listed below), do the following:</p>
+<pre><code class="lang-csharp" name="Item.razor">&lt;span&gt;@Value&lt;/span&gt;
+@code 
+{
+  [Parameter]
+  public string Value { get; set; }
+}
+</code></pre><div class="tabGroup" id="tabgroup_12">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_12_csharp" role="tab" aria-controls="tabpanel_12_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C# test code</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_12_razor" role="tab" aria-controls="tabpanel_12_razor" data-tab="razor" tabindex="-1">Razor test code</a>
+</li>
+</ul>
+<section id="tabpanel_12_csharp" role="tabpanel" data-tab="csharp">
+<pre><code class="lang-csharp" name="TemplateParamsTest.cs">public class TemplateParams2Test : BunitContext
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render&lt;TemplateParams&lt;string&gt;&gt;(parameters =&gt; parameters
+      .Add(p =&gt; p.Items, new[] { &quot;Foo&quot;, &quot;Bar&quot;, &quot;Baz&quot; })
+      .Add&lt;Item, string&gt;(p =&gt; p.Template, value =&gt; itemParams =&gt; itemParams
+        .Add(p =&gt; p.Value, value)
+      )
+    );
+  }
+}
+</code></pre>
+<p>The example creates a template with the <code>&lt;Item&gt;</code> component listed above.</p>
+</section>
+<section id="tabpanel_12_razor" role="tabpanel" data-tab="razor" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-cshtml" name="TemplateParamsTest.razor">@inherits BunitContext
+
+@code
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render(@&lt;TemplateParams Items=@(new string[]{ &quot;Foo&quot;, &quot;Bar&quot;, &quot;Baz&quot; }) TItem=&quot;string&quot;&gt;
+                       &lt;Template&gt;
+                         &lt;Item Value=@context&gt;&lt;/Item&gt;
+                       &lt;/Template&gt;
+                     &lt;/TemplateParams&gt;);
+  }
+}
+</code></pre>
+<p>The example passes a inline Razor template to the <a class="xref" href="../../api/Bunit.BunitContext.html#Bunit_BunitContext_Render_Microsoft_AspNetCore_Components_RenderFragment_">Render(RenderFragment)</a> method. The child template content, some HTML and Razor markup, is just passed like normal in Razor code.</p>
+<p><strong>NOTE:</strong> Before the .NET 6 version of the Blazor compiler, this example does not work.</p>
+</section>
+</div>
+<h3 id="unmatched-parameters">Unmatched parameters</h3>
+<p>An unmatched parameter is a parameter that is passed to a component under test, and which does not have an explicit <code>[Parameter]</code> parameter but instead is captured by a <code>[Parameter(CaptureUnmatchedValues = true)]</code> parameter.</p>
+<p>In the follow examples, we will pass an unmatched parameter to the following component:</p>
+<pre><code class="lang-csharp" name="UnmatchedParams">public class UnmatchedParams : ComponentBase
+{
+  [Parameter(CaptureUnmatchedValues = true)]
+  public Dictionary&lt;string, object&gt; InputAttributes { get; set; }
+}
+</code></pre><div class="tabGroup" id="tabgroup_13">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_13_csharp" role="tab" aria-controls="tabpanel_13_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C# test code</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_13_razor" role="tab" aria-controls="tabpanel_13_razor" data-tab="razor" tabindex="-1">Razor test code</a>
+</li>
+</ul>
+<section id="tabpanel_13_csharp" role="tabpanel" data-tab="csharp">
+<pre><code class="lang-csharp" name="UnmatchedParamsTest.cs">public class UnmatchedParamsTest : BunitContext
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render&lt;UnmatchedParams&gt;(parameters =&gt; parameters
+      .AddUnmatched(&quot;some-unknown-param&quot;, &quot;a value&quot;)
+    );
+  }
+}
+</code></pre>
+<p>The examples passes in the parameter <code>some-unknown-param</code> with the value <code>a value</code> to the component under test.</p>
+</section>
+<section id="tabpanel_13_razor" role="tabpanel" data-tab="razor" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-cshtml" name="UnmatchedParamsTest.razor">@inherits BunitContext
+
+@code
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render(@&lt;UnmatchedParams some-unknown-param=&quot;a value&quot;&gt;&lt;/UnmatchedParams&gt;);
+  }
+}
+</code></pre>
+<p>The example passes a inline Razor template to the <a class="xref" href="../../api/Bunit.BunitContext.html#Bunit_BunitContext_Render_Microsoft_AspNetCore_Components_RenderFragment_">Render(RenderFragment)</a> method. The parameter is just passed like normal in Razor code.</p>
+</section>
+</div>
+<h2 id="cascading-parameters-and-cascading-values">Cascading Parameters and Cascading Values</h2>
+<p>Cascading parameters are properties with the <code>[CascadingParameter]</code> attribute. There are two variants: <strong>named</strong> and <strong>unnamed</strong> cascading parameters. In Blazor, the <code>&lt;CascadingValue&gt;</code> component is used to provide values to cascading parameters, which we also do in tests written in <code>.razor</code> files. However, for tests written in <code>.cs</code> files we need to do it a little differently.</p>
+<p>The following examples will pass cascading values to the <code>&lt;CascadingParams&gt;</code> component listed below:</p>
+<pre><code class="lang-csharp" name="CascadingParams.razor">@code 
+{
+  [CascadingParameter]
+  public bool IsDarkTheme { get; set; }
+
+  [CascadingParameter(Name = &quot;LoggedInUser&quot;)]
+  public string UserName { get; set; }
+    
+  [CascadingParameter(Name = &quot;LoggedInEmail&quot;)]
+  public string Email { get; set; }
+}
+</code></pre><h3 id="passing-unnamed-cascading-values">Passing unnamed cascading values</h3>
+<p>To pass the unnamed <code>IsDarkTheme</code> cascading parameter to the <code>&lt;CascadingParams&gt;</code> component, do the following:</p>
+<div class="tabGroup" id="tabgroup_14">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_14_csharp" role="tab" aria-controls="tabpanel_14_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C# test code</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_14_razor" role="tab" aria-controls="tabpanel_14_razor" data-tab="razor" tabindex="-1">Razor test code</a>
+</li>
+</ul>
+<section id="tabpanel_14_csharp" role="tabpanel" data-tab="csharp">
+<pre><code class="lang-csharp" name="CascadingParamsTest.cs">public class CascadingParams1Test : BunitContext
+{
+  [Fact]
+  public void Test()
+  {
+    var isDarkTheme = true;
+
+    var cut = Render&lt;CascadingParams&gt;(parameters =&gt; parameters
+      .Add(p =&gt; p.IsDarkTheme, isDarkTheme)
+    );
+  }
+}
+</code></pre>
+<p>The example pass the variable <code>isDarkTheme</code> to the cascading parameter <code>IsDarkTheme</code> using the <code>Add</code> method on the <a class="xref" href="../../api/Bunit.ComponentParameterCollectionBuilder-1.html">ComponentParameterCollectionBuilder&lt;TComponent&gt;</a> with the parameter selector to explicitly select the desired cascading parameter and pass the unnamed parameter value that way.</p>
+</section>
+<section id="tabpanel_14_razor" role="tabpanel" data-tab="razor" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-cshtml" name="CascadingParamsTest.razor">@inherits BunitContext
+
+@code
+{
+  [Fact]
+  public void Test()
+  {
+    var isDarkTheme = true;
+
+    var cut = Render(@&lt;CascadingValue Value=&quot;isDarkTheme&quot;&gt;
+                        &lt;CascadingParams /&gt;
+                      &lt;/CascadingValue&gt;);
+  }
+}
+</code></pre>
+<p>The example passes a inline Razor template to the <a class="xref" href="../../api/Bunit.BunitContext.html#Bunit_BunitContext_Render_Microsoft_AspNetCore_Components_RenderFragment_">Render(RenderFragment)</a> method. The cascading value is just passed like normal in Razor code.</p>
+</section>
+</div>
+<h3 id="passing-named-cascading-values">Passing named cascading values</h3>
+<p>To pass a named cascading parameter to the <code>&lt;CascadingParams&gt;</code> component, do the following:</p>
+<div class="tabGroup" id="tabgroup_15">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_15_csharp" role="tab" aria-controls="tabpanel_15_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C# test code</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_15_razor" role="tab" aria-controls="tabpanel_15_razor" data-tab="razor" tabindex="-1">Razor test code</a>
+</li>
+</ul>
+<section id="tabpanel_15_csharp" role="tabpanel" data-tab="csharp">
+<pre><code class="lang-csharp" name="CascadingParamsTest.cs">public class CascadingParams2Test : BunitContext
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render&lt;CascadingParams&gt;(parameters =&gt; parameters
+      .Add(p =&gt; p.UserName, &quot;Name of User&quot;)
+    );
+  }
+}
+</code></pre>
+<p>The example pass in the value <code>Name of User</code> to the cascading parameter with the name <code>LoggedInUser</code>. Note that the name of the parameter is not the same as the property of the parameter, e.g. <code>LoggedInUser</code> vs. <code>UserName</code>. The example uses the <code>Add</code> method on the <a class="xref" href="../../api/Bunit.ComponentParameterCollectionBuilder-1.html">ComponentParameterCollectionBuilder&lt;TComponent&gt;</a> with the parameter selector to select the cascading parameter property and pass the parameter value that way.</p>
+</section>
+<section id="tabpanel_15_razor" role="tabpanel" data-tab="razor" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-cshtml" name="CascadingParamsTest.razor">@inherits BunitContext
+
+@code
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render(@&lt;CascadingValue Name=&quot;LoggedInUser&quot; Value=@(&quot;Name of User&quot;)&gt;
+                        &lt;CascadingParams /&gt;
+                      &lt;/CascadingValue&gt;);
+  }
+}
+</code></pre>
+<p>The example passes a inline Razor template to the <a class="xref" href="../../api/Bunit.BunitContext.html#Bunit_BunitContext_Render_Microsoft_AspNetCore_Components_RenderFragment_">Render(RenderFragment)</a> method. The cascading value is just passed like normal in Razor code.</p>
+</section>
+</div>
+<h3 id="passing-multiple-named-and-unnamed-cascading-values">Passing multiple, named and unnamed, cascading values</h3>
+<p>To pass all cascading parameters to the <code>&lt;CascadingParams&gt;</code> component, do the following:</p>
+<div class="tabGroup" id="tabgroup_16">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_16_csharp" role="tab" aria-controls="tabpanel_16_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C# test code</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_16_razor" role="tab" aria-controls="tabpanel_16_razor" data-tab="razor" tabindex="-1">Razor test code</a>
+</li>
+</ul>
+<section id="tabpanel_16_csharp" role="tabpanel" data-tab="csharp">
+<pre><code class="lang-csharp" name="CascadingParamsTest.cs">public class CascadingParams3Test : BunitContext
+{
+  [Fact]
+  public void Test()
+  {
+    var isDarkTheme = true;
+
+    var cut = Render&lt;CascadingParams&gt;(parameters =&gt; parameters
+      .Add(p =&gt; p.IsDarkTheme, isDarkTheme)
+      .Add(p =&gt; p.UserName, &quot;Name of User&quot;)
+      .Add(p =&gt; p.Email, &quot;user@example.com&quot;)
+    );
+  }
+}
+</code></pre>
+<p>The example passes both the unnamed <code>IsDarkTheme</code> cascading parameter and the two named cascading parameters (<code>LoggedInUser</code>, <code>LoggedInEmail</code>). It does this using the <code>Add</code> method on the <a class="xref" href="../../api/Bunit.ComponentParameterCollectionBuilder-1.html">ComponentParameterCollectionBuilder&lt;TComponent&gt;</a> with the parameter selector to select both the named and unnamed cascading parameters and pass values to them that way.</p>
+</section>
+<section id="tabpanel_16_razor" role="tabpanel" data-tab="razor" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-cshtml" name="CascadingParamsTest.razor">@inherits BunitContext
+
+@code
+{
+  [Fact]
+  public void Test()
+  {
+    var isDarkTheme = true;
+
+    var cut = Render(@&lt;CascadingValue Name=&quot;LoggedInUser&quot; Value=@(&quot;Name of User&quot;)&gt;
+                        &lt;CascadingValue Name=&quot;LoggedInEmail&quot; Value=@(&quot;user@example.com&quot;)&gt;
+                          &lt;CascadingValue Value=&quot;isDarkTheme&quot;&gt;
+                            &lt;CascadingParams /&gt;
+                          &lt;/CascadingValue&gt;
+                        &lt;/CascadingValue&gt;
+                      &lt;/CascadingValue&gt;);
+  }
+}
+</code></pre>
+<p>The example passes a inline Razor template to the <a class="xref" href="../../api/Bunit.BunitContext.html#Bunit_BunitContext_Render_Microsoft_AspNetCore_Components_RenderFragment_">Render(RenderFragment)</a> method. The cascading value is just passed like normal in Razor code.</p>
+</section>
+</div>
+<h2 id="rendering-a-component-under-test-inside-other-components">Rendering a component under test inside other components</h2>
+<p>It is possible to nest a component under tests inside other components, if that is required to test it. For example, to nest the <code>&lt;HelloWorld&gt;</code> component inside the <code>&lt;Wrapper&gt;</code> component do the following:</p>
+<div class="tabGroup" id="tabgroup_17">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_17_csharp" role="tab" aria-controls="tabpanel_17_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C# test code</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_17_razor" role="tab" aria-controls="tabpanel_17_razor" data-tab="razor" tabindex="-1">Razor test code</a>
+</li>
+</ul>
+<section id="tabpanel_17_csharp" role="tabpanel" data-tab="csharp">
+<pre><code class="lang-csharp" name="NestedComponentTest">[Fact]
+public void Test()
+{
+  var wrapper = Render&lt;Wrapper&gt;(parameters =&gt; parameters
+    .AddChildContent&lt;HelloWorld&gt;()
+  );
+  var cut = wrapper.FindComponent&lt;HelloWorld&gt;();
+}
+</code></pre>
+<p>The example renders the <code>&lt;HelloWorld&gt;</code> component inside the <code>&lt;Wrapper&gt;</code> component. What is special in both cases is the use of the <code>FindComponent&lt;HelloWorld&gt;()</code> that returns a <code>RenderedComponent&lt;HelloWorld&gt;</code>. This is needed because the <code>Render&lt;Wrapper&gt;</code> method call returns an <code>RenderedComponent&lt;Wrapper&gt;</code> instance, that provides access to the instance of the <code>&lt;Wrapper&gt;</code> component, but not the <code>&lt;HelloWorld&gt;</code>-component instance.</p>
+</section>
+<section id="tabpanel_17_razor" role="tabpanel" data-tab="razor" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-cshtml" name="NestedComponentTest">@inherits BunitContext
+
+@code
+{
+  [Fact]
+  public void Test()
+  {
+    var cut = Render&lt;HelloWorld&gt;(@&lt;Wrapper&gt;
+                                    &lt;HelloWorld /&gt;
+                                  &lt;/Wrapper&gt;);
+  }
+}
+</code></pre>
+<p>The example passes a inline Razor template to the <code>Render&lt;TComponent&gt;()</code> method. What is different here from the previous examples is that we use the generic version of the <code>Render&lt;TComponent&gt;</code> method, which is a shorthand for <code>Render(...).FindComponent&lt;TComponent&gt;()</code>.</p>
+</section>
+</div>
+<h2 id="configure-two-way-with-component-parameters-bind-directive">Configure two-way with component parameters (<code>@bind</code> directive)</h2>
+<p>To set up <a href="https://docs.microsoft.com/en-us/aspnet/core/blazor/components/data-binding#binding-with-component-parameters">two-way binding to a pair of component parameters</a> on a component under test, e.g. the <code>Value</code> and <code>ValueChanged</code> parameter pair on the component below, do the following:</p>
+<pre><code class="lang-csharp" name="TwoWayBinding.razor">@code {
+  [Parameter] public string Value { get; set; } = string.Empty;
+  [Parameter] public EventCallback&lt;string&gt; ValueChanged { get; set; }
+}
+</code></pre><div class="tabGroup" id="tabgroup_18">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_18_csharp" role="tab" aria-controls="tabpanel_18_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C# test code</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_18_razor" role="tab" aria-controls="tabpanel_18_razor" data-tab="razor" tabindex="-1">Razor test code</a>
+</li>
+</ul>
+<section id="tabpanel_18_csharp" role="tabpanel" data-tab="csharp">
+<pre><code class="lang-csharp" name="TwoWayBindingTest.cs">public class TwoWayBindingTest : BunitContext
+{
+  [Fact]
+  public void Test()
+  {
+    var currentValue = string.Empty;
+
+    Render&lt;TwoWayBinding&gt;(parameters =&gt;
+      parameters.Bind(
+        p =&gt; p.Value,
+        currentValue,
+        newValue =&gt; currentValue = newValue));
+  }
+}
+</code></pre>
+<p>The example uses the <code>Bind</code> method to setup two-way binding between the <code>Value</code> parameter and <code>ValueChanged</code> parameter, and the local variable in the test method (<code>currentValue</code>). The <code>Bind</code> method is a shorthand for calling the the <code>Add</code> method for the <code>Value</code> parameter and <code>ValueChanged</code> parameter individually.</p>
+</section>
+<section id="tabpanel_18_razor" role="tabpanel" data-tab="razor" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-cshtml" name="TwoWayBindingTest.razor">@inherits BunitContext
+
+@code {
+  [Fact]
+  public void Test()
+  {
+    var currentValue = string.Empty;
+
+    var cut = Render(@&lt;TwoWayBinding @bind-Value=&quot;currentValue&quot;&gt;&lt;/TwoWayBinding&gt;);
+  }
+}
+</code></pre>
+<p>The example uses the standard <code>@bind-Value</code> directive in Blazor to set up two way binding between the <code>Value</code> parameter and <code>ValueChanged</code> parameter and the local variable in the test method (<code>currentValue</code>).</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>When using <code>@bind</code> in conjunction with razor test-files the razor component should <strong>not</strong> inherit from <code>ComponentBase</code> (which is the default). The simplest solution would be to inherit from <code>BunitContext</code> (as seen in the example above) which also brings the benefits as described on top of this page.</p>
+</div>
+</section>
+</div>
+<h2 id="bunitcontext-per-test-method"><code>BunitContext</code> per test method</h2>
+<p>There are scenarios where it is not possible or not desirable to inherit from <code>BunitContext</code> in the test class. In those cases, it is possible to create a new <code>BunitContext</code> instance per test method. As the <code>BunitContext</code> class implements <code>IDisposable</code>, it is recommended to use the <code>using</code> statement to ensure that the instance is disposed of after the test method has run.</p>
+<div class="tabGroup" id="tabgroup_19">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_19_csharp" role="tab" aria-controls="tabpanel_19_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C# test code</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_19_razor" role="tab" aria-controls="tabpanel_19_razor" data-tab="razor" tabindex="-1">Razor test code</a>
+</li>
+</ul>
+<section id="tabpanel_19_csharp" role="tabpanel" data-tab="csharp">
+<pre><code class="lang-csharp" name="HelloWorldExplicitContext.cs">public class HelloWorldExplicitContext
+{
+  [Fact]
+  public void HelloWorldComponentRendersCorrectly()
+  {
+    // Arrange
+    using var ctx = new BunitContext();
+
+    // Act
+    var cut = ctx.Render&lt;HelloWorld&gt;();
+
+    // Assert
+    cut.MarkupMatches(&quot;&lt;h1&gt;Hello world from Blazor&lt;/h1&gt;&quot;);
+  }
+}
+</code></pre></section>
+<section id="tabpanel_19_razor" role="tabpanel" data-tab="razor" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-cshtml" name="HelloWorldExplicitContext.razor">@code
+{
+  [Fact]
+  public void HelloWorldComponentRendersCorrectly()
+  {
+    // Arrange
+    using var ctx = new BunitContext();
+
+    // Act
+    var cut = ctx.Render(@&lt;HelloWorld/&gt;);
+
+    // Assert
+    cut.MarkupMatches(@&lt;h1&gt;Hello world from Blazor&lt;/h1&gt;);
+  }
+}
+</code></pre></section>
+</div>
+<h2 id="getting-an-invalidoperationexception">Getting an <code>InvalidOperationException</code></h2>
+<p>When the razor syntax is used and the test throws the following exception:</p>
+<blockquote>
+<p>System.InvalidOperationException: The render handle is not yet assigned.</p>
+</blockquote>
+<p>This usually means that the test class (Blazor component where the tests is declared in) is direclty inheriting from <code>ComponentBase</code>, as is the default for all Blazor components.</p>
+<p>The solution is to inherit from bUnits <code>BunitContext</code> instead, i.e.:</p>
+<pre><code class="lang-razor">@inherits BunitContext
+
+@code {
+    [Fact]
+    public void Test1()
+    {
+        // test code
+    }
+}
+</code></pre>
+<h2 id="limitations-of-rendering-a-renderfragment-inside-a-test">Limitations of rendering a <code>RenderFragment</code> inside a test</h2>
+<p>When rendering a <code>RenderFragment</code> using the <a class="xref" href="../../api/Bunit.BunitContext.html#Bunit_BunitContext_Render_Microsoft_AspNetCore_Components_RenderFragment_">Render(RenderFragment)</a> method, the created <a class="xref" href="../../api/Bunit.IRenderedComponent-1.html">IRenderedComponent&lt;TComponent&gt;</a> is static. This means that it will not re-render even if events are triggered.</p>
+<pre><code class="lang-razor">@inherits BunitContext
+
+@code {
+  [Fact]
+  public void Button_clicked_string_gets_updated()
+  {
+    var output = string.Empty;
+    var cut = Render(@&lt;button @onclick='@(() =&gt; output = &quot;Success&quot;)'&gt;@output&lt;/button&gt;);
+    
+    cut.Find(&quot;button&quot;).Click();
+    
+    // This will pass, as events are triggered and the function get executed
+    output.ShouldBe(&quot;Success&quot;);
+
+    // This will fail, as the markup will not get updated
+    cut.Find(&quot;button&quot;).TextContent.ShouldBe(&quot;Success&quot;);
+  }
+}
+</code></pre>
+<h2 id="passing-query-parameters-supplyparameterfromquery-to-a-component">Passing query parameters (<code>SupplyParameterFromQuery</code>) to a component</h2>
+<p>In .NET 6 and later, components can receive parameters from a query string if the parameter is annotated with the <code>[SupplyParameterFromQuery]</code> attribute in addition to the <code>[Parameter]</code> attribute.</p>
+<p>In .NET 8 however, the <code>[Parameter]</code> attribute is no longer required, which means a value cannot be passed to the component during testing using the normal methods, e.g. the <a class="xref" href="../../api/Bunit.ComponentParameterCollectionBuilder-1.html">ComponentParameterCollectionBuilder&lt;TComponent&gt;</a>'s <code>Add</code> method, if a component parameter is only annotated with the <code>[SupplyParameterFromQuery]</code> attribute. Instead, pass a query string parameters by setting it using the <a class="xref" href="../../api/Bunit.TestDoubles.BunitNavigationManager.html">BunitNavigationManager</a>.</p>
+<p>For example:</p>
+<pre><code class="lang-razor">@code {
+  [SupplyParameterFromQuery]
+  public string Name { get; set; }
+}
+</code></pre>
+<p>A simple example of how to test a component that receives parameters from the query string:</p>
+<pre><code class="lang-razor">@inherits BunitContext
+
+@code {
+  [Fact]
+  public void Component_receives_parameters_from_query_string()
+  {
+    var navigationManager = Services.GetRequiredService&lt;NavigationManager&gt;();
+    var uri = navigationManager.GetUriWithQueryParameter(&quot;Name&quot;, &quot;bUnit&quot;);
+    navigationManager.NavigateTo(uri);
+
+    var cut = Render&lt;SupplyFromQueryParameterComponent&gt;();
+
+    cut.Instance.Name.ShouldBe(&quot;bUnit&quot;);
+  }
+}
+</code></pre>
+<h2 id="further-reading">Further Reading</h2>
+<ul>
+<li><a class="xref" href="inject-services-into-components.html">Injecting services into components under test</a></li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/providing-input/passing-parameters-to-components.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://dotnetfoundation.org" title=".NET Foundation">
+            <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg" alt=".NET Foundation">
+          </a>
+          <p class="pt-1"><small>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</small></p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary bg-body-tertiary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <small>Documentation updated on 2026-02-27T14:38:27.0000000+00:00 in commit a452cce29f</small>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

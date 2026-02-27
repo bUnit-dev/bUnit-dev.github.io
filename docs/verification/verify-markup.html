@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Verifying markup from a component | bUnit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Verifying markup from a component | bUnit ">
+      <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" href="/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
+      <link rel="manifest" href="/site.webmanifest">
+
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/verification/verify-markup.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../..//images/bunit-logo.png" alt="bUnit">
+            bUnit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="verify-markup">
+<h1 id="verifying-markup-from-a-component">Verifying markup from a component</h1>
+
+<p>Generally, the strategy for verifying markup produced by components depends on whether you are creating reusable component library or a single-use Blazor app component.</p>
+<p>With a <strong>reusable component library</strong>, the markup produced may be considered part of the externally observable behavior of the component, and that should thus be verified, since users of the component may depend on the markup having a specific structure. Consider using <code>MarkupMatches</code> and semantic comparison described below to get the best protection against regressions and good maintainability.</p>
+<p>When <strong>building components for a Blazor app</strong>, the externally observable behavior of components are how they visibly look and behave from an end-users point of view, e.g. what the user sees and interact with in a browser. In this scenario, consider use <code>FindByLabelText</code> and related methods described below to inspect and assert against individual elements look and feel, for a good balance between protection against regressions and maintainability. Learn more about this testing approach at <a href="https://testing-library.com">https://testing-library.com</a>.</p>
+<p>This page covers the following <strong>verification approaches:</strong></p>
+<ul>
+<li>Inspecting the individual DOM nodes in the DOM tree</li>
+<li>Semantic comparison of markup</li>
+<li>Finding expected differences in markup between renders</li>
+<li>Verification of raw markup</li>
+</ul>
+<p>The following sections will cover each of these.</p>
+<h2 id="result-of-rendering-components">Result of rendering components</h2>
+<p>When a component is rendered in a test, the result is a <a class="xref" href="../../api/Bunit.IRenderedComponent-1.html">IRenderedComponent&lt;TComponent&gt;</a> or a <a class="xref" href="../../api/Bunit.IRenderedComponent-1.html">IRenderedComponent&lt;TComponent&gt;</a>. Through these, it is possible to access the rendered markup (HTML) of the component and, in the case of <a class="xref" href="../../api/Bunit.IRenderedComponent-1.html">IRenderedComponent&lt;TComponent&gt;</a>, the instance of the component.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>An <a class="xref" href="../../api/Bunit.IRenderedComponent-1.html">IRenderedComponent&lt;TComponent&gt;</a> inherits from <a class="xref" href="../../api/Bunit.IRenderedComponent-1.html">IRenderedComponent&lt;TComponent&gt;</a>. This page will only cover features of the <a class="xref" href="../../api/Bunit.IRenderedComponent-1.html">IRenderedComponent&lt;TComponent&gt;</a> type. <a class="xref" href="../../api/Bunit.IRenderedComponent-1.html">IRenderedComponent&lt;TComponent&gt;</a> is covered on the <a class="xref" href="verify-component-state.html">Verifying the state of a component under test</a> page.</p>
+</div>
+<h2 id="inspecting-dom-nodes">Inspecting DOM nodes</h2>
+<p>The rendered markup from a component is available as a DOM node through the <a class="xref" href="../../api/Bunit.IRenderedComponent-1.html#Bunit_IRenderedComponent_1_Nodes">Nodes</a> property on <a class="xref" href="../../api/Bunit.IRenderedComponent-1.html">IRenderedComponent&lt;TComponent&gt;</a>. The nodes and element types comes from <a href="https://anglesharp.github.io/">AngleSharp</a> that follows the W3C DOM API specifications and gives you the same results as a state-of-the-art browser’s implementation of the DOM API in JavaScript. Besides the official DOM API, AngleSharp and bUnit add some useful extension methods on top. This makes working with DOM nodes convenient.</p>
+<h3 id="finding-dom-elements">Finding DOM elements</h3>
+<p>bUnit supports multiple different ways of searching and querying the rendered HTML elements:</p>
+<ul>
+<li><code>FindByLabelText(string labelText)</code> that takes a text string used to label an input element and returns an <code>IElement</code> as output, or throws an exception if none are found (this is included in the experimental library <a href="https://www.nuget.org/packages/bunit.web.query">bunit.web.query</a>). Use this method when possible compared to the generic <code>Find</code> and <code>FindAll</code> methods.</li>
+<li><a class="xref" href="../../api/Bunit.RenderedComponentExtensions.html#Bunit_RenderedComponentExtensions_Find__1_Bunit_IRenderedComponent___0__System_String_"><code>Find(string cssSelector)</code></a> takes a &quot;CSS selector&quot; as input and returns an <code>IElement</code> as output, or throws an exception if none are found.</li>
+<li><a class="xref" href="../../api/Bunit.RenderedComponentExtensions.html#Bunit_RenderedComponentExtensions_FindAll__1_Bunit_IRenderedComponent___0__System_String_"><code>FindAll(string cssSelector)</code></a> takes a &quot;CSS selector&quot; as input and returns a list of <code>IElement</code> elements.</li>
+</ul>
+<p>Let's see some examples of using the <a class="xref" href="../../api/Bunit.RenderedComponentExtensions.html#Bunit_RenderedComponentExtensions_Find__1_Bunit_IRenderedComponent___0__System_String_"><code>Find(string cssSelector)</code></a> and <a class="xref" href="../../api/Bunit.RenderedComponentExtensions.html#Bunit_RenderedComponentExtensions_FindAll__1_Bunit_IRenderedComponent___0__System_String_"><code>FindAll(string cssSelector)</code></a> methods to query the <code>&lt;FancyTable&gt;</code> component listed below.</p>
+<pre><code class="lang-razor" name="FancyTable.razor">&lt;table&gt;
+  &lt;caption&gt;Lorem lipsum captium&lt;/caption&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;white-space:nowrap&quot;&gt;Foo&lt;/td&gt;
+      &lt;td&gt;Bar&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;white-space:nowrap&quot;&gt;Baz&lt;/td&gt;
+      &lt;td&gt;Boo&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</code></pre>
+<p>To find the <code>&lt;caption&gt;</code> element and the first <code>&lt;td&gt;</code> elements in each row, do the following:</p>
+<pre><code class="lang-csharp" highlight-lines="3-4">var tableCaption = cut.Find(&quot;caption&quot;);
+var tableCells = cut.FindAll(&quot;td:first-child&quot;);
+
+Assert.Empty(tableCaption.Attributes);
+</code></pre>
+<p>Once you have one or more elements, you verify against them,  such as by  inspecting their properties through the DOM API. For example:</p>
+<pre><code class="lang-csharp">    Assert.All(tableCells, td =&gt; td.HasAttribute(&quot;style&quot;));
+  }
+}
+</code></pre><h4 id="auto-refreshing-find-queries">Auto-refreshing Find() queries</h4>
+<p>An element found with the <a class="xref" href="../../api/Bunit.RenderedComponentExtensions.html#Bunit_RenderedComponentExtensions_Find__1_Bunit_IRenderedComponent___0__System_String_"><code>Find(string cssSelector)</code></a> method will be updated if the component it came from is re-rendered.</p>
+<p>However, that does not apply to elements that are found by traversing the DOM tree via the <a class="xref" href="../../api/Bunit.IRenderedComponent-1.html#Bunit_IRenderedComponent_1_Nodes">Nodes</a> property on <a class="xref" href="../../api/Bunit.IRenderedComponent-1.html">IRenderedComponent&lt;TComponent&gt;</a>, for example, as those nodes do not know when their root component is re-rendered. Consequently, they don’t know when they should be updated.</p>
+<p>As a result of this, it is always recommended to use the <a class="xref" href="../../api/Bunit.RenderedComponentExtensions.html#Bunit_RenderedComponentExtensions_Find__1_Bunit_IRenderedComponent___0__System_String_"><code>Find(string cssSelector)</code></a> method when searching for a single element. Alternatively, always reissue the query whenever you need the element.</p>
+<h2 id="semantic-comparison-of-markup">Semantic comparison of markup</h2>
+<p>Working with raw markup only works well with very simple output, but even then you have to sanitize it to get stable tests. A much better approach is to use the semantic HTML comparer that comes with bUnit.</p>
+<h3 id="how-does-the-semantic-html-comparer-work">How does the semantic HTML comparer work?</h3>
+<p>The comparer takes two HTML fragments (e.g. in the form of a C# string) as input, and returns <code>true</code> if both HTML fragments result in the same visual rendered output in a web browser. If not, it returns <code>false</code>.</p>
+<p>For example, a web browser will render this HTML:</p>
+<pre><code class="lang-html">&lt;span&gt;Foo Bar&lt;/span&gt;
+</code></pre>
+<p>This will be done in exactly the same way as this HTML:</p>
+<pre><code class="lang-html">&lt;span&gt;
+  Foo       Bar
+&lt;/span&gt;
+</code></pre>
+<p>This is why it makes sense to allow tests to pass, <em>even</em> when the rendered HTML markup is not entirely identical to the expected HTML from a normal string comparer's perspective.</p>
+<p>bUnit's semantic HTML comparer safely ignores things like insignificant whitespace and the order of attributes on elements, as well as many more things. <strong>This leads to much more stable tests, as - for example - a reformatted component doesn't break its tests because of insignificant whitespace changes.</strong> More details of the semantic comparer can be found on the <a class="xref" href="semantic-html-comparison.html">Customizing the semantic HTML comparison</a> page.</p>
+<h3 id="the-markupmatches-method">The MarkupMatches() method</h3>
+<p>The HTML comparer can be easily accessed through <code>MarkupMatches()</code> extension methods, available in places that represent HTML fragments in bUnit, i.e. on <a class="xref" href="../../api/Bunit.IRenderedComponent-1.html">IRenderedComponent&lt;TComponent&gt;</a> and the <code>INode</code> and <code>INodeList</code> types.</p>
+<p>In the following examples, the <code>&lt;Heading&gt;</code> component listed below will be used as the component under test.</p>
+<pre><code class="lang-razor" name="Heading.razor">&lt;h3 id=&quot;heading-1337&quot; required&gt;
+  Heading text
+  &lt;small class=&quot;text-muted mark&quot;&gt;
+    Secondary text
+  &lt;/small&gt;
+&lt;/h3&gt;
+</code></pre>
+<p>To use the <code>MarkupMatches()</code> method to perform a semantic comparison of the output of the <code>&lt;Heading&gt;</code> component through its <a class="xref" href="../../api/Bunit.IRenderedComponent-1.html">IRenderedComponent&lt;TComponent&gt;</a>, do the following:</p>
+<pre><code class="lang-csharp" highlight-lines="3-6">var cut = Render&lt;Heading&gt;();
+
+cut.MarkupMatches(@&quot;&lt;h3 id=&quot;&quot;heading-1337&quot;&quot; required&gt;
+                        Heading text
+                        &lt;small class=&quot;&quot;mark text-muted&quot;&quot;&gt;Secondary text&lt;/small&gt;
+                      &lt;/h3&gt;&quot;);
+</code></pre>
+<p>The highlighted line shows the call to the <code>MarkupMatches()</code> method. This test passes even though the insignificant whitespace is not exactly the same between the expected HTML string and the raw markup produced by the <code>&lt;Heading&gt;</code> component. It even works when the CSS class list is not in the same order on the <code>&lt;small&gt;</code> element.</p>
+<p>The <code>MarkupMatches()</code> method is also available on <code>INode</code> and <code>INodeList</code> types, for example:</p>
+<pre><code class="lang-csharp" highlight-lines="3-4">var cut = Render&lt;Heading&gt;();
+
+var smallElm = cut.Find(&quot;small&quot;);
+smallElm.MarkupMatches(@&quot;&lt;small class=&quot;&quot;mark text-muted&quot;&quot;&gt;Secondary text&lt;/small&gt;&quot;);
+</code></pre>
+<p>Here we use the <code>Find(string cssSelector)</code> method to find the <code>&lt;small&gt;</code> element, and only verify it and its content and attributes.</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>Working with <code>Find()</code>, <code>FindAll()</code>, <code>INode</code> and <code>INodeList</code> is covered later on this page.</p>
+</div>
+<p>Text content can also be verified with the <code>MarkupMatches()</code> method, e.g. the text inside the <code>&lt;small&gt;</code> element. It has the advantage over regular string comparison in that it removes insignificant whitespace in the text automatically - even between words - where a normal string <code>Trim()</code> method isn't enough. For example:</p>
+<pre><code class="lang-csharp" highlight-lines="3">var cut = Render&lt;Heading&gt;();
+
+var smallElmText = cut.Find(&quot;small&quot;).TextContent;
+smallElmText.MarkupMatches(&quot;Secondary text&quot;);
+</code></pre>
+<p>The semantic HTML comparer can be customized to make a test case even more stable and easier to maintain. For example, it is possible to ignore an element or attribute during comparison, or provide a regular expression to the comparer when comparing a specific element or attribute to make the comparer work with generated data.</p>
+<p>Learn more about the customization options on the <a class="xref" href="semantic-html-comparison.html">Customizing the semantic HTML comparison</a> page.</p>
+<h2 id="verification-of-raw-markup">Verification of raw markup</h2>
+<p>To access the rendered markup of a component, just use the <a class="xref" href="../../api/Bunit.IRenderedComponent-1.html#Bunit_IRenderedComponent_1_Markup">Markup</a> property on <a class="xref" href="../../api/Bunit.IRenderedComponent-1.html">IRenderedComponent&lt;TComponent&gt;</a>. This holds the <em>raw</em> HTML from the component as a <code>string</code>.</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>Be aware that all indentions and whitespace in your components (<code>.razor</code> files) are included in the raw rendered markup, so it is often wise to normalize the markup string a little. For example, via the string <code>Trim()</code> method to make the tests more stable. Otherwise, a change to the formatting in your components might break the tests unnecessarily when it does not need to.</p>
+<p>To avoid these issues and others related to asserting against raw markup, use the semantic HTML comparer that comes with bUnit, described in the next section.</p>
+</div>
+<p>To get the markup as a string, do the following:</p>
+<pre><code class="lang-csharp" highlight-lines="3">  var renderedMarkup = cut.Markup;
+  Assert.Equal(&quot;&lt;h1&gt;Hello world from Blazor&lt;/h1&gt;&quot;, renderedMarkup);
+}
+
+</code></pre>
+<p>Standard string assertions can be performed against the markup string, such as checking whether it contains a value or is empty.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/verification/verify-markup.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://dotnetfoundation.org" title=".NET Foundation">
+            <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg" alt=".NET Foundation">
+          </a>
+          <p class="pt-1"><small>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</small></p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary bg-body-tertiary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <small>Documentation updated on 2026-02-27T14:38:27.0000000+00:00 in commit a452cce29f</small>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

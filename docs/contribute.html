@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Contribute | bUnit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Contribute | bUnit ">
+      <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" href="/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
+      <link rel="manifest" href="/site.webmanifest">
+
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/contribute.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="..//images/bunit-logo.png" alt="bUnit">
+            bUnit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="contribute">
+<h1 id="how-to-contribute">How to contribute</h1>
+
+<p>One of the easiest ways to contribute is to participate in discussions on GitHub issues. You can also contribute by submitting pull requests with code changes.</p>
+<h2 id="general-feedback-and-discussions">General feedback and discussions</h2>
+<p>Start a discussion on the <a href="https://github.com/egil/bUnit/discussions">bUnit discussion list</a>.</p>
+<h2 id="bugs-and-feature-requests">Bugs and feature requests</h2>
+<p>For bugs or feature requests, log a new issue on the <a href="https://github.com/egil/bunit/issues">issues list</a>. Be sure to use the right template.</p>
+<h2 id="contributing-code-and-content">Contributing code and content</h2>
+<p>bUnit accepts fixes and features. Here is what you should do when writing code for bUnit:</p>
+<ul>
+<li>Follow the coding conventions used throughout the bUnit project. In general, they align with the AspNetCore teams <a href="https://github.com/dotnet/aspnetcore/wiki/Engineering-guidelines#coding-guidelines">coding guidelines</a>.</li>
+<li>Add, remove, or delete unit tests to cover your changes. Make sure tests are specific to the changes you are making. Tests need to be provided for every bug/feature that is completed.</li>
+<li>This repository follow the truck-based development approach, meaning changes should be based on the <code>main</code> branch</li>
+<li>Any code or documentation you share with the bUnit projects should fall under the projects license agreement.</li>
+</ul>
+<p>Here are some resources to help you get started on how to contribute code or new content:</p>
+<ul>
+<li><a href="https://github.com/egil/bunit/labels/help%20wanted">&quot;Help wanted&quot; issues</a> - these issues are up for grabs if you want to create a fix. To do this, simply comment on the issue you want to fix.</li>
+<li><a href="https://github.com/egil/bunit/labels/good%20first%20issue">&quot;Good first issue&quot; issues</a> - these are good for newcomers. Good first issues are small, usually require just a few hours of work, and do not require a deep technical knowledge of bUnit. This is a good place to start if you want to become familiar with bUnit’s inner workings and maybe take on bigger issues later.</li>
+</ul>
+<h3 id="identifying-the-scale-of-a-contribution">Identifying the Scale of a Contribution</h3>
+<p>If you would like to contribute to bUnit, first identify the scale of what you would like to contribute. If it is small (grammar/spelling or a bug fix), feel free to start working on a fix. If you are submitting a feature or substantial code contribution, please discuss it with us first.</p>
+<p>You might also read these two blogs posts on contributing code: <a href="http://tirania.org/blog/archive/2010/Dec-31.html">Open Source Contribution Etiquette</a> by Miguel de Icaza and <a href="https://www.igvita.com/2011/12/19/dont-push-your-pull-requests/">Don't &quot;Push&quot; Your Pull Requests</a> by Ilya Grigorik. These blog posts highlight good open source collaboration etiquette and help align expectations between you and us.</p>
+<p>All code submissions will be reviewed and tested, and only those that meet the expected quality and design/roadmap appropriateness will be merged into the project. Fear not though, you will be given plenty of constructive feedback as needed.</p>
+<h3 id="submitting-a-pull-request">Submitting a pull request</h3>
+<p>If you don't know what a pull request is, read this article: <a href="https://help.github.com/articles/using-pull-requests">https://help.github.com/articles/using-pull-requests</a>. Make sure the repository can build and all tests pass. It is also a good idea to familiarize yourself with the project workflow and our coding conventions.</p>
+<h2 id="code-of-conduct">Code of conduct</h2>
+<p>See <a class="xref" href="code-of-conduct.html">Contributor covenant code of conduct</a></p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/contribute.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://dotnetfoundation.org" title=".NET Foundation">
+            <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg" alt=".NET Foundation">
+          </a>
+          <p class="pt-1"><small>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</small></p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary bg-body-tertiary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <small>Documentation updated on 2026-02-27T14:38:27.0000000+00:00 in commit a452cce29f</small>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

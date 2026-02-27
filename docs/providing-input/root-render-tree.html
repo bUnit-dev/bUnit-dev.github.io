@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Controlling the root render tree | bUnit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Controlling the root render tree | bUnit ">
+      <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" href="/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
+      <link rel="manifest" href="/site.webmanifest">
+
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/providing-input/root-render-tree.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../..//images/bunit-logo.png" alt="bUnit">
+            bUnit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="root-render-tree">
+<h1 id="controlling-the-root-render-tree">Controlling the root render tree</h1>
+
+<p>The root render tree, the render tree in which components under test are rendered, can be added to before components are rendered with bUnit's test context. This is mostly useful when a component under test, or a component it depends on, must be rendered inside another component, that provides a cascading value to it.</p>
+<p>For example, when using Blazor’s authentication, it is common to add the <code>CascadingAuthenticationState</code> component higher up the render tree, such that it can provide authentication state to those components below it that need it. Adding this through the <a class="xref" href="../../api/Bunit.BunitContext.html#Bunit_BunitContext_RenderTree">RenderTree</a> property on the <a class="xref" href="../../api/Bunit.BunitContext.html">BunitContext</a> type makes it possible to add it once in a shared setup method, and not have to do so in every test method during the call to <a class="xref" href="../../api/Bunit.Rendering.RootRenderTree.html#Bunit_Rendering_RootRenderTree_Add__1_System_Action_Bunit_ComponentParameterCollectionBuilder___0___"><code>Render()</code></a>.</p>
+<p>This can also be useful when writing tests that use a third-party component library, that require a special root component to be added to the render tree, but which otherwise don’t change between tests.</p>
+<h2 id="adding-a-component-to-the-root-render-tree">Adding a component to the root render tree</h2>
+<p>The following example verifies that the <code>PrintCascadingValue</code> component correctly prints out the cascading value passed to it. This value is passed to it by adding the <code>CascadingValue&lt;string&gt;</code> component to the render tree and then rendering the <code>PrintCascadingValue</code> component. The <code>PrintCascadingValue</code> component looks like this:</p>
+<pre><code class="lang-cshtml" name="PrintCascadingValue.razor">Cascading value: @Value
+@code 
+{
+  [CascadingParameter]
+  public string Value { get; set; }
+}
+</code></pre>
+<p>Here is the test that adds the <code>CascadingValue&lt;string&gt;</code> component to the render tree and then renders the <code>PrintCascadingValue</code> component.</p>
+<pre><code class="lang-csharp" name="PrintCascadingValueTest.cs">// Add a cascading value to the test contexts root render tree.
+RenderTree.Add&lt;CascadingValue&lt;string&gt;&gt;(parameters =&gt; parameters
+  .Add(p =&gt; p.Value, &quot;FOO&quot;)
+);
+
+// The component will be rendered as a child of last
+// component added to the RenderTree property.
+var cut = Render&lt;PrintCascadingValue&gt;();
+
+// Verify that the cascading value was passed correctly.
+cut.MarkupMatches($&quot;Cascading value: FOO&quot;);
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The call to <a class="xref" href="../../api/Bunit.Rendering.RootRenderTree.html#Bunit_Rendering_RootRenderTree_Add__1_System_Action_Bunit_ComponentParameterCollectionBuilder___0___"><code>Add</code></a> can be done in a common setup method, outside the context of the test method listed here, for easy re-use between tests.</p>
+</div>
+<h2 id="add-only-if-not-already-in-root-render-tree">Add only if not already in root render tree</h2>
+<p>Sometimes common test setup logic exists outside the test class, perhaps abstracted away in other libraries. In those cases, the <a class="xref" href="../../api/Bunit.Rendering.RootRenderTree.html#Bunit_Rendering_RootRenderTree_TryAdd__1_System_Action_Bunit_ComponentParameterCollectionBuilder___0___"><code>TryAdd</code></a> method can be used to a components to the render tree, <em>only if</em> it has not already been added. <a class="xref" href="../../api/Bunit.Rendering.RootRenderTree.html#Bunit_Rendering_RootRenderTree_TryAdd__1_System_Action_Bunit_ComponentParameterCollectionBuilder___0___"><code>TryAdd</code></a> returns true if the component was added, false otherwise.</p>
+<pre><code class="lang-csharp">RenderTree.TryAdd&lt;CascadingValue&lt;string&gt;&gt;(parameters =&gt; parameters
+  .Add(p =&gt; p.Value, &quot;BAR?&quot;)
+);
+</code></pre>
+<p>In the listing above, the cascading value <code>BAR?</code> is added only if there is not another <code>CascadingValue&lt;string&gt;</code> component added to the render tree already.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/providing-input/root-render-tree.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://dotnetfoundation.org" title=".NET Foundation">
+            <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg" alt=".NET Foundation">
+          </a>
+          <p class="pt-1"><small>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</small></p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary bg-body-tertiary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <small>Documentation updated on 2026-02-27T14:38:27.0000000+00:00 in commit a452cce29f</small>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

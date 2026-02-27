@@ -1,0 +1,364 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class BunitJSModuleInterop
+ | bUnit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class BunitJSModuleInterop
+ | bUnit ">
+      <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" href="/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
+      <link rel="manifest" href="/site.webmanifest">
+
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="..//images/bunit-logo.png" alt="bUnit">
+            bUnit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Bunit.BunitJSModuleInterop">
+
+
+
+  <h1 id="Bunit_BunitJSModuleInterop" data-uid="Bunit.BunitJSModuleInterop" class="text-break">
+    Class BunitJSModuleInterop
+  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Bunit.html">Bunit</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>bunit.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Represents a bUnit JSInterop module.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class BunitJSModuleInterop : BunitJSInterop</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Bunit.BunitJSInterop.html">BunitJSInterop</a></div>
+      <div><span class="xref">BunitJSModuleInterop</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Bunit.BunitJSInterop.html#Bunit_BunitJSInterop_AddInvocationHandler__1_Bunit_JSRuntimeInvocationHandlerBase___0__">BunitJSInterop.AddInvocationHandler&lt;TResult&gt;(JSRuntimeInvocationHandlerBase&lt;TResult&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Bunit.BunitJSInterop.html#Bunit_BunitJSInterop_Invocations">BunitJSInterop.Invocations</a>
+    </div>
+    <div>
+      <a class="xref" href="Bunit.BunitJSInterop.html#Bunit_BunitJSInterop_JSRuntime">BunitJSInterop.JSRuntime</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Bunit.BunitJSInteropSetupExtensions.html#Bunit_BunitJSInteropSetupExtensions_SetupModule_Bunit_BunitJSInterop_">BunitJSInteropSetupExtensions.SetupModule(BunitJSInterop)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.BunitJSInteropSetupExtensions.html#Bunit_BunitJSInteropSetupExtensions_SetupModule_Bunit_BunitJSInterop_Bunit_InvocationMatcher_System_Boolean_">BunitJSInteropSetupExtensions.SetupModule(BunitJSInterop, InvocationMatcher, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.BunitJSInteropSetupExtensions.html#Bunit_BunitJSInteropSetupExtensions_SetupModule_Bunit_BunitJSInterop_System_String_">BunitJSInteropSetupExtensions.SetupModule(BunitJSInterop, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.BunitJSInteropSetupExtensions.html#Bunit_BunitJSInteropSetupExtensions_SetupModule_Bunit_BunitJSInterop_System_String_Bunit_InvocationMatcher_">BunitJSInteropSetupExtensions.SetupModule(BunitJSInterop, string, InvocationMatcher)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.BunitJSInteropSetupExtensions.html#Bunit_BunitJSInteropSetupExtensions_SetupModule_Bunit_BunitJSInterop_System_String_System_Object___">BunitJSInteropSetupExtensions.SetupModule(BunitJSInterop, string, object?[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.BunitJSInteropSetupExtensions.html#Bunit_BunitJSInteropSetupExtensions_SetupVoid_Bunit_BunitJSInterop_">BunitJSInteropSetupExtensions.SetupVoid(BunitJSInterop)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.BunitJSInteropSetupExtensions.html#Bunit_BunitJSInteropSetupExtensions_SetupVoid_Bunit_BunitJSInterop_Bunit_InvocationMatcher_System_Boolean_">BunitJSInteropSetupExtensions.SetupVoid(BunitJSInterop, InvocationMatcher, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.BunitJSInteropSetupExtensions.html#Bunit_BunitJSInteropSetupExtensions_SetupVoid_Bunit_BunitJSInterop_System_String_Bunit_InvocationMatcher_">BunitJSInteropSetupExtensions.SetupVoid(BunitJSInterop, string, InvocationMatcher)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.BunitJSInteropSetupExtensions.html#Bunit_BunitJSInteropSetupExtensions_SetupVoid_Bunit_BunitJSInterop_System_String_System_Object___">BunitJSInteropSetupExtensions.SetupVoid(BunitJSInterop, string, params object?[]?)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.BunitJSInteropSetupExtensions.html#Bunit_BunitJSInteropSetupExtensions_Setup__1_Bunit_BunitJSInterop_">BunitJSInteropSetupExtensions.Setup&lt;TResult&gt;(BunitJSInterop)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.BunitJSInteropSetupExtensions.html#Bunit_BunitJSInteropSetupExtensions_Setup__1_Bunit_BunitJSInterop_Bunit_InvocationMatcher_System_Boolean_">BunitJSInteropSetupExtensions.Setup&lt;TResult&gt;(BunitJSInterop, InvocationMatcher, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.BunitJSInteropSetupExtensions.html#Bunit_BunitJSInteropSetupExtensions_Setup__1_Bunit_BunitJSInterop_System_String_Bunit_InvocationMatcher_">BunitJSInteropSetupExtensions.Setup&lt;TResult&gt;(BunitJSInterop, string, InvocationMatcher)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.BunitJSInteropSetupExtensions.html#Bunit_BunitJSInteropSetupExtensions_Setup__1_Bunit_BunitJSInterop_System_String_System_Object___">BunitJSInteropSetupExtensions.Setup&lt;TResult&gt;(BunitJSInterop, string, params object?[]?)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.BunitJSInteropSetupExtensions.html#Bunit_BunitJSInteropSetupExtensions_TryGetInvokeHandler__1_Bunit_BunitJSInterop_System_String_System_Object___">BunitJSInteropSetupExtensions.TryGetInvokeHandler&lt;TResult&gt;(BunitJSInterop, string, params object?[]?)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.BunitJSInteropSetupExtensions.html#Bunit_BunitJSInteropSetupExtensions_TryGetInvokeVoidHandler_Bunit_BunitJSInterop_System_String_System_Object___">BunitJSInteropSetupExtensions.TryGetInvokeVoidHandler(BunitJSInterop, string, params object?[]?)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.BunitJSInteropSetupExtensions.html#Bunit_BunitJSInteropSetupExtensions_TryGetModuleJSInterop_Bunit_BunitJSInterop_System_String_System_Object___">BunitJSInteropSetupExtensions.TryGetModuleJSInterop(BunitJSInterop, string, params object?[]?)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.FocusAsyncAssertJSInteropExtensions.html#Bunit_FocusAsyncAssertJSInteropExtensions_VerifyFocusAsyncInvoke_Bunit_BunitJSInterop_System_Int32_System_String_">FocusAsyncAssertJSInteropExtensions.VerifyFocusAsyncInvoke(BunitJSInterop, int, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.FocusAsyncAssertJSInteropExtensions.html#Bunit_FocusAsyncAssertJSInteropExtensions_VerifyFocusAsyncInvoke_Bunit_BunitJSInterop_System_String_">FocusAsyncAssertJSInteropExtensions.VerifyFocusAsyncInvoke(BunitJSInterop, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.FocusOnNavigateAssertJSInteropExtensions.html#Bunit_FocusOnNavigateAssertJSInteropExtensions_VerifyFocusOnNavigateInvoke_Bunit_BunitJSInterop_System_Int32_System_String_">FocusOnNavigateAssertJSInteropExtensions.VerifyFocusOnNavigateInvoke(BunitJSInterop, int, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.FocusOnNavigateAssertJSInteropExtensions.html#Bunit_FocusOnNavigateAssertJSInteropExtensions_VerifyFocusOnNavigateInvoke_Bunit_BunitJSInterop_System_String_">FocusOnNavigateAssertJSInteropExtensions.VerifyFocusOnNavigateInvoke(BunitJSInterop, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_VerifyInvoke_Bunit_BunitJSInterop_System_String_System_Int32_System_String_">JSRuntimeAssertExtensions.VerifyInvoke(BunitJSInterop, string, int, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_VerifyInvoke_Bunit_BunitJSInterop_System_String_System_String_">JSRuntimeAssertExtensions.VerifyInvoke(BunitJSInterop, string, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_VerifyNotInvoke_Bunit_BunitJSInterop_System_String_System_String_">JSRuntimeAssertExtensions.VerifyNotInvoke(BunitJSInterop, string, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_ShouldBeElementReferenceTo_System_Object_AngleSharp_Dom_IElement_">JSRuntimeAssertExtensions.ShouldBeElementReferenceTo(object?, IElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_ShouldBeElementReferenceTo_System_Object_AngleSharp_Dom_IElement_">JSRuntimeAssertExtensions.ShouldBeElementReferenceTo(object?, IElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_ShouldBeElementReferenceTo_System_Object_AngleSharp_Dom_IElement_">JSRuntimeAssertExtensions.ShouldBeElementReferenceTo(object?, IElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_ShouldBeElementReferenceTo_System_Object_AngleSharp_Dom_IElement_">JSRuntimeAssertExtensions.ShouldBeElementReferenceTo(object?, IElement)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Bunit_BunitJSModuleInterop__ctor_" data-uid="Bunit.BunitJSModuleInterop.#ctor*"></a>
+
+  <h3 id="Bunit_BunitJSModuleInterop__ctor_Bunit_BunitJSInterop_" data-uid="Bunit.BunitJSModuleInterop.#ctor(Bunit.BunitJSInterop)">
+  BunitJSModuleInterop(BunitJSInterop)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Bunit.BunitJSModuleInterop.html">BunitJSModuleInterop</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BunitJSModuleInterop(BunitJSInterop parent)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>parent</code> <a class="xref" href="Bunit.BunitJSInterop.html">BunitJSInterop</a></dt>
+    <dd><p>The parent <a class="xref" href="Bunit.BunitJSInterop.html">BunitJSInterop</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Bunit_BunitJSModuleInterop_Mode_" data-uid="Bunit.BunitJSModuleInterop.Mode*"></a>
+
+  <h3 id="Bunit_BunitJSModuleInterop_Mode" data-uid="Bunit.BunitJSModuleInterop.Mode">
+  Mode
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets whether this <a class="xref" href="Bunit.BunitJSInterop.html">BunitJSInterop</a>
+is running in <a class="xref" href="Bunit.JSRuntimeMode.html#Bunit_JSRuntimeMode_Loose">Loose</a> or <a class="xref" href="Bunit.JSRuntimeMode.html#Bunit_JSRuntimeMode_Strict">Strict</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override JSRuntimeMode Mode { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Bunit.JSRuntimeMode.html">JSRuntimeMode</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Bunit_BunitJSModuleInterop_Mode_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>When this is not set explicitly, the mode from <a class="xref" href="Bunit.BunitJSInterop.html#Bunit_BunitJSInterop_Mode">Mode</a> is used.
+As soon as this is set, the mode will no longer be changed when the <a class="xref" href="Bunit.BunitJSInterop.html#Bunit_BunitJSInterop_Mode">Mode</a>
+changes.</p>
+</div>
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://dotnetfoundation.org" title=".NET Foundation">
+            <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg" alt=".NET Foundation">
+          </a>
+          <p class="pt-1"><small>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</small></p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary bg-body-tertiary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <small>Documentation updated on 2026-02-27T14:38:27.0000000+00:00 in commit a452cce29f</small>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

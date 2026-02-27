@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Adding NavigationManager | bUnit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Adding NavigationManager | bUnit ">
+      <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" href="/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
+      <link rel="manifest" href="/site.webmanifest">
+
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/test-doubles/navigation-manager.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../..//images/bunit-logo.png" alt="bUnit">
+            bUnit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="bunit-navigation-manager">
+<h1 id="adding-navigationmanager">Adding <code>NavigationManager</code></h1>
+
+<p>bUnit has its own version of Blazor's <code>NavigationManager</code> built-in, which is added by default to bUnit's <code>BunitContext.Services</code> service provider. That means nothing special is needed to test components that depend on <code>NavigationManager</code>, as it is already available by default.</p>
+<h2 id="verify-navigationmanager-interactions">Verify <code>NavigationManager</code> interactions</h2>
+<p>Lets look at a few examples that show how to verify that a component correctly interacts with the <code>NavigationManager</code> in various ways.</p>
+<p>In the examples, we'll use the following <code>&lt;PrintCurrentUrl&gt;</code> component:</p>
+<pre><code class="lang-cshtml">@implements IDisposable
+@inject NavigationManager NavMan
+
+&lt;button @onclick=&quot;() =&gt; NavMan.NavigateTo(GoToUrl)&quot;&gt;&lt;/button&gt;
+&lt;p&gt;@url&lt;/p&gt;
+
+@code {
+  private string url;
+
+  [Parameter] public string GoToUrl { get; set; } = string.Empty;
+
+  protected override void OnInitialized()
+    =&gt; NavMan.LocationChanged += OnLocationChanged;
+
+  public void Dispose()
+    =&gt; NavMan.LocationChanged -= OnLocationChanged;
+
+  private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+  {
+    url = e.Location;
+    StateHasChanged();
+  }
+}
+</code></pre>
+<p>To verify that the <code>&lt;PrintCurrentUrl&gt;</code> component correctly listens to location changes, do the following:</p>
+<pre><code class="lang-csharp">// Arrange
+var navMan = Services.GetRequiredService&lt;BunitNavigationManager&gt;();
+var cut = Render&lt;PrintCurrentUrl&gt;();
+
+// Act - trigger a navigation change
+navMan.NavigateTo(&quot;newUrl&quot;);
+
+// Assert - inspects markup to verify the location change is reflected there
+cut.Find(&quot;p&quot;).MarkupMatches($&quot;&lt;p&gt;{navMan.BaseUri}newUrl&lt;/p&gt;&quot;);
+</code></pre>
+<p>To verify that the <code>&lt;PrintCurrentUrl&gt;</code> component correctly calls <code>NavigateTo</code> when it's button is clicked, do the following:</p>
+<pre><code class="lang-csharp">// Arrange
+var cut = Render&lt;PrintCurrentUrl&gt;(parameters =&gt; parameters
+  .Add(p =&gt; p.GoToUrl, &quot;http://localhost/foo&quot;));
+
+// Act - trigger a location change by clicking the button
+cut.Find(&quot;button&quot;).Click();
+
+// Assert - inspect the navigation manager to see if its Uri has been updated.
+var navMan = Services.GetRequiredService&lt;BunitNavigationManager&gt;();
+Assert.Equal(&quot;http://localhost/foo&quot;, navMan.Uri);
+</code></pre>
+<p>If a component issues multiple <code>NavigateTo</code> calls, then it is possible to inspect the navigation history by accessing the <a class="xref" href="../../api/Bunit.TestDoubles.BunitNavigationManager.html#Bunit_TestDoubles_BunitNavigationManager_History">History</a> property. It's a stack based structure, meaning the latest navigations will be first in the collection at index 0.</p>
+<h2 id="asserting-that-navigation-was-prevented-with-the-navigationlock-component">Asserting that navigation was prevented with the <code>NavigationLock</code> component</h2>
+<p>The <code>NavigationLock</code> component, which was introduced with .NET 7, gives the possibility to intercept the navigation and can even prevent it. bUnit will always create a history entry for prevented or even failed interceptions. This gets reflected in the <a class="xref" href="../../api/Bunit.TestDoubles.NavigationHistory.html">NavigationHistory</a> property.</p>
+<p>A component can look like this:</p>
+<pre><code class="lang-razor">@inject NavigationManager NavigationManager
+
+&lt;button @onclick=&quot;(() =&gt; NavigationManager.NavigateTo(&quot;/counter&quot;))&quot;&gt;Counter&lt;/button&gt;
+
+&lt;NavigationLock OnBeforeInternalNavigation=&quot;InterceptNavigation&quot;&gt;&lt;/NavigationLock&gt;
+
+@code {
+  private void InterceptNavigation(LocationChangingContext context)
+  {
+    context.PreventNavigation();
+  }
+}
+</code></pre>
+<p>A typical test, which asserts that the navigation got prevented, would look like this:</p>
+<pre><code class="lang-csharp">var navMan = Services.GetRequiredService&lt;BunitNavigationManager&gt;();
+var cut = Render&lt;InterceptComponent&gt;();
+
+cut.Find(&quot;button&quot;).Click();
+
+// Assert that the navigation was prevented
+var navigationHistory = navMan.History.Single();
+Assert.Equal(NavigationState.Prevented, navigationHistory.NavigationState);
+</code></pre>
+<h2 id="simulate-preventing-navigation-from-a-a-href-with-the-navigationlock-component">Simulate preventing navigation from a <code>&lt;a href&gt;</code> with the <code>NavigationLock</code> component</h2>
+<p>As <code>&lt;a href&gt;</code> navigation is not natively supported in bUnit, the <code>NavigationManager</code> can be used to simulate the exact behavior.</p>
+<pre><code class="lang-razor">&lt;a href=&quot;/counter&quot;&gt;Counter&lt;/a&gt;
+
+&lt;NavigationLock OnBeforeInternalNavigation=&quot;InterceptNavigation&quot;&gt;&lt;/NavigationLock&gt;
+
+@code {
+  private void InterceptNavigation(LocationChangingContext context)
+  {
+    throw new Exception();
+  }
+}
+</code></pre>
+<p>The test utilizes the <code>NavigationManager</code> itself to achieve the same:</p>
+<pre><code class="lang-csharp">var navMan = Services.GetRequiredService&lt;BunitNavigationManager&gt;();
+var cut = Render&lt;InterceptAHRefComponent&gt;();
+
+navMan.NavigateTo(&quot;/counter&quot;);
+
+// Assert that the navigation was prevented
+var navigationHistory = navMan.History.Single();
+Assert.Equal(NavigationState.Faulted, navigationHistory.NavigationState);
+Assert.NotNull(navigationHistory.Exception);
+</code></pre>
+<h2 id="getting-the-result-of-navigationmanagernavigatetologin">Getting the result of <code>NavigationManager.NavigateToLogin</code></h2>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.navigationmanager.navigateto?view=aspnetcore-7.0"><code>NavigationManager.NavigateToLogin</code></a> is a function, which was introduced with .NET 7, which allows to login dynamically. The function can also retrieve an <code>InteractiveRequestOptions</code> object, which can hold additional parameter.</p>
+<pre><code class="lang-csharp">InteractiveRequestOptions requestOptions = new()
+{
+    Interaction = InteractionType.SignIn,
+    ReturnUrl = NavigationManager.Uri,
+};
+requestOptions.TryAddAdditionalParameter(&quot;prompt&quot;, &quot;login&quot;);
+NavigationManager.NavigateToLogin(&quot;authentication/login&quot;, requestOptions);
+</code></pre>
+<p>A test could look like this:</p>
+<pre><code class="lang-csharp">var navigationManager = Services.GetRequiredService&lt;BunitNavigationManager&gt;();
+
+ActionToTriggerTheNavigationManager();
+
+// This helper method retrieves the InteractiveRequestOptions object
+var requestOptions = navigationManager.History.Last().StateFromJson&lt;InteractiveRequestOptions&gt;();
+Asser.NotNull(requestOptions);
+Assert.Equal(requestOptions.Interaction, InteractionType.SignIn);
+options.TryGetAdditionalParameter(&quot;prompt&quot;, out string prompt);
+Assert.Equal(prompt, &quot;login&quot;);
+</code></pre>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/test-doubles/navigation-manager.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://dotnetfoundation.org" title=".NET Foundation">
+            <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg" alt=".NET Foundation">
+          </a>
+          <p class="pt-1"><small>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</small></p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary bg-body-tertiary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <small>Documentation updated on 2026-02-27T14:38:27.0000000+00:00 in commit a452cce29f</small>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

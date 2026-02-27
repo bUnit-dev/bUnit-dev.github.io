@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Controlling component instantiation | bUnit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Controlling component instantiation | bUnit ">
+      <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" href="/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
+      <link rel="manifest" href="/site.webmanifest">
+
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/providing-input/controlling-component-instantiation.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../..//images/bunit-logo.png" alt="bUnit">
+            bUnit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="controlling-component-instantiation">
+<h1 id="controlling-component-instantiation">Controlling component instantiation</h1>
+
+<p>Components are, by default in bUnit, instantiated in the exact same way the regular Blazor runtime does it. For example, if the component under test has a <code>&lt;Counter /&gt;</code> component inside it, an instance of the <code>Counter</code> class will be created at runtime and added to the render tree below the component under test.</p>
+<p>It is however possible to control how Blazor components build using .NET 5 or newer are instantiated by bUnit. This enables the possibility to replace one component during testing with another, e.g., to replace a 3rd party component during testing with a &quot;<a href="https://en.wikipedia.org/wiki/Test_stub">stub component</a>&quot;, to make the test easier to write and maintain.</p>
+<p>The following sections will describe how to use component factories to control the instantiation of components during testing.</p>
+<h2 id="using-component-factories-to-control-instantiation">Using component factories to control instantiation</h2>
+<p>To take control of how components are instantiated during testing, add one or more <a class="xref" href="../../api/Bunit.IComponentFactory.html">IComponentFactory</a> types to the <code>ComponentFactories</code> collection.</p>
+<p>The added component factories <a class="xref" href="../../api/Bunit.IComponentFactory.html#Bunit_IComponentFactory_CanCreate_System_Type_">CanCreate(Type)</a> methods will be called in a last- to first-added order, e.g., the last one added will be called first, then the second-to-last, and so on, and the first that returns <code>true</code> will have its <a class="xref" href="../../api/Bunit.IComponentFactory.html#Bunit_IComponentFactory_Create_System_Type_">Create(Type)</a> method invoked. If none of the factories can create the requested type, the default Blazor factory will be used.</p>
+<h2 id="example--replacing-foo-with-bar">Example – replacing <code>&lt;Foo&gt;</code> with <code>&lt;Bar&gt;</code></h2>
+<p>To create a component factory that replaces <code>&lt;Foo&gt;</code> with <code>&lt;Bar&gt;</code> create the following component factory:</p>
+<pre><code class="lang-csharp" name="FooBarComponentFactory.cs">using System;
+using Microsoft.AspNetCore.Components;
+using Bunit;
+
+public class FooBarComponentFactory : IComponentFactory
+{
+  public bool CanCreate(Type componentType)
+    =&gt; typeof(Foo) == componentType;
+
+  public IComponent Create(Type componentType)
+    =&gt; new Bar();
+}
+</code></pre>
+<p>Make sure that the replacement component is compatible with the component it replaces, i.e., has the same parameters. This can be done by copying all parameters from the replacee to the replacer, or by using <a href="https://docs.microsoft.com/en-us/aspnet/core/blazor/components/#attribute-splatting-and-arbitrary-parameters">attribute splatting and arbitrary parameters</a> in the replacer.</p>
+<p>Then, before rendering the component under test, add the <code>FooBarComponentFactory</code> to the test context’s component factories collection:</p>
+<pre><code class="lang-csharp" name="ComponentFactoryExampleTest.cs">    [Fact]
+    public void ReplacesFooWithBarDuringTest()
+    {
+      // Arrange
+      ComponentFactories.Add(new FooBarComponentFactory());
+
+      // Act
+      var cut = Render&lt;Wrapper&gt;(parameters =&gt; parameters
+        .AddChildContent&lt;Foo&gt;());
+
+      // Assert that there are no &lt;Foo&gt; in render tree,
+      // but there is one &lt;Bar&gt; in the render tree.
+      Assert.Empty(cut.FindComponents&lt;Foo&gt;());
+      Assert.Single(cut.FindComponents&lt;Bar&gt;());
+    }
+  }
+}
+</code></pre><h2 id="built-in-factories">Built-in factories</h2>
+<p>bUnit comes with several built-in factories that allow shallow rendering or replacing components with test dummies and test stubs. See the <a class="xref" href="substituting-components.html">Substituting (mocking) component</a> page for details.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/providing-input/controlling-component-instantiation.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://dotnetfoundation.org" title=".NET Foundation">
+            <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg" alt=".NET Foundation">
+          </a>
+          <p class="pt-1"><small>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</small></p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary bg-body-tertiary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <small>Documentation updated on 2026-02-27T14:38:27.0000000+00:00 in commit a452cce29f</small>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

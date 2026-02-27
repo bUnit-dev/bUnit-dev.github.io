@@ -1,0 +1,449 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Creating a new bUnit test project | bUnit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Creating a new bUnit test project | bUnit ">
+      <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" href="/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
+      <link rel="manifest" href="/site.webmanifest">
+
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/getting-started/create-test-project.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../..//images/bunit-logo.png" alt="bUnit">
+            bUnit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="create-test-project">
+<h1 id="creating-a-new-bunit-test-project">Creating a new bUnit test project</h1>
+
+<p>To write tests, you need a place to put them - a test project. bUnit is not a unit test runner, so a general-purpose test framework like xUnit, NUnit, or MSTest is needed in addition to bUnit in order to write and run tests.</p>
+<p>To use bUnit, the easiest approach is to use the bUnit project template described in the following section. To create a test project manually and in a general-purpose testing frameworks agnostic way, read the section <a href="#creating-a-test-project-manually">Creating a test project manually</a> section further down the page.</p>
+<h2 id="creating-a-test-project-with-bunit-template">Creating a test project with bUnit template</h2>
+<p>To quickly get started with bUnit, install and use the <a href="https://www.nuget.org/packages/bunit.template/">bUnit test project template</a>.</p>
+<p>The steps for creating a test project with the bUnit template are as follows:</p>
+<ol>
+<li>Install the template (only needed the first time)</li>
+<li>Create a new bUnit test project</li>
+<li>Add the test project to your solution</li>
+</ol>
+<p>These steps look like this from the <code>dotnet</code> CLI:</p>
+<p><strong>1. Install the template</strong></p>
+<p>Install the template from NuGet using this command:</p>
+<pre><code class="lang-dotnetcli">dotnet new install bunit.template
+</code></pre>
+<p><strong>2. Create a new test project</strong></p>
+<p>If you successfully installed the template listed in the previous section, you
+can create a new project directly from the &quot;Create new project&quot; wizard in Visual Studio (or Rider), where the bUnit project type will also show up.</p>
+<p>Otherwise, use one of the following command to create a bUnit test project with
+the framework of your choice:</p>
+<div class="tabGroup" id="tabgroup_1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_1_xunit" role="tab" aria-controls="tabpanel_1_xunit" data-tab="xunit" tabindex="0" aria-selected="true">xUnit</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_xunitv3" role="tab" aria-controls="tabpanel_1_xunitv3" data-tab="xunitv3" tabindex="-1">xUnit v3</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_nunit" role="tab" aria-controls="tabpanel_1_nunit" data-tab="nunit" tabindex="-1">NUnit</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_mstest" role="tab" aria-controls="tabpanel_1_mstest" data-tab="mstest" tabindex="-1">MSTest</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_tunit" role="tab" aria-controls="tabpanel_1_tunit" data-tab="tunit" tabindex="-1">TUnit</a>
+</li>
+</ul>
+<section id="tabpanel_1_xunit" role="tabpanel" data-tab="xunit">
+
+<pre><code class="lang-dotnetcli">dotnet new bunit --framework xunit -o &lt;NAME OF TEST PROJECT&gt;
+</code></pre>
+</section>
+<section id="tabpanel_1_xunitv3" role="tabpanel" data-tab="xunitv3" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-dotnetcli">dotnet new bunit --framework xunitv3 -o &lt;NAME OF TEST PROJECT&gt;
+</code></pre>
+</section>
+<section id="tabpanel_1_nunit" role="tabpanel" data-tab="nunit" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-dotnetcli">dotnet new bunit --framework nunit -o &lt;NAME OF TEST PROJECT&gt;
+</code></pre>
+</section>
+<section id="tabpanel_1_mstest" role="tabpanel" data-tab="mstest" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-dotnetcli">dotnet new bunit --framework mstest -o &lt;NAME OF TEST PROJECT&gt;
+</code></pre>
+</section>
+<section id="tabpanel_1_tunit" role="tabpanel" data-tab="tunit" aria-hidden="true" hidden="hidden">
+
+<p>There is no prebuilt template for <strong>TUnit</strong>. More information on how to set up a <strong>TUnit</strong> project can be found down below.</p>
+</section>
+</div>
+
+<p>The <code>--framework</code> option in the <code>dotnet new</code> command above is used to specify the unit testing framework used by the test project. If the <code>--framework</code> option is omitted, the default test framework <code>xunit</code> will be configured. Currently supported options are the following:</p>
+<ul>
+<li><code>xunit</code> and <code>xunitv3</code> - <a href="https://xunit.net/">xUnit</a>,</li>
+<li><code>nunit</code> - <a href="https://nunit.org/">NUnit</a>,</li>
+<li><code>mstest</code> - <a href="https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-mstest">MSTest</a></li>
+</ul>
+<p><strong>3. Add the test project to your solution</strong></p>
+<p>If using Visual Studio, add the test project to your solution (<code>.sln</code>), and add a reference between the test project and the project containing the components that should be tested:</p>
+<pre><code class="lang-dotnetcli">dotnet sln &lt;NAME OF PROJECT&gt;.sln add &lt;NAME OF TEST PROJECT&gt;
+dotnet add &lt;NAME OF TEST PROJECT&gt;.csproj reference &lt;NAME OF COMPONENT PROJECT&gt;.csproj
+</code></pre>
+<p>This will allow the test project to see and test the components in the component project.</p>
+<h2 id="creating-a-test-project-manually">Creating a test project manually</h2>
+<p>This section will take you through the steps required to create a project for testing Blazor components using bUnit. Any of the three general-purpose test frameworks shown in step 1 below can be used. Briefly, here is what we will do:</p>
+<ol>
+<li>Create a new xUnit/NUnit/MSTest/TUnit testing project</li>
+<li>Add bUnit to the test project</li>
+<li>Configure project settings</li>
+<li>Add the test project to your existing solution</li>
+</ol>
+<p>Let's look at these in more detail. These steps look like this from the 'dotnet' CLI:</p>
+<p><strong>1. Create a new test project</strong></p>
+<p>Use the following command (<em>click on the tab for the test framework of choice</em>):</p>
+<div class="tabGroup" id="tabgroup_2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_2_xunit" role="tab" aria-controls="tabpanel_2_xunit" data-tab="xunit" tabindex="0" aria-selected="true">xUnit</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_2_xunitv3" role="tab" aria-controls="tabpanel_2_xunitv3" data-tab="xunitv3" tabindex="-1">xUnit v3</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_2_nunit" role="tab" aria-controls="tabpanel_2_nunit" data-tab="nunit" tabindex="-1">NUnit</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_2_mstest" role="tab" aria-controls="tabpanel_2_mstest" data-tab="mstest" tabindex="-1">MSTest</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_2_tunit" role="tab" aria-controls="tabpanel_2_tunit" data-tab="tunit" tabindex="-1">TUnit</a>
+</li>
+</ul>
+<section id="tabpanel_2_xunit" role="tabpanel" data-tab="xunit">
+
+<pre><code class="lang-dotnetcli">dotnet new xunit -o &lt;NAME OF TEST PROJECT&gt;
+</code></pre>
+</section>
+<section id="tabpanel_2_xunitv3" role="tabpanel" data-tab="xunitv3" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-dotnetcli">dotnet new xunit3 -o &lt;NAME OF TEST PROJECT&gt;
+</code></pre>
+</section>
+<section id="tabpanel_2_nunit" role="tabpanel" data-tab="nunit" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-dotnetcli">dotnet new nunit -o &lt;NAME OF TEST PROJECT&gt;
+</code></pre>
+</section>
+<section id="tabpanel_2_mstest" role="tabpanel" data-tab="mstest" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-dotnetcli">dotnet new mstest -o &lt;NAME OF TEST PROJECT&gt;
+</code></pre>
+</section>
+<section id="tabpanel_2_tunit" role="tabpanel" data-tab="tunit" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-dotnetcli">dotnet new TUnit -o &lt;NAME OF TEST PROJECT&gt;
+</code></pre>
+</section>
+</div>
+
+<p>The <code>-o</code> option in the <code>dotnet new</code> command above is used to specify the name of the test project.</p>
+<p><strong>2. Add bUnit to the test project</strong></p>
+<p>To add bUnit to the test project, change to the newly created test projects folder and use the following command:</p>
+<pre><code class="lang-dotnetcli">cd &lt;NAME OF PROJECT&gt;
+dotnet add package bunit --version 2.6.2
+</code></pre>
+<p><strong>3. Configure project settings</strong></p>
+<p>The test projects setting needs to be set to the following:</p>
+<ul>
+<li>the project's SDK needs to be set to <code>Microsoft.NET.Sdk.Razor</code> (this does not work with <strong>TUnit</strong> - a more detailed explanation can be found below)</li>
+<li>set the <code>&lt;TargetFramework&gt;</code> to <code>net8.0</code></li>
+</ul>
+<div class="NOTE">
+<h5>Note</h5>
+<p>bUnit works with <code>net8.0</code> and above as well.</p>
+</div>
+<p>To do so, change the first part of the test projects <code>.csproj</code> file to look like this.:</p>
+<pre><code class="lang-xml">&lt;Project Sdk=&quot;Microsoft.NET.Sdk.Razor&quot;&gt;
+
+  &lt;PropertyGroup&gt;
+    &lt;TargetFramework&gt;net8.0&lt;/TargetFramework&gt;
+  &lt;/PropertyGroup&gt;  ...
+
+&lt;/Project&gt;
+</code></pre>
+<p><strong>4. Add the test project to your solution</strong></p>
+<p>If using Visual Studio, add the test project to your solution (<code>.sln</code>), and add a reference between the test project and the project containing the components that are to be tested:</p>
+<pre><code class="lang-dotnetcli">dotnet sln &lt;NAME OF PROJECT&gt;.sln add &lt;NAME OF TEST PROJECT&gt;
+dotnet add &lt;NAME OF TEST PROJECT&gt;.csproj reference &lt;NAME OF COMPONENT PROJECT&gt;.csproj
+</code></pre>
+<p>The result should be a test project with a <code>.csproj</code> that looks like this (non bUnit packages may have different version numbers):</p>
+<div class="tabGroup" id="tabgroup_3">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_3_xunit" role="tab" aria-controls="tabpanel_3_xunit" data-tab="xunit" tabindex="0" aria-selected="true">xUnit</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_3_xunitv3" role="tab" aria-controls="tabpanel_3_xunitv3" data-tab="xunitv3" tabindex="-1">xUnit v3</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_3_nunit" role="tab" aria-controls="tabpanel_3_nunit" data-tab="nunit" tabindex="-1">NUnit</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_3_mstest" role="tab" aria-controls="tabpanel_3_mstest" data-tab="mstest" tabindex="-1">MSTest</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_3_tunit" role="tab" aria-controls="tabpanel_3_tunit" data-tab="tunit" tabindex="-1">TUnit</a>
+</li>
+</ul>
+<section id="tabpanel_3_xunit" role="tabpanel" data-tab="xunit">
+
+<pre><code class="lang-xml">&lt;Project Sdk=&quot;Microsoft.NET.Sdk.Razor&quot;&gt;
+
+  &lt;PropertyGroup&gt;
+    &lt;TargetFramework&gt;net8.0&lt;/TargetFramework&gt;
+    &lt;Nullable&gt;enable&lt;/Nullable&gt;
+    &lt;IsPackable&gt;false&lt;/IsPackable&gt;
+  &lt;/PropertyGroup&gt;
+
+  &lt;ItemGroup&gt;
+    &lt;PackageReference Include=&quot;bunit&quot; Version=&quot;2.5.3&quot; /&gt;
+    &lt;PackageReference Include=&quot;Microsoft.NET.Test.Sdk&quot; Version=&quot;17.12.0&quot; /&gt;
+		&lt;PackageReference Include=&quot;xunit&quot; Version=&quot;2.9.4&quot; /&gt;
+    &lt;PackageReference Include=&quot;xunit.runner.visualstudio&quot; Version=&quot;3.0.1&quot;&gt;
+      &lt;IncludeAssets&gt;runtime; build; native; contentfiles; analyzers; buildtransitive&lt;/IncludeAssets&gt;
+      &lt;PrivateAssets&gt;all&lt;/PrivateAssets&gt;
+    &lt;/PackageReference&gt;
+    &lt;PackageReference Include=&quot;coverlet.collector&quot; Version=&quot;6.0.4&quot; /&gt;
+  &lt;/ItemGroup&gt;
+
+  &lt;ItemGroup&gt;
+    &lt;ProjectReference Include=&quot;&lt;PATH TO COMPONENT LIB&gt;.csproj&quot; /&gt;
+  &lt;/ItemGroup&gt;
+
+&lt;/Project&gt;
+</code></pre>
+</section>
+<section id="tabpanel_3_xunitv3" role="tabpanel" data-tab="xunitv3" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-xml">&lt;Project Sdk=&quot;Microsoft.NET.Sdk.Razor&quot;&gt;
+
+  &lt;PropertyGroup&gt;
+    &lt;TargetFramework&gt;net8.0&lt;/TargetFramework&gt;
+    &lt;Nullable&gt;enable&lt;/Nullable&gt;
+    &lt;IsPackable&gt;false&lt;/IsPackable&gt;
+    &lt;OutputType&gt;Exe&lt;/OutputType&gt;
+  &lt;/PropertyGroup&gt;
+
+  &lt;ItemGroup&gt;
+    &lt;PackageReference Include=&quot;bunit&quot; Version=&quot;2.5.3&quot; /&gt;
+    &lt;PackageReference Include=&quot;Microsoft.NET.Test.Sdk&quot; Version=&quot;17.12.0&quot; /&gt;
+		&lt;PackageReference Include=&quot;xunit.v3&quot; Version=&quot;1.0.1&quot; /&gt;
+    &lt;PackageReference Include=&quot;xunit.runner.visualstudio&quot; Version=&quot;3.0.1&quot;&gt;
+      &lt;IncludeAssets&gt;runtime; build; native; contentfiles; analyzers; buildtransitive&lt;/IncludeAssets&gt;
+      &lt;PrivateAssets&gt;all&lt;/PrivateAssets&gt;
+    &lt;/PackageReference&gt;
+    &lt;PackageReference Include=&quot;coverlet.collector&quot; Version=&quot;6.0.4&quot; /&gt;
+  &lt;/ItemGroup&gt;
+
+  &lt;ItemGroup&gt;
+    &lt;ProjectReference Include=&quot;&lt;PATH TO COMPONENT LIB&gt;.csproj&quot; /&gt;
+  &lt;/ItemGroup&gt;
+
+&lt;/Project&gt;
+</code></pre>
+</section>
+<section id="tabpanel_3_nunit" role="tabpanel" data-tab="nunit" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-xml">&lt;Project Sdk=&quot;Microsoft.NET.Sdk.Razor&quot;&gt;
+
+  &lt;PropertyGroup&gt;
+    &lt;TargetFramework&gt;net8.0&lt;/TargetFramework&gt;
+    &lt;Nullable&gt;enable&lt;/Nullable&gt;
+    &lt;IsPackable&gt;false&lt;/IsPackable&gt;
+  &lt;/PropertyGroup&gt;
+
+  &lt;ItemGroup&gt;
+    &lt;PackageReference Include=&quot;bunit&quot; Version=&quot;2.5.3&quot; /&gt;
+    &lt;PackageReference Include=&quot;Microsoft.NET.Test.Sdk&quot; Version=&quot;17.12.0&quot; /&gt;
+    &lt;PackageReference Include=&quot;NUnit&quot; Version=&quot;4.3.2&quot; /&gt;
+    &lt;PackageReference Include=&quot;NUnit3TestAdapter&quot; Version=&quot;4.6.0&quot; /&gt;
+    &lt;PackageReference Include=&quot;coverlet.collector&quot; Version=&quot;6.0.4&quot; /&gt;
+  &lt;/ItemGroup&gt;
+
+  &lt;ItemGroup&gt;
+    &lt;ProjectReference Include=&quot;&lt;PATH TO COMPONENT LIB&gt;.csproj&quot; /&gt;
+  &lt;/ItemGroup&gt;
+
+&lt;/Project&gt;
+</code></pre>
+</section>
+<section id="tabpanel_3_mstest" role="tabpanel" data-tab="mstest" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-xml">&lt;Project Sdk=&quot;Microsoft.NET.Sdk.Razor&quot;&gt;
+
+  &lt;PropertyGroup&gt;
+    &lt;TargetFramework&gt;net8.0&lt;/TargetFramework&gt;
+    &lt;Nullable&gt;enable&lt;/Nullable&gt;
+    &lt;IsPackable&gt;false&lt;/IsPackable&gt;
+  &lt;/PropertyGroup&gt;
+
+  &lt;ItemGroup&gt;
+    &lt;PackageReference Include=&quot;bunit&quot; Version=&quot;2.5.3&quot; /&gt;
+    &lt;PackageReference Include=&quot;Microsoft.NET.Test.Sdk&quot; Version=&quot;17.12.0&quot; /&gt;
+    &lt;PackageReference Include=&quot;MSTest.TestAdapter&quot; Version=&quot;3.7.1&quot; /&gt;
+    &lt;PackageReference Include=&quot;MSTest.TestFramework&quot; Version=&quot;3.7.1&quot; /&gt;
+    &lt;PackageReference Include=&quot;coverlet.collector&quot; Version=&quot;6.0.4&quot; /&gt;
+  &lt;/ItemGroup&gt;
+
+  &lt;ItemGroup&gt;
+    &lt;ProjectReference Include=&quot;&lt;PATH TO COMPONENT LIB&gt;.csproj&quot; /&gt;
+  &lt;/ItemGroup&gt;
+
+&lt;/Project&gt;
+</code></pre>
+</section>
+<section id="tabpanel_3_tunit" role="tabpanel" data-tab="tunit" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-xml">&lt;Project Sdk=&quot;Microsoft.NET.Sdk&quot;&gt;
+
+  &lt;PropertyGroup&gt;
+    &lt;TargetFramework&gt;net8.0&lt;/TargetFramework&gt;
+    &lt;Nullable&gt;enable&lt;/Nullable&gt;
+    &lt;IsPackable&gt;false&lt;/IsPackable&gt;
+    &lt;IsTestingPlatformApplication&gt;false&lt;/IsTestingPlatformApplication&gt;
+  &lt;/PropertyGroup&gt;
+
+  &lt;ItemGroup&gt;
+    &lt;PackageReference Include=&quot;bunit&quot; Version=&quot;2.5.3&quot; /&gt;
+    &lt;PackageReference Include=&quot;TUnit&quot; Version=&quot;0.6.154&quot; /&gt;
+    &lt;PackageReference Include=&quot;coverlet.collector&quot; Version=&quot;6.0.4&quot; /&gt;
+  &lt;/ItemGroup&gt;
+
+  &lt;ItemGroup&gt;
+    &lt;ProjectReference Include=&quot;&lt;PATH TO COMPONENT LIB&gt;.csproj&quot; /&gt;
+  &lt;/ItemGroup&gt;
+
+&lt;/Project&gt;
+</code></pre>
+<div class="WARNING">
+<h5>Warning</h5>
+<p><strong>TUnit</strong> and the <code>Microsoft.NET.Sdk.Razor</code> both utilize source code generators. Source generators can not see or interact with the output of another generator. Therefore <strong>TUnit</strong> does not work with <code>razor</code> files. Using <code>cs</code> based tests is working perfectly fine. For more information regarding the setup of <strong>TUnit</strong> head over to: <a href="https://github.com/thomhurst/TUnit">https://github.com/thomhurst/TUnit</a></p>
+</div>
+</section>
+</div>
+<h2 id="further-reading">Further reading</h2>
+<p>To start creating tests, continue reading the <a class="xref" href="writing-tests.html">Writing tests for Blazor components</a> page.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/getting-started/create-test-project.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://dotnetfoundation.org" title=".NET Foundation">
+            <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg" alt=".NET Foundation">
+          </a>
+          <p class="pt-1"><small>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</small></p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary bg-body-tertiary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <small>Documentation updated on 2026-02-27T14:38:27.0000000+00:00 in commit a452cce29f</small>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

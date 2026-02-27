@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Awaiting an asynchronous state change in a component under test | bUnit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Awaiting an asynchronous state change in a component under test | bUnit ">
+      <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" href="/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
+      <link rel="manifest" href="/site.webmanifest">
+
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/interaction/awaiting-async-state.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../..//images/bunit-logo.png" alt="bUnit">
+            bUnit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="awaiting-async-state">
+<h1 id="awaiting-an-asynchronous-state-change">Awaiting an asynchronous state change</h1>
+
+<p>A test can fail if a component performs asynchronous renders. This may be due to a reason such as waiting for an asynchronous operation to complete before continuing its render life-cycle. For example, if a component is waiting for an async web service to return data to it in the <code>OnInitializedAsync()</code> life-cycle method before rendering it to the render tree.</p>
+<p>You need to handle this specifically in your tests because tests execute in the test framework's synchronization context and the test renderer executes renders in its own synchronization context. If you do not, you will likely experience tests that sometimes pass and sometimes fail.</p>
+<p>bUnit comes with several methods that help to deal with this issue: the <a class="xref" href="../../api/Bunit.RenderedComponentWaitForHelperExtensions.html#Bunit_RenderedComponentWaitForHelperExtensions_WaitForState__1_Bunit_IRenderedComponent___0__System_Func_System_Boolean__System_Nullable_System_TimeSpan__"><code>WaitForState()</code></a> method, the <a class="xref" href="../../api/Bunit.RenderedComponentWaitForHelperExtensions.html#Bunit_RenderedComponentWaitForHelperExtensions_WaitForAssertion__1_Bunit_IRenderedComponent___0__System_Action_System_Nullable_System_TimeSpan__"><code>WaitForAssertion()</code></a> method covered on the <a class="xref" href="../verification/async-assertion.html">Assertion of asynchronous changes</a> page, and the component-specific waiting methods <a class="xref" href="../../api/Bunit.RenderedComponentWaitForHelperExtensions.html#Bunit_RenderedComponentWaitForHelperExtensions_WaitForComponent__1_Bunit_IRenderedComponent_Microsoft_AspNetCore_Components_IComponent__System_Nullable_System_TimeSpan__"><code>WaitForComponent()</code></a> and <a class="xref" href="../../api/Bunit.RenderedComponentWaitForHelperExtensions.html#Bunit_RenderedComponentWaitForHelperExtensions_WaitForComponents__1_Bunit_IRenderedComponent_Microsoft_AspNetCore_Components_IComponent__System_Nullable_System_TimeSpan__"><code>WaitForComponents()</code></a> that are covered later on this page.</p>
+<p>Let's start by taking a look at the <code>WaitForState</code> method in more detail.</p>
+<h2 id="waiting-for-state-using-waitforstate">Waiting for state using <code>WaitForState</code></h2>
+<p>The <a class="xref" href="../../api/Bunit.RenderedComponentWaitForHelperExtensions.html#Bunit_RenderedComponentWaitForHelperExtensions_WaitForState__1_Bunit_IRenderedComponent___0__System_Func_System_Boolean__System_Nullable_System_TimeSpan__"><code>WaitForState(Func&lt;Boolean&gt;, TimeSpan?)</code></a> method can be used to block and wait in a test method, until the provided predicate returns true or the timeout is reached. (The default timeout is one second.)</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The <code>WaitForState()</code> method will try the predicate passed to it when the <code>WaitForState()</code> method is called, and every time the component under test renders.</p>
+</div>
+<p>Let us look at an example. Consider the following <code>&lt;AsyncData&gt;</code> component which awaits an async <code>TextService</code> in its <code>OnInitializedAsync()</code> life-cycle method. When the service returns the data, the component will automatically re-render to update its rendered markup:</p>
+<pre><code class="lang-cshtml" name="AsyncData.razor">&lt;p&gt;@text&lt;/p&gt;
+
+@code
+{
+  string text = string.Empty;
+  [Parameter] public Task&lt;string&gt; TextService { get; set; }
+
+  protected override async Task OnInitializedAsync()
+  {
+    text = await TextService;
+  }
+}
+</code></pre>
+<p>To test the <code>&lt;AsyncData&gt;</code> component, do the following:</p>
+<pre><code class="lang-csharp" name="AsyncDataTest.cs" highlight-lines="1,7,10,13">var textService = new TaskCompletionSource&lt;string&gt;();
+var cut = Render&lt;AsyncData&gt;(parameters =&gt; parameters
+  .Add(p =&gt; p.TextService, textService.Task)
+);
+
+// Act - set the awaited result from the text service
+textService.SetResult(&quot;Hello World&quot;);
+
+// Wait for state before continuing test
+cut.WaitForState(() =&gt; cut.Find(&quot;p&quot;).TextContent == &quot;Hello World&quot;);
+
+// Assert - verify result has been set
+cut.MarkupMatches(&quot;&lt;p&gt;Hello World&lt;/p&gt;&quot;);
+</code></pre>
+<p>This is what happens in the test:</p>
+<ol>
+<li>The test uses a <code>TaskCompletionSource&lt;string&gt;</code> to simulate an async web service.</li>
+<li>In the second highlighted line, the result is provided to the component through the <code>textService</code>. This causes the component to re-render.</li>
+<li>In the third highlighted line, the <code>WaitForState()</code> method is used to block the test until the predicate provided to it returns true.</li>
+<li>Finally, the tests assertion step can execute, knowing that the desired state has been reached.</li>
+</ol>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>The wait predicate and an assertion should not verify the same thing. Instead, use the <code>WaitForAssertion(...)</code> method covered on the <a class="xref" href="../verification/async-assertion.html">Assertion of asynchronous changes</a> page instead.</p>
+</div>
+<h3 id="controlling-wait-timeout">Controlling wait timeout</h3>
+<p>The timeout, which defaults to one second, can be controlled by passing a <code>TimeSpan</code> as the second argument to the <code>WaitForState()</code> method, e.g.:</p>
+<pre><code class="lang-csharp">cut.WaitForState(() =&gt; cut.Find(&quot;p&quot;).TextContent == &quot;Long time&quot;, TimeSpan.FromSeconds(2));
+</code></pre>
+<p>If the timeout is reached, a <a class="xref" href="../../api/Bunit.Extensions.WaitForHelpers.WaitForFailedException.html">WaitForFailedException</a> exception is thrown with the following error message:</p>
+<blockquote>
+<p>The state predicate did not pass before the timeout period passed.</p>
+</blockquote>
+<h2 id="waiting-for-components-using-waitforcomponent-and-waitforcomponents">Waiting for components using <code>WaitForComponent</code> and <code>WaitForComponents</code></h2>
+<p>bUnit provides specialized methods for waiting for child components to appear in the render tree. These methods are useful when testing scenarios where components are rendered asynchronously based on some state change or data loading.</p>
+<h3 id="waiting-for-a-single-component">Waiting for a single component</h3>
+<p>The <a class="xref" href="../../api/Bunit.RenderedComponentWaitForHelperExtensions.html#Bunit_RenderedComponentWaitForHelperExtensions_WaitForComponent__1_Bunit_IRenderedComponent_Microsoft_AspNetCore_Components_IComponent__System_Nullable_System_TimeSpan__"><code>WaitForComponent&lt;TComponent&gt;(TimeSpan?)</code></a> method waits until the specified component type is rendered in the DOM and returns the first instance found.</p>
+<p>Consider the following <code>&lt;AsyncComponentLoader&gt;</code> component that loads child components asynchronously:</p>
+<pre><code class="lang-cshtml" name="AsyncComponentLoader.razor">@if (isLoading)
+{
+    &lt;p&gt;Loading...&lt;/p&gt;
+}
+else
+{
+    @foreach (var item in Items)
+    {
+        &lt;ListItem Value=&quot;@item&quot; /&gt;
+    }
+}
+
+@code {
+    [Parameter] public List&lt;string&gt; Items { get; set; } = new();
+
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Simulate async loading
+        await Task.Delay(100);
+        isLoading = false;
+    }
+}
+</code></pre>
+<p>To test that the <code>&lt;ListItem&gt;</code> components are rendered correctly, the <code>WaitForComponent&lt;TComponent&gt;()</code> method can be used:</p>
+<pre><code class="lang-csharp" name="WaitForComponentTest.cs">var cut = Render&lt;AsyncComponentLoader&gt;(parameters =&gt; parameters
+    .Add(p =&gt; p.Items, [&quot;Item 1&quot;]));
+
+var listItem = cut.WaitForComponent&lt;ListItem&gt;();
+
+Assert.Equal(&quot;Item 1&quot;, listItem.Find(&quot;.list-item&quot;).TextContent);
+</code></pre><h3 id="waiting-for-multiple-components">Waiting for multiple components</h3>
+<p>The <a class="xref" href="../../api/Bunit.RenderedComponentWaitForHelperExtensions.html#Bunit_RenderedComponentWaitForHelperExtensions_WaitForComponents__1_Bunit_IRenderedComponent_Microsoft_AspNetCore_Components_IComponent__System_Nullable_System_TimeSpan__"><code>WaitForComponents&lt;TComponent&gt;(TimeSpan?)</code></a> method waits until at least one instance of the specified component type is rendered in the DOM and returns all instances found:</p>
+<pre><code class="lang-csharp" name="WaitForComponentTest.cs">var items = new List&lt;string&gt; { &quot;Item 1&quot;, &quot;Item 2&quot;, &quot;Item 3&quot; };
+var cut = Render&lt;AsyncComponentLoader&gt;(parameters =&gt; parameters
+    .Add(p =&gt; p.Items, items));
+
+var listItems = cut.WaitForComponents&lt;ListItem&gt;();
+
+Assert.Equal(3, listItems.Count);
+Assert.Equal(&quot;Item 1&quot;, listItems.ElementAt(0).Find(&quot;.list-item&quot;).TextContent);
+Assert.Equal(&quot;Item 2&quot;, listItems.ElementAt(1).Find(&quot;.list-item&quot;).TextContent);
+</code></pre><h3 id="waiting-for-a-specific-number-of-components">Waiting for a specific number of components</h3>
+<p>The <a class="xref" href="../../api/Bunit.RenderedComponentWaitForHelperExtensions.html#Bunit_RenderedComponentWaitForHelperExtensions_WaitForComponents__1_Bunit_IRenderedComponent_Microsoft_AspNetCore_Components_IComponent__System_Int32_System_Nullable_System_TimeSpan__"><code>WaitForComponents&lt;TComponent&gt;(int, TimeSpan?)</code></a> overload waits until at least the specified number of component instances are rendered:</p>
+<pre><code class="lang-csharp" name="WaitForComponentTest.cs">var items = new List&lt;string&gt; { &quot;Item 1&quot;, &quot;Item 2&quot;, &quot;Item 3&quot;, &quot;Item 4&quot;, &quot;Item 5&quot; };
+var cut = Render&lt;AsyncComponentLoader&gt;(parameters =&gt; parameters
+    .Add(p =&gt; p.Items, items));
+
+var listItems = cut.WaitForComponents&lt;ListItem&gt;(5);
+
+Assert.Equal(5, listItems.Count);
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>This method waits for <strong>at least</strong> the specified number of components, not exactly that number. If more components are rendered than requested, the method will still succeed and return all found instances.</p>
+</div>
+<div class="NOTE">
+<h5>Note</h5>
+<p>These component wait methods use the same underlying mechanism as <code>WaitForState()</code> and will retry their checks every time the component under test renders.</p>
+</div>
+<p>If the timeout is reached, a <a class="xref" href="../../api/Bunit.Extensions.WaitForHelpers.WaitForFailedException.html">WaitForFailedException</a> exception is thrown with an appropriate error message indicating that the expected component(s) were not found within the timeout period.</p>
+<h2 id="debugging-code-that-uses-waitforstate-waitforassertion-waitforcomponent-waitforcomponents-or-waitforelement">Debugging code that uses <code>WaitForState</code>, <code>WaitForAssertion</code>, <code>WaitForComponent</code>, <code>WaitForComponents</code>, or <code>WaitForElement</code></h2>
+<p>When <code>bUnit</code> detects that a debugger is attached (<code>Debugger.IsAttached</code>), it will automatically disable the timeout functionality of the &quot;wait for&quot; methods.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/interaction/awaiting-async-state.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://dotnetfoundation.org" title=".NET Foundation">
+            <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg" alt=".NET Foundation">
+          </a>
+          <p class="pt-1"><small>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</small></p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary bg-body-tertiary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <small>Documentation updated on 2026-02-27T14:38:27.0000000+00:00 in commit a452cce29f</small>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

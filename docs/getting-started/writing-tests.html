@@ -1,0 +1,459 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Writing tests for Blazor components | bUnit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Writing tests for Blazor components | bUnit ">
+      <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" href="/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
+      <link rel="manifest" href="/site.webmanifest">
+
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/getting-started/writing-tests.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../..//images/bunit-logo.png" alt="bUnit">
+            bUnit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="writing-tests">
+<h1 id="writing-tests-for-blazor-components">Writing tests for Blazor components</h1>
+
+<p>Testing Blazor components is a little different from testing regular C# classes: Blazor components are <em>rendered</em>, they have the <em>Blazor component life cycle</em> during which we can <em>provide input</em> to them, and they can <em>produce output</em>.</p>
+<p>Use <strong>bUnit</strong> to render the component under test, pass in its parameters, inject required services, and access the rendered component instance and the markup it has produced.</p>
+<p>Rendering a component happens through bUnit's <a class="xref" href="../../api/Bunit.BunitContext.html">BunitContext</a>. The result of the rendering is an <code>RenderedComponent</code>, referred to as a &quot;rendered component&quot;, that provides access to the component instance and the markup produced by the component.</p>
+<h2 id="write-tests-in-cs-or-razor-files">Write tests in <code>.cs</code> or <code>.razor</code> files</h2>
+<p>bUnit works with MSTest, NUnit, and xUnit, and it allows you to write the unit tests in either <code>.cs</code> or <code>.razor</code> files.</p>
+<p>The latter, writing tests in <code>.razor</code> files, provides an easier way to declare component markup and HTML markup in the tests, so it will most likely be the go-to for many people in the future.</p>
+<p><em>However</em>, the current Razor editor in Visual Studio 2022 does not offer all the code editing features available in the C# editor, so that is something to consider if you choose to write tests in <code>.razor</code> files.</p>
+<p>The following sections show how to get started writing tests in either <code>.cs</code> or <code>.razor</code> files.</p>
+<h2 id="creating-basic-tests-in-razor-files">Creating basic tests in <code>.razor</code> files</h2>
+<p>Before writing tests in <code>.razor</code> files, a few things needs to be in place:</p>
+<ol>
+<li><p>Make sure the test project has the SDK type set to <code>Microsoft.NET.Sdk.Razor</code>. Otherwise the Blazor compiler will not translate your <code>.razor</code> files into runnable code.</p>
+</li>
+<li><p>Add an <code>_Imports.razor</code> file to the test project. It serves the same purpose as <code>_Imports.razor</code> files in regular Blazor projects. These using statements are useful to add right away:</p>
+<pre><code class="lang-cshtml">@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.JSInterop
+@using Microsoft.Extensions.DependencyInjection
+@using AngleSharp.Dom
+@using Bunit
+@using Bunit.TestDoubles
+</code></pre>
+</li>
+</ol>
+<p>Also add an using statement for your general purpose testing framework, e.g. <code>@using Xunit</code> for xUnit.</p>
+<p>With that in place, lets look at a simple example that tests the following <code>&lt;HelloWorld&gt;</code> component:</p>
+<pre><code class="lang-cshtml" name="HelloWorld.razor">&lt;h1&gt;Hello world from Blazor&lt;/h1&gt;
+</code></pre><div class="tabGroup" id="tabgroup_1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_1_xunit" role="tab" aria-controls="tabpanel_1_xunit" data-tab="xunit" tabindex="0" aria-selected="true">xUnit</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_nunit" role="tab" aria-controls="tabpanel_1_nunit" data-tab="nunit" tabindex="-1">NUnit</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_mstest" role="tab" aria-controls="tabpanel_1_mstest" data-tab="mstest" tabindex="-1">MSTest</a>
+</li>
+</ul>
+<section id="tabpanel_1_xunit" role="tabpanel" data-tab="xunit">
+<pre><code class="lang-cshtml" name="HelloWorldRazorTest.razor">@inherits BunitContext
+@code
+{
+  [Fact]
+  public void HelloWorldComponentRendersCorrectly()
+  {
+    // Act
+    var cut = Render(@&lt;HelloWorld/&gt;);
+
+    // Assert
+    cut.MarkupMatches(@&lt;h1&gt;Hello world from Blazor&lt;/h1&gt;);
+  }
+}
+</code></pre>
+<p>The test above does the following:</p>
+<ol>
+<li>Inherits from the bUnit <a class="xref" href="../../api/Bunit.BunitContext.html">BunitContext</a>. This base class offers the majority of functions.</li>
+<li>Renders the <code>&lt;HelloWorld&gt;</code> component using <a class="xref" href="../../api/Bunit.BunitContext.html">BunitContext</a>, which is done through the <code>Render(RenderFragment)</code> method. We cover passing parameters to components on the <a class="xref" href="../providing-input/passing-parameters-to-components.html">Passing parameters to components</a> page.</li>
+<li>Verifies the rendered markup from the <code>&lt;HelloWorld&gt;</code> component using the <code>MarkupMatches</code> method. The <code>MarkupMatches</code> method performs a semantic comparison of the expected markup with the rendered markup.</li>
+</ol>
+</section>
+<section id="tabpanel_1_nunit" role="tabpanel" data-tab="nunit" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-cshtml" name="HelloWorldRazorTest.razor">@inherits BunitContext
+@code
+{
+  [Test]
+  public void HelloWorldComponentRendersCorrectly()
+  {
+    // Act
+    var cut = Render(@&lt;HelloWorld /&gt;);
+
+    // Assert
+    cut.MarkupMatches(@&lt;h1&gt;Hello world from Blazor&lt;/h1&gt;);
+  }
+}
+</code></pre>
+<p>Use the <a href="https://docs.nunit.org/articles/nunit/writing-tests/attributes/fixturelifecycle.html">LifeCycle.InstancePerTestCase</a> attribute (introduced in NUnit 3.13) so that a new instance of the test class is created for each test removing the need for the wrapper.</p>
+<pre><code class="lang-csharp" name="HelloWorldInstancePerTestCase.cs">[FixtureLifeCycle(LifeCycle.InstancePerTestCase)]
+public class HelloWorldInstancePerTestCase : Bunit.BunitContext
+{
+  [Test]
+  public void HelloWorldComponentRendersCorrectly()
+  {
+    // Act
+    var cut = Render&lt;HelloWorld&gt;();
+
+    // Assert
+    cut.MarkupMatches(&quot;&lt;h1&gt;Hello world from Blazor&lt;/h1&gt;&quot;);
+  }
+}
+</code></pre></section>
+<section id="tabpanel_1_mstest" role="tabpanel" data-tab="mstest" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-cshtml" name="HelloWorldRazorTest.razor">@attribute [TestClass]
+@inherits BunitContext
+@code
+{
+  [TestMethod]
+  public void HelloWorldComponentRendersCorrectly()
+  {
+    // Act
+    var cut = Render(@&lt;HelloWorld/&gt;);
+
+    // Assert
+    cut.MarkupMatches(@&lt;h1&gt;Hello world from Blazor&lt;/h1&gt;);
+  }
+}
+</code></pre></section>
+</div>
+
+<div class="TIP">
+<h5>Tip</h5>
+<p>Learn more about how the semantic HTML/markup comparison in bUnit works, and how to customize it, on the <a class="xref" href="../verification/semantic-html-comparison.html">Customizing the semantic HTML comparison</a> page.</p>
+</div>
+<div class="TIP">
+<h5>Tip</h5>
+<p>In bUnit tests, we like to use the abbreviation <code>CUT</code>, short for &quot;component under test&quot;, to indicate the component that is being tested. This is inspired by the common testing abbreviation <code>SUT</code>, short for &quot;system under test&quot;.</p>
+</div>
+<h3 id="secret-sauce-of-razor-files-tests">Secret sauce of '.razor' files tests</h3>
+<p>The trick employed in these tests is the &quot;<a href="https://docs.microsoft.com/en-us/aspnet/core/blazor/components/?view=aspnetcore-5.0#razor-templates">inline Razor templates syntax</a>&quot;, i.e. where a render fragment is simply created using the <code>@&lt;{HTML tag}&gt;...&lt;/{HTML tag}&gt;</code> notation. In that notation there is no need to do any escaping of e.g. the quotation mark (<code>&quot;</code>), that is usually associated with working with markup in C# code.</p>
+<p>One small caveat to be aware of is that the inline Razor templates syntax only supports one outer element, e.g. this is OK:</p>
+<pre><code class="lang-cshtml">@&lt;Foo&gt;
+   &lt;Bar&gt;
+     &lt;Baz&gt;...&lt;/Baz&gt;
+   &lt;/Bar&gt;
+ &lt;/Foo&gt;
+</code></pre>
+<p>However, this will <strong>not</strong> work:</p>
+<pre><code class="lang-cshtml">@&lt;Foo&gt;&lt;/Foo&gt;
+ &lt;Bar&gt;&lt;/Bar&gt;
+</code></pre>
+<p>There is a simple workaround though: wrap all elements in the special Blazor element <code>&lt;text&gt;</code>. The <code>&lt;text&gt;</code> element will not be part of the rendered output, but it provides a simple way to group multiple root elements into a single inline Razor template. E.g.:</p>
+<pre><code class="lang-cshtml">@&lt;text&gt;
+   &lt;Foo&gt;&lt;/Foo&gt;
+   &lt;Bar&gt;&lt;/Bar&gt;
+ &lt;/text&gt;
+</code></pre>
+<h2 id="creating-basic-tests-in-cs-files">Creating basic tests in <code>.cs</code> files</h2>
+<p>This is a simple example of writing tests in <code>.cs</code> files which tests the following <code>&lt;HelloWorld&gt;</code> component:</p>
+<pre><code class="lang-cshtml" name="HelloWorld.razor">&lt;h1&gt;Hello world from Blazor&lt;/h1&gt;
+</code></pre><div class="tabGroup" id="tabgroup_2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_2_xunit" role="tab" aria-controls="tabpanel_2_xunit" data-tab="xunit" tabindex="0" aria-selected="true">xUnit</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_2_nunit" role="tab" aria-controls="tabpanel_2_nunit" data-tab="nunit" tabindex="-1">NUnit</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_2_mstest" role="tab" aria-controls="tabpanel_2_mstest" data-tab="mstest" tabindex="-1">MSTest</a>
+</li>
+</ul>
+<section id="tabpanel_2_xunit" role="tabpanel" data-tab="xunit">
+<pre><code class="lang-csharp" name="HelloWorldTest.cs">using Xunit;
+using Bunit;
+
+public class HelloWorldTest : BunitContext
+{
+  [Fact]
+  public void HelloWorldComponentRendersCorrectly()
+  {
+    // Act
+    var cut = Render&lt;HelloWorld&gt;();
+
+    // Assert
+    cut.MarkupMatches(&quot;&lt;h1&gt;Hello world from Blazor&lt;/h1&gt;&quot;);
+  }
+}
+</code></pre>
+<p>The test above does the following:</p>
+<ol>
+<li>Inherits from the bUnit's <code>BunitContext</code>. This base class offers the majority of functions.</li>
+<li>Renders the <code>&lt;HelloWorld&gt;</code> component using <a class="xref" href="../../api/Bunit.BunitContext.html">BunitContext</a>, which is done through the <a class="xref" href="../../api/Bunit.BunitContext.html#Bunit_BunitContext_Render__1_System_Action_Bunit_ComponentParameterCollectionBuilder___0___">Render&lt;TComponent&gt;(Action&lt;ComponentParameterCollectionBuilder&lt;TComponent&gt;&gt;?)</a> method. We cover passing parameters to components on the <a class="xref" href="../providing-input/passing-parameters-to-components.html">Passing parameters to components</a> page.</li>
+<li>Verifies the rendered markup from the <code>&lt;HelloWorld&gt;</code> component using the <code>MarkupMatches</code> method. The <code>MarkupMatches</code> method performs a semantic comparison of the expected markup with the rendered markup.</li>
+</ol>
+</section>
+<section id="tabpanel_2_nunit" role="tabpanel" data-tab="nunit" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-csharp" name="HelloWorldTest.cs">using Bunit;
+using NUnit.Framework;
+
+public class HelloWorldTest : BunitContext
+{
+    [Test]
+    public void HelloWorldComponentRendersCorrectly()
+    {
+        // Act
+        var cut = Render&lt;HelloWorld&gt;();
+
+        // Assert
+        cut.MarkupMatches(&quot;&lt;h1&gt;Hello world from Blazor&lt;/h1&gt;&quot;);
+    }
+}
+</code></pre>
+<p>The test above does the following:</p>
+<ol>
+<li>Inherits from the <code>BunitContext</code> listed above. This base class offers the majority of functions.</li>
+<li>Renders the <code>&lt;HelloWorld&gt;</code> component using <a class="xref" href="../../api/Bunit.BunitContext.html">BunitContext</a>, which is done through the <a class="xref" href="../../api/Bunit.BunitContext.html#Bunit_BunitContext_Render__1_System_Action_Bunit_ComponentParameterCollectionBuilder___0___">Render&lt;TComponent&gt;(Action&lt;ComponentParameterCollectionBuilder&lt;TComponent&gt;&gt;?)</a> method. We cover passing parameters to components on the <a class="xref" href="../providing-input/passing-parameters-to-components.html">Passing parameters to components</a> page.</li>
+<li>Verifies the rendered markup from the <code>&lt;HelloWorld&gt;</code> component using the <code>MarkupMatches</code> method. The <code>MarkupMatches</code> method performs a semantic comparison of the expected markup with the rendered markup.</li>
+</ol>
+<p>Alternatively, use the <a href="https://docs.nunit.org/articles/nunit/writing-tests/attributes/fixturelifecycle.html">LifeCycle.InstancePerTestCase</a> attribute (introduced in NUnit 3.13) so that a new instance of the test class is created for each test removing the need for the wrapper.</p>
+<pre><code class="lang-csharp" name="HelloWorldRazorInstancePerTestCase.razor">using NUnit.Framework;
+
+namespace Bunit.Docs.Samples;
+
+[FixtureLifeCycle(LifeCycle.InstancePerTestCase)]
+public class HelloWorldInstancePerTestCase : Bunit.BunitContext
+{
+  [Test]
+  public void HelloWorldComponentRendersCorrectly()
+  {
+    // Act
+    var cut = Render&lt;HelloWorld&gt;();
+
+    // Assert
+    cut.MarkupMatches(&quot;&lt;h1&gt;Hello world from Blazor&lt;/h1&gt;&quot;);
+  }
+}
+</code></pre></section>
+<section id="tabpanel_2_mstest" role="tabpanel" data-tab="mstest" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-csharp" name="HelloWorldTest.cs">using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Bunit;
+
+[TestClass]
+public class HelloWorldTest : BunitContext
+{
+  [TestMethod]
+  public void HelloWorldComponentRendersCorrectly()
+  {
+    // Act
+    var cut = Render&lt;HelloWorld&gt;();
+
+    // Assert
+    cut.MarkupMatches(&quot;&lt;h1&gt;Hello world from Blazor&lt;/h1&gt;&quot;);
+  }
+}
+</code></pre>
+<p>The test above does the following:</p>
+<ol>
+<li>Inherits from the <code>BunitContext</code> listed above. This base class offers the majority of functions.</li>
+<li>Renders the <code>&lt;HelloWorld&gt;</code> component using <a class="xref" href="../../api/Bunit.BunitContext.html">BunitContext</a>, which is done through the <a class="xref" href="../../api/Bunit.BunitContext.html#Bunit_BunitContext_Render__1_System_Action_Bunit_ComponentParameterCollectionBuilder___0___">Render&lt;TComponent&gt;(Action&lt;ComponentParameterCollectionBuilder&lt;TComponent&gt;&gt;?)</a> method. We cover passing parameters to components on the <a class="xref" href="../providing-input/passing-parameters-to-components.html">Passing parameters to components</a> page.</li>
+<li>Verifies the rendered markup from the <code>&lt;HelloWorld&gt;</code> component using the <code>MarkupMatches</code> method. The <code>MarkupMatches</code> method performs a semantic comparison of the expected markup with the rendered markup.</li>
+</ol>
+</section>
+</div>
+
+<div class="TIP">
+<h5>Tip</h5>
+<p>Learn more about how the semantic HTML/markup comparison in bUnit works, and how to customize it, on the <a class="xref" href="../verification/semantic-html-comparison.html">Customizing the semantic HTML comparison</a> page.</p>
+</div>
+<div class="TIP">
+<h5>Tip</h5>
+<p>In bUnit tests, we like to use the abbreviation <code>CUT</code>, short for &quot;component under test&quot;, to indicate the component that is being tested. This is inspired by the common testing abbreviation <code>SUT</code>, short for &quot;system under test&quot;.</p>
+</div>
+<h3 id="instantiate-bunitcontext-in-each-test">Instantiate BunitContext in each test</h3>
+<p>If you prefer to instantiate <a class="xref" href="../../api/Bunit.BunitContext.html">BunitContext</a> in each test, instead of inheriting from it, you can do so. This can be useful if you have your own base class that you want to inherit from, or if you want to use a different test framework than the ones listed here.</p>
+<p>Just be aware that all examples in the rest of the documentation assumes that you are inheriting from <a class="xref" href="../../api/Bunit.BunitContext.html">BunitContext</a>, so adjust accordingly.</p>
+<div class="tabGroup" id="tabgroup_3">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_3_xunit" role="tab" aria-controls="tabpanel_3_xunit" data-tab="xunit" tabindex="0" aria-selected="true">xUnit</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_3_nunit" role="tab" aria-controls="tabpanel_3_nunit" data-tab="nunit" tabindex="-1">NUnit</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_3_mstest" role="tab" aria-controls="tabpanel_3_mstest" data-tab="mstest" tabindex="-1">MSTest</a>
+</li>
+</ul>
+<section id="tabpanel_3_xunit" role="tabpanel" data-tab="xunit">
+<pre><code class="lang-csharp" name="HelloWorldExplicitContextTest.cs">public class HelloWorldExplicitContext
+{
+  [Fact]
+  public void HelloWorldComponentRendersCorrectly()
+  {
+    // Arrange
+    using var ctx = new BunitContext();
+
+    // Act
+    var cut = ctx.Render&lt;HelloWorld&gt;();
+
+    // Assert
+    cut.MarkupMatches(&quot;&lt;h1&gt;Hello world from Blazor&lt;/h1&gt;&quot;);
+  }
+}
+</code></pre></section>
+<section id="tabpanel_3_nunit" role="tabpanel" data-tab="nunit" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-csharp" name="HelloWorldExplicitContextTest.cs">public class HelloWorldExplicitContext
+{
+  [Test]
+  public void HelloWorldComponentRendersCorrectly()
+  {
+    // Arrange
+    using var ctx = new Bunit.BunitContext();
+
+    // Act
+    var cut = ctx.Render&lt;HelloWorld&gt;();
+
+    // Assert
+    cut.MarkupMatches(&quot;&lt;h1&gt;Hello world from Blazor&lt;/h1&gt;&quot;);
+  }
+}
+</code></pre></section>
+<section id="tabpanel_3_mstest" role="tabpanel" data-tab="mstest" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-csharp" name="HelloWorldImplicitContextTest.cs">[TestClass]
+public class HelloWorldExplicitContext
+{
+  [TestMethod]
+  public void HelloWorldComponentRendersCorrectly()
+  {
+    // Arrange
+    using var ctx = new Bunit.BunitContext();
+
+    // Act
+    var cut = ctx.Render&lt;HelloWorld&gt;();
+
+    // Assert
+    cut.MarkupMatches(&quot;&lt;h1&gt;Hello world from Blazor&lt;/h1&gt;&quot;);
+  }
+}
+</code></pre><h2 id="further-reading">Further reading</h2>
+<p>With the basics out of the way, next we will look at how to pass parameters and inject services into our component under test. After that, we will cover the ways in which we can verify the outcome of a rendering in more detail</p>
+<ul>
+<li><a class="xref" href="../providing-input/passing-parameters-to-components.html">Passing parameters to components</a></li>
+<li><a class="xref" href="../providing-input/inject-services-into-components.html">Injecting services into components under test</a></li>
+<li><a class="xref" href="../verification/verify-markup.html">Verifying markup from a component</a></li>
+<li><a class="xref" href="../verification/verify-component-state.html">Verifying the state of a component under test</a></li>
+<li><a class="xref" href="../interaction/trigger-event-handlers.html">Triggering event handlers in components</a></li>
+</ul>
+</section>
+</div>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/getting-started/writing-tests.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://dotnetfoundation.org" title=".NET Foundation">
+            <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg" alt=".NET Foundation">
+          </a>
+          <p class="pt-1"><small>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</small></p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary bg-body-tertiary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <small>Documentation updated on 2026-02-27T14:38:27.0000000+00:00 in commit a452cce29f</small>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

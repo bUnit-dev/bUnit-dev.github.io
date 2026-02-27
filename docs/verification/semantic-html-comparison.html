@@ -1,0 +1,255 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Customizing the semantic HTML comparison | bUnit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Customizing the semantic HTML comparison | bUnit ">
+      <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" href="/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
+      <link rel="manifest" href="/site.webmanifest">
+
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/verification/semantic-html-comparison.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../..//images/bunit-logo.png" alt="bUnit">
+            bUnit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="semantic-html-comparison">
+<h1 id="customizing-the-semantic-html-comparison">Customizing the semantic HTML comparison</h1>
+
+<p>This library includes comparison and assert helpers that use the <a href="https://github.com/AngleSharp/AngleSharp.Diffing/">AngleSharp Diffing</a> library to perform semantic HTML comparison.</p>
+<p>On this page we will go through how the comparison works, and what options you have to affect the comparison process.</p>
+<h2 id="why-semantic-comparison-is-needed-for-stable-tests">Why semantic comparison is needed for stable tests</h2>
+<p>Just performing string comparison of two strings containing HTML markup can break quite easily, <em>even</em> if the two markup strings are semantically equivalent. Some changes that can cause a regular string comparison to fail are as follows:</p>
+<ul>
+<li>Formatting of markup, e.g. with extra line breaks or indentions and changes to insignificant whitespace.</li>
+<li>Reordering of attributes. The order of attributes does not matter.</li>
+<li>Reordering of classes defined in the <code>class=&quot;...&quot;</code> attribute. The order of classes does not matter.</li>
+<li>Change of boolean attributes  to be implicit or explicit, e.g. from <code>required=&quot;required&quot;</code> to <code>required</code>.</li>
+<li>Changes to insignificant whitespace inside <code>&lt;style&gt;</code> tags.</li>
+<li>Changes to HTML comments and comments inside <code>&lt;style&gt;</code> tags.</li>
+</ul>
+<p>The <a href="https://github.com/AngleSharp/AngleSharp.Diffing/">AngleSharp Diffing</a> library handles all those cases, so your tests are more stable.</p>
+<h2 id="customizing-options">Customizing Options</h2>
+<p>The <a href="https://github.com/AngleSharp/AngleSharp.Diffing/">AngleSharp Diffing</a> library also allows us to customize the comparison process by adding special attributes to the <em>&quot;control&quot; markup</em>, i.e. the expected markup we want to use in verification.</p>
+<p>All the customization options below will match with the following markup:</p>
+<pre><code class="lang-html">&lt;header&gt;
+  &lt;h1 id=&quot;head-1&quot;&gt;
+    Hello    &lt;em&gt;world&lt;/em&gt;
+  &lt;/h1&gt;
+&lt;/header&gt;
+</code></pre>
+<p>Here are the customization options you have available to you:</p>
+<ul>
+<li><p><strong>Ignore comments (enabled by default):</strong> Comments in markup and inside <code>&lt;style&gt;</code> tags are automatically ignored and not part of the comparison process.</p>
+</li>
+<li><p><strong>Ignore element:</strong> Use the <code>diff:ignore</code> attribute to ignore an element, all its attributes and its child nodes. For example, to ignore the <code>h1</code> element, do the following:</p>
+<pre><code class="lang-html">&lt;header&gt;
+  &lt;h1 diff:ignore&gt;&lt;/h1&gt;
+&lt;/header&gt;
+</code></pre>
+</li>
+<li><p><strong>Ignore attribute:</strong> To ignore an attribute during comparison, add the <code>:ignore</code> modifier to the attribute (no value is needed). For example, to ignore the <code>id</code> attribute:</p>
+<pre><code class="lang-html">&lt;header&gt;
+  &lt;h1 id:ignore&gt;Hello &lt;em&gt;world&lt;/em&gt;&lt;/h1&gt;
+&lt;/header&gt;
+</code></pre>
+</li>
+<li><p><strong>Ignore children:</strong> Use the <code>diff:ignoreChildren</code> attribute (no value is needed) to ignore all child nodes/elements of an element. This does not include attributes. For example, to ignore all child nodes of the <code>h1</code> element, do the following:</p>
+<pre><code class="lang-html">&lt;header&gt;
+  &lt;h1 id=&quot;head-1&quot; diff:ignoreChildren&gt;&lt;/h1&gt;
+&lt;/header&gt;
+</code></pre>
+</li>
+<li><p><strong>Ignore all attributes:</strong> Use the <code>diff:ignoreAttributes</code> attribute (no value is needed) to ignore all attributes of an element. For example:</p>
+<pre><code class="lang-html">&lt;header&gt;
+  &lt;h1 diff:ignoreAttributes&gt;Hello &lt;em&gt;world&lt;/em&gt;&lt;/h1&gt;
+&lt;/header&gt;
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The <code>diff:ignoreChildren</code> and <code>diff:ignoreAttributes</code> attributes can be combined to ignore all child nodes/element <em>and</em> attributes of an element, but still verify that the element itself exists. For example:</p>
+</div>
+<pre><code class="lang-html">&lt;header&gt;
+  &lt;h1 diff:ignoreChildren diff:ignoreAttributes&gt;&lt;/h1&gt;
+&lt;/header&gt;
+
+</code></pre>
+</li>
+<li><p><strong>Configure whitespace handling:</strong> By default, all nodes and elements are compared using the <code>Normalize</code> whitespace handling option. The <code>Normalize</code> option will trim all text nodes and replace two or more whitespace characters with a single space character. The other options are <code>Preserve</code>, which will leave all whitespace unchanged, and <code>RemoveWhitespaceNodes</code>, which will only remove empty text nodes.</p>
+<p>To override the default option, use the <code>diff:whitespace</code> attribute, and pass one of the three options to it. For example:</p>
+<pre><code class="lang-html">&lt;header&gt;
+  &lt;h1 id=&quot;head-1&quot; diff:whitespace=&quot;preserve&quot;&gt;
+    Hello    &lt;em&gt;world&lt;/em&gt;
+  &lt;/h1&gt;
+&lt;/header&gt;
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The default for <code>&lt;pre&gt;</code> and <code>&lt;script&gt;</code> elements is the <code>Preserve</code> option. To change that, use the <code>diff:whitespace</code> attribute. For example:</p>
+</div>
+<pre><code class="lang-html">&lt;header&gt;
+  &lt;h1 id=&quot;head-1&quot; diff:whitespace=&quot;RemoveWhitespaceNodes&quot;&gt;Hello&lt;em&gt;world&lt;/em&gt;&lt;/pre&gt;
+&lt;/header&gt;
+</code></pre>
+</li>
+<li><p><strong>Perform case-insensitive comparison:</strong> By default, all text comparison is case sensitive, but if you want to perform a case-insensitive comparison of text inside elements or attributes, use the <code>diff:ignoreCase</code> attribute on elements and <code>:ignoreCase</code> modifier on attributes. For example, to perform a case insensitive comparison of the text in the following <code>h1</code> element , do the following:</p>
+<pre><code class="lang-html">&lt;header&gt;
+  &lt;h1 id=&quot;head-1&quot; diff:ignoreCase&gt;HeLLo &lt;em&gt;world&lt;/em&gt;&lt;/h1&gt;
+&lt;/header&gt;
+</code></pre>
+<p>To perform case insensitive comparison of the text inside the <code>id</code> attribute, do the following:</p>
+<pre><code class="lang-html">&lt;header&gt;
+  &lt;h1 id:ignoreCase=&quot;HeAD-1&quot;&gt;Hello &lt;em&gt;world&lt;/em&gt;&lt;/h1&gt;
+&lt;/header&gt;
+</code></pre>
+</li>
+<li><p><strong>Use RegEx during comparison:</strong> To use a regular expression when comparing the text inside an element or inside an attribute, use the <code>diff:regex</code> attribute on elements and the <code>:regex</code> modifier on attributes.</p>
+<p>For example, to use a regular expression during comparison of the text in the <code>em</code> element, add the <code>diff:regex</code> attribute to the element and place the regular expression in the body of the element:</p>
+<pre><code class="lang-html">&lt;header&gt;
+  &lt;h1 id=&quot;head-1&quot;&gt;Hello &lt;em diff:regex&gt;\w&lt;/em&gt;&lt;/h1&gt;
+&lt;/header&gt;  
+</code></pre>
+<p>To use a regular expression during comparison of the text inside the <code>id</code> attribute, add the <code>:regex</code> modifier to the attribute and add the regular expression in the attribute's value:</p>
+<pre><code class="lang-html">&lt;h1 id:regex=&quot;head-\d{1}&quot;&gt;...&lt;/h1&gt;
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The attribute modifiers <code>:ignoreCase</code> and <code>:regex</code> can be combined, for example, as: <code>attr:ignoreCase:regex=&quot;FOO-\d{4}&quot;</code></p>
+</div>
+</li>
+</ul>
+<h2 id="examples">Examples</h2>
+<p>Let’s look at a few examples where we use the semantic comparison options listed above to modify the comparison. In tests, we have the <code>MarkupMatches()</code> methods we can use to perform semantic comparison of the output from a rendered component. For example, we may have a component, <code>&lt;Heading&gt;</code>, that renders the following markup:</p>
+<pre><code class="lang-razor" name="Heading.razor">&lt;h3 id=&quot;heading-1337&quot; required&gt;
+  Heading text
+  &lt;small class=&quot;text-muted mark&quot;&gt;
+    Secondary text
+  &lt;/small&gt;
+&lt;/h3&gt;
+</code></pre>
+<p>In this case, we want to verify that the markup is rendered correctly, using something such as RegEx to verify the <code>id</code> attribute (it might be generated) and ignoring the <code>&lt;small&gt;</code> element.  In tests we can do this like so with the <code>MarkupMatches()</code> method:</p>
+<pre><code class="lang-csharp" name="SemanticHtmlTest.cs">  var cut = Render&lt;Heading&gt;();
+
+  // Assert
+  // Here we specify expected HTML from CUT.
+  var expectedHtml = @&quot;&lt;h3 id:regex=&quot;&quot;heading-\d{4}&quot;&quot; required&gt;
+                          Heading text
+                          &lt;small diff:ignore&gt;&lt;/small&gt;
+                         &lt;/h3&gt;&quot;;
+
+  // Here we use the HTML diffing library to assert that the rendered HTML
+  // from CUT is semantically the same as the expected HTML string above.
+  cut.MarkupMatches(expectedHtml);
+}
+</code></pre>
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/verification/semantic-html-comparison.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://dotnetfoundation.org" title=".NET Foundation">
+            <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg" alt=".NET Foundation">
+          </a>
+          <p class="pt-1"><small>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</small></p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary bg-body-tertiary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <small>Documentation updated on 2026-02-27T14:38:27.0000000+00:00 in commit a452cce29f</small>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

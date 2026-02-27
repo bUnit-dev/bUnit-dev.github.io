@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Adding persistent component state | bUnit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Adding persistent component state | bUnit ">
+      <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" href="/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
+      <link rel="manifest" href="/site.webmanifest">
+
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/test-doubles/persistentcomponentstate.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../..//images/bunit-logo.png" alt="bUnit">
+            bUnit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="bunit-persistentcomponentstate">
+<h1 id="adding-persistent-component-state">Adding persistent component state</h1>
+
+<p>bUnit comes with its own version of the <code>PersistentComponentState</code> type in Blazor that makes it possible to test components that use the type.</p>
+<h2 id="using-the-persistentcomponentstate">Using the <code>PersistentComponentState</code></h2>
+<p>To use the <code>PersistentComponentState</code> in bUnit, call the <code>AddBunitPersistentComponentState</code> extension method on <code>BunitContext</code>:</p>
+<pre><code class="lang-csharp">var state = AddBunitPersistentComponentState();
+</code></pre>
+<p>Calling <code>AddBunitPersistentComponentState</code> returns a <code>BunitPersistentComponentState</code> type, which has three methods; one to persist data, one to get persisted data, and one that triggers any &quot;OnPersisting&quot; callbacks added to the <code>PersistentComponentState</code>.</p>
+<p>To add data to the <code>PersistentComponentState</code> before running a test, i.e. to verify that a component uses the persisted state, use the <code>Persist</code> method:</p>
+<pre><code class="lang-csharp">var state = AddBunitPersistentComponentState();
+var key = &quot;STATE KEY&quot;;
+var data = ...; // data to persist
+
+state.Persist(key, data);
+
+// render component
+</code></pre>
+<p>To trigger a callback registered with the <code>PersistentComponentState.RegisterOnPersisting</code> method, use the <code>TriggerOnPersisting</code> method on <code>BunitPersistentComponentState</code>:</p>
+<pre><code class="lang-csharp">var state = AddBunitPersistentComponentState();
+
+// render component
+
+state.TriggerOnPersisting();
+</code></pre>
+<p>To check if data has been persisted, use the <code>TryTake</code> method:</p>
+<pre><code class="lang-csharp">var state = AddBunitPersistentComponentState();
+var key = &quot;STATE KEY&quot;;
+
+// render component, call TriggerOnPersisting
+
+bool foundState = state.TryTake&lt;string&gt;(key, out var data);
+</code></pre>
+<p>The following section has a complete example.</p>
+<h2 id="example---testing-the-fetchdata-component">Example - testing the <code>&lt;FetchData&gt;</code> component</h2>
+<p>In this example, lets test the following <code>&lt;FetchData&gt;</code> component that use <code>PersistentComponentState</code>:</p>
+<pre><code class="lang-cshtml">@page &quot;/fetchdata&quot;
+@inject PersistentComponentState State
+
+@foreach (var f in Forecasts)
+{
+  &lt;p&gt;@f.Temperature&lt;/p&gt;
+}
+
+@code {
+  private WeatherForecast[] Forecasts { get; set; }
+
+  protected override async Task OnInitializedAsync()
+  {
+    State.RegisterOnPersisting(PersistForecasts);
+    
+    if (!State.TryTakeFromJson&lt;WeatherForecast[]&gt;(&quot;weather-data&quot;, out var forecasts))
+    {
+        forecasts = await CreateForecastsAsync();
+    }
+    
+    Forecasts = forecasts;
+  }
+
+  private Task PersistForecasts()
+  {
+    State.PersistAsJson(&quot;weather-data&quot;, Forecasts);
+    return Task.CompletedTask;
+  }
+
+  // Emulates calling an API or database to get forecasts
+  private Task&lt;WeatherForecast[]&gt; CreateForecastsAsync() =&gt;
+    new WeatherForecast[] { ... };
+}
+</code></pre>
+<p>To test that the <code>&lt;FetchData&gt;</code> component uses persisted weather data instead of downloading (generating) it again with the <code>CreateForecastsAsync</code> method, use the <code>Persist</code> method on the <code>BunitPersistentComponentState</code> type:</p>
+<pre><code class="lang-csharp">// Arrange
+var state = AddBunitPersistentComponentState();
+
+// Persist a single weather forecast with a temperature of 42
+state.Persist(&quot;weather-data&quot;, new [] { new WeatherForecast { Temperature = 42 } });
+
+// Act
+var cut = Render&lt;FetchData&gt;();
+
+// Assert - verify that the persisted forecast was rendered out
+cut.MarkupMatches(&quot;&lt;p&gt;42&lt;/p&gt;&quot;);
+</code></pre>
+<p>To test that the <code>&lt;FetchData&gt;</code> component correctly persists weather data when its <code>OnPersisting</code> callback is triggered, do the following:</p>
+<pre><code class="lang-csharp">// Arrange
+var state = AddBunitPersistentComponentState();
+var cut = Render&lt;FetchData&gt;();
+
+// Act - trigger the FetchData components PersistForecasts method
+state.TriggerOnPersisting();
+
+// Assert that state was saved and there is a non-empty forecast array returned
+var didSaveState = state.TryTake&lt;WeatherForecast[]&gt;(&quot;weather-data&quot;, out var savedState);
+Assert.IsTrue(didSaveState);
+Assert.NotEmpty(savedState);
+</code></pre>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/test-doubles/persistentcomponentstate.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://dotnetfoundation.org" title=".NET Foundation">
+            <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg" alt=".NET Foundation">
+          </a>
+          <p class="pt-1"><small>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</small></p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary bg-body-tertiary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <small>Documentation updated on 2026-02-27T14:38:27.0000000+00:00 in commit a452cce29f</small>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

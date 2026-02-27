@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>bUnit - a testing library for Blazor components | bUnit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="bUnit - a testing library for Blazor components | bUnit ">
+      <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" href="/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
+      <link rel="manifest" href="/site.webmanifest">
+
+      <link rel="stylesheet" href="public/docfx.min.css">
+      <link rel="stylesheet" href="public/main.css">
+      <meta name="docfx:navrel" content="toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/index.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="index.html">
+            <img id="logo" class="svg" src="/images/bunit-logo.png" alt="bUnit">
+            bUnit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="home">
+
+
+<p><a href="https://github.com/egil/bunit/releases"><img src="https://img.shields.io/github/v/tag/egil/bunit?include_prereleases&amp;logo=github&amp;style=flat-square" alt="GitHub tag (latest SemVer pre-release)"></a>
+<a href="https://www.nuget.org/packages/bunit/"><img src="https://img.shields.io/nuget/dt/bunit?logo=nuget&amp;style=flat-square" alt="Nuget"></a>
+<a href="https://github.com/egil/bunit/issues"><img src="https://img.shields.io/github/issues/egil/bunit.svg?style=flat-square&amp;logo=github" alt="Issues Open"></a></p>
+<h1 id="bunit-a-testing-library-for-blazor-components">bUnit: a testing library for Blazor components</h1>
+<p><strong>bUnit</strong> is a testing library for Blazor Components. Its goal is to make it easy to write <em>comprehensive, stable</em> unit tests. With bUnit, you can:</p>
+<ul>
+<li>Setup and define components under tests using C# or Razor syntax</li>
+<li>Verify outcomes using semantic HTML comparer</li>
+<li>Interact with and inspect components as well as trigger event handlers</li>
+<li>Pass parameters, cascading values and inject services into components under test</li>
+<li>Mock <code>IJSRuntime</code>, Blazor authentication and authorization, and others</li>
+</ul>
+<p>bUnit builds on top of existing unit testing frameworks such as xUnit, NUnit, MSTest and TUnit, which run the Blazor components tests in just the same way as any normal unit test. bUnit runs a test in milliseconds, compared to browser-based UI tests which usually take seconds to run.</p>
+<p><strong>Go to the <a class="xref" href="docs/getting-started/index.html">Documentation</a> pages to learn more.</strong></p>
+<h3 id="test-example">Test example</h3>
+<p>Let’s write a test for the <code>&lt;Counter&gt;</code> component listed below. This comes with the standard Blazor project template which verifies that the counter corrects increments when the button is clicked:</p>
+<pre><code class="lang-razor" name="Counter.razor">&lt;h1&gt;Counter&lt;/h1&gt;
+
+&lt;p&gt;
+    Current count: @currentCount
+&lt;/p&gt;
+
+&lt;button class=&quot;btn btn-primary&quot; @onclick=&quot;IncrementCount&quot;&gt;Click me&lt;/button&gt;
+
+@code {
+  int currentCount = 0;
+
+  void IncrementCount()
+  {
+    currentCount++;
+  }
+}
+</code></pre>
+<p>To do this, you can carry out the following using bUnit and xUnit:</p>
+<pre><code class="lang-cshtml" name="CounterTest.razor">@inherits BunitContext
+@code {
+  [Fact]
+  public void CounterShouldIncrementWhenClicked()
+  {
+    // Arrange: render the Counter.razor component
+    var cut = Render(@&lt;Counter /&gt;);
+
+    // Act: find and click the &lt;button&gt; element to increment
+    // the counter in the &lt;p&gt; element
+    cut.Find(&quot;button&quot;).Click();
+
+    // Assert: first find the &lt;p&gt; element, then verify its content
+    cut.Find(&quot;p&quot;).MarkupMatches(@&lt;p&gt;Current count: 1&lt;/p&gt;);
+  }
+}
+</code></pre>
+<p>This test uses bUnit's test context to render the <code>Counter</code> component with the <code>Render</code> method. It then finds the button the component rendered and clicks it with the <code>Find</code> and <code>Click</code> methods. Finally, it finds the paragraph (<code>&lt;p&gt;</code>) element and verifies that it matches the expected markup passed to the MarkupMatches method.</p>
+<p><strong>Go to the <a class="xref" href="docs/getting-started/index.html">Documentation</a> pages to learn more.</strong></p>
+<h3 id="nuget-downloads">NuGet downloads</h3>
+<p>bUnit is available on NuGet in various incarnations. Most users should just pick the <a href="https://www.nuget.org/packages/bunit/">bUnit</a> package:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>NuGet Download Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.nuget.org/packages/bunit/">bUnit</a></td>
+<td>Includes the bUnit.core and bUnit.web packages.</td>
+<td><a href="https://www.nuget.org/packages/bunit/"><img src="https://img.shields.io/nuget/dt/bunit?logo=nuget&amp;style=flat-square" alt="Nuget"></a></td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/bunit.template/">bUnit.template</a></td>
+<td>Template for bUnit test projects based on xUnit, NUnit or MSTest</td>
+<td><a href="https://www.nuget.org/packages/bunit.template/"><img src="https://img.shields.io/nuget/dt/bunit.template?logo=nuget&amp;style=flat-square" alt="Nuget"></a></td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/bunit.generators/">bUnit.generators</a></td>
+<td>Source code generators to minimize code setup in various situations.</td>
+<td><a href="https://www.nuget.org/packages/bunit.generators/"><img src="https://img.shields.io/nuget/dt/bunit.generators?logo=nuget&amp;style=flat-square" alt="Nuget"></a></td>
+</tr>
+<tr>
+<td><a href="https://www.nuget.org/packages/bunit.web.query/">bUnit.web.query</a></td>
+<td>bUnit implementation of testing-library.com's query APIs.</td>
+<td><a href="https://www.nuget.org/packages/bunit.web.query/"><img src="https://img.shields.io/nuget/dt/bunit.web.query?logo=nuget&amp;style=flat-square" alt="Nuget"></a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="sponsors">Sponsors</h2>
+<p>A huge thank you to the <a href="https://github.com/sponsors/egil">sponsors of bUnit</a>. The higher tier sponsors are:</p>
+<div class="d-flex flex-row mb-3 align-items-center">
+  <a href="https://www.testmuai.com/?utm_medium=sponsor&utm_source=bunit" target="_blank" class="d-block p-3 text-center">
+    <img src="sponsors/testmu.png" style="vertical-align: middle;" width="250" height="45">
+    <br>
+    TestMu AI
+  </a>
+</div>
+<h2 id="contributors">Contributors</h2>
+<p>Shoutouts and a big thank you <a href="https://github.com/egil/bunit/graphs/contributors">to all the contributors</a> to the library, including those who raise issues, those who provide input to issues, and those who send pull requests.</p>
+<p><strong>Want to help out? You can help in a number of ways:</strong></p>
+<ul>
+<li>Provide feedback and input through <a href="https://github.com/egil/bunit/issues">issues</a>, via <a href="https://twitter.com/egilhansen">Twitter</a> or by using the <a href="https://gitter.im/egil/bunit">bUnit Gitter chat room</a>.</li>
+<li>Help build the library. Just pick an issue and submit pull requests.</li>
+<li>Help write documentation.</li>
+<li>Create blog posts, presentations, or video tutorials. If you do, I'll be happy to showcase them in the <a class="xref" href="docs/external-resources.html">related section</a> on this site.</li>
+</ul>
+<h2 id="code-of-conduct">Code of conduct</h2>
+<p>This project has adopted the code of conduct defined by the Contributor Covenant to clarify expected behavior in our community.
+For more information see the <a href="https://dotnetfoundation.org/code-of-conduct">.NET Foundation Code of Conduct</a>.</p>
+<h2 id="net-foundation">.NET Foundation</h2>
+<p>This project is supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/index.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://dotnetfoundation.org" title=".NET Foundation">
+            <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg" alt=".NET Foundation">
+          </a>
+          <p class="pt-1"><small>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</small></p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary bg-body-tertiary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <small>Documentation updated on 2026-02-27T14:38:27.0000000+00:00 in commit a452cce29f</small>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,439 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class JSRuntimeInvocationHandler
+ | bUnit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class JSRuntimeInvocationHandler
+ | bUnit ">
+      <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" href="/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
+      <link rel="manifest" href="/site.webmanifest">
+
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="..//images/bunit-logo.png" alt="bUnit">
+            bUnit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Bunit.JSRuntimeInvocationHandler">
+
+
+
+  <h1 id="Bunit_JSRuntimeInvocationHandler" data-uid="Bunit.JSRuntimeInvocationHandler" class="text-break">
+    Class JSRuntimeInvocationHandler
+  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Bunit.html">Bunit</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>bunit.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Represents a handler for an invocation of a JavaScript function which returns nothing, with specific arguments.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class JSRuntimeInvocationHandler : JSRuntimeInvocationHandlerBase&lt;IJSVoidResult&gt;, IDisposable</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Bunit.JSRuntimeInvocationHandlerBase-1.html">JSRuntimeInvocationHandlerBase</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.jsinterop.infrastructure.ijsvoidresult">IJSVoidResult</a>&gt;</div>
+      <div><span class="xref">JSRuntimeInvocationHandler</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Bunit.JSRuntimeInvocationHandlerBase-1.html#Bunit_JSRuntimeInvocationHandlerBase_1_SetCanceledBase">JSRuntimeInvocationHandlerBase&lt;IJSVoidResult&gt;.SetCanceledBase()</a>
+    </div>
+    <div>
+      <a class="xref" href="Bunit.JSRuntimeInvocationHandlerBase-1.html#Bunit_JSRuntimeInvocationHandlerBase_1_SetExceptionBase__1___0_">JSRuntimeInvocationHandlerBase&lt;IJSVoidResult&gt;.SetExceptionBase&lt;TException&gt;(TException)</a>
+    </div>
+    <div>
+      <a class="xref" href="Bunit.JSRuntimeInvocationHandlerBase-1.html#Bunit_JSRuntimeInvocationHandlerBase_1_SetResultBase__0_">JSRuntimeInvocationHandlerBase&lt;IJSVoidResult&gt;.SetResultBase(IJSVoidResult)</a>
+    </div>
+    <div>
+      <a class="xref" href="Bunit.JSRuntimeInvocationHandlerBase-1.html#Bunit_JSRuntimeInvocationHandlerBase_1_HandleAsync_Bunit_JSRuntimeInvocation_">JSRuntimeInvocationHandlerBase&lt;IJSVoidResult&gt;.HandleAsync(JSRuntimeInvocation)</a>
+    </div>
+    <div>
+      <a class="xref" href="Bunit.JSRuntimeInvocationHandlerBase-1.html#Bunit_JSRuntimeInvocationHandlerBase_1_Dispose">JSRuntimeInvocationHandlerBase&lt;IJSVoidResult&gt;.Dispose()</a>
+    </div>
+    <div>
+      <a class="xref" href="Bunit.JSRuntimeInvocationHandlerBase-1.html#Bunit_JSRuntimeInvocationHandlerBase_1_Dispose_System_Boolean_">JSRuntimeInvocationHandlerBase&lt;IJSVoidResult&gt;.Dispose(bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="Bunit.JSRuntimeInvocationHandlerBase-1.html#Bunit_JSRuntimeInvocationHandlerBase_1_IsCatchAllHandler">JSRuntimeInvocationHandlerBase&lt;IJSVoidResult&gt;.IsCatchAllHandler</a>
+    </div>
+    <div>
+      <a class="xref" href="Bunit.JSRuntimeInvocationHandlerBase-1.html#Bunit_JSRuntimeInvocationHandlerBase_1_Invocations">JSRuntimeInvocationHandlerBase&lt;IJSVoidResult&gt;.Invocations</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_VerifyInvoke__1_Bunit_JSRuntimeInvocationHandlerBase___0__System_String_System_Int32_System_String_">JSRuntimeAssertExtensions.VerifyInvoke&lt;TResult&gt;(JSRuntimeInvocationHandlerBase&lt;TResult&gt;, string, int, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_VerifyInvoke__1_Bunit_JSRuntimeInvocationHandlerBase___0__System_String_System_String_">JSRuntimeAssertExtensions.VerifyInvoke&lt;TResult&gt;(JSRuntimeInvocationHandlerBase&lt;TResult&gt;, string, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_VerifyNotInvoke__1_Bunit_JSRuntimeInvocationHandlerBase___0__System_String_System_String_">JSRuntimeAssertExtensions.VerifyNotInvoke&lt;TResult&gt;(JSRuntimeInvocationHandlerBase&lt;TResult&gt;, string, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_ShouldBeElementReferenceTo_System_Object_AngleSharp_Dom_IElement_">JSRuntimeAssertExtensions.ShouldBeElementReferenceTo(object?, IElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_ShouldBeElementReferenceTo_System_Object_AngleSharp_Dom_IElement_">JSRuntimeAssertExtensions.ShouldBeElementReferenceTo(object?, IElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_ShouldBeElementReferenceTo_System_Object_AngleSharp_Dom_IElement_">JSRuntimeAssertExtensions.ShouldBeElementReferenceTo(object?, IElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="Bunit.JSRuntimeAssertExtensions.html#Bunit_JSRuntimeAssertExtensions_ShouldBeElementReferenceTo_System_Object_AngleSharp_Dom_IElement_">JSRuntimeAssertExtensions.ShouldBeElementReferenceTo(object?, IElement)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Bunit_JSRuntimeInvocationHandler__ctor_" data-uid="Bunit.JSRuntimeInvocationHandler.#ctor*"></a>
+
+  <h3 id="Bunit_JSRuntimeInvocationHandler__ctor_Bunit_InvocationMatcher_System_Boolean_" data-uid="Bunit.JSRuntimeInvocationHandler.#ctor(Bunit.InvocationMatcher,System.Boolean)">
+  JSRuntimeInvocationHandler(InvocationMatcher, bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Bunit.JSRuntimeInvocationHandler.html">JSRuntimeInvocationHandler</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected JSRuntimeInvocationHandler(InvocationMatcher matcher, bool isCatchAllHandler)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>matcher</code> <a class="xref" href="Bunit.InvocationMatcher.html">InvocationMatcher</a></dt>
+    <dd><p>An invocation matcher used to determine if the handler should handle an invocation.</p>
+</dd>
+    <dt><code>isCatchAllHandler</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Set to true if this handler is a catch all handler, that should only be used if there are no other non-catch all handlers available.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Bunit_JSRuntimeInvocationHandler_IsVoidResultHandler_" data-uid="Bunit.JSRuntimeInvocationHandler.IsVoidResultHandler*"></a>
+
+  <h3 id="Bunit_JSRuntimeInvocationHandler_IsVoidResultHandler" data-uid="Bunit.JSRuntimeInvocationHandler.IsVoidResultHandler">
+  IsVoidResultHandler
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a value indicating whether this handler is set up to handle calls to <code>InvokeVoidAsync(string, object[])</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override sealed bool IsVoidResultHandler { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Bunit_JSRuntimeInvocationHandler_SetCanceled_" data-uid="Bunit.JSRuntimeInvocationHandler.SetCanceled*"></a>
+
+  <h3 id="Bunit_JSRuntimeInvocationHandler_SetCanceled" data-uid="Bunit.JSRuntimeInvocationHandler.SetCanceled">
+  SetCanceled()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Marks the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a> that invocations will receive as canceled.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JSRuntimeInvocationHandler SetCanceled()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Bunit.JSRuntimeInvocationHandler.html">JSRuntimeInvocationHandler</a></dt>
+    <dd><p>This handler to allow calls to be chained.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_JSRuntimeInvocationHandler_SetException_" data-uid="Bunit.JSRuntimeInvocationHandler.SetException*"></a>
+
+  <h3 id="Bunit_JSRuntimeInvocationHandler_SetException__1___0_" data-uid="Bunit.JSRuntimeInvocationHandler.SetException``1(``0)">
+  SetException&lt;TException&gt;(TException)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets the <code class="typeparamref">TException</code> exception that invocations will receive.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JSRuntimeInvocationHandler SetException&lt;TException&gt;(TException exception) where TException : Exception</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>exception</code> <span class="xref">TException</span></dt>
+    <dd><p>The exception to set.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Bunit.JSRuntimeInvocationHandler.html">JSRuntimeInvocationHandler</a></dt>
+    <dd><p>This handler to allow calls to be chained.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TException</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Bunit_JSRuntimeInvocationHandler_SetVoidResult_" data-uid="Bunit.JSRuntimeInvocationHandler.SetVoidResult*"></a>
+
+  <h3 id="Bunit_JSRuntimeInvocationHandler_SetVoidResult" data-uid="Bunit.JSRuntimeInvocationHandler.SetVoidResult">
+  SetVoidResult()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Completes the current awaiting void invocation requests.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JSRuntimeInvocationHandler SetVoidResult()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Bunit.JSRuntimeInvocationHandler.html">JSRuntimeInvocationHandler</a></dt>
+    <dd><p>This handler to allow calls to be chained.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://dotnetfoundation.org" title=".NET Foundation">
+            <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg" alt=".NET Foundation">
+          </a>
+          <p class="pt-1"><small>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</small></p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary bg-body-tertiary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <small>Documentation updated on 2026-02-27T14:38:27.0000000+00:00 in commit a452cce29f</small>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

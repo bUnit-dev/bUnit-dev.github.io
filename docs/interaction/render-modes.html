@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Render modes and RendererInfo | bUnit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Render modes and RendererInfo | bUnit ">
+      <meta name="description" content="bUnit is a unit testing library for Blazor Components. You can easily define components under test in C# or Razor syntax and verify outcome using semantic HTML diffing/comparison logic. You can interact with and inspect components, trigger event handlers, provide cascading values, inject services, mock IJsRuntime, and perform snapshot testing.">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" href="/favicon.ico">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+
+      <link rel="manifest" href="/site.webmanifest">
+
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/interaction/render-modes.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../..//images/bunit-logo.png" alt="bUnit">
+            bUnit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="render-modes">
+<h1 id="support-for-render-modes-and-rendererinfo">Support for render modes and <code>RendererInfo</code></h1>
+
+<p>This article explains how to emulate different render modes and <code>RendererInfo</code> in bUnit tests.</p>
+<p>Render modes in Blazor Web Apps determine the hosting model and interactivity of components. A render mode can be applied to a component using the <code>@rendermode</code> directive. The <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.rendererinfo?view=aspnetcore-9.0"><code>RendererInfo</code></a> allows the application to determine the interactivity and location of the component. For more details, see the <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-9.0">Blazor render modes</a> documentation.</p>
+<h2 id="setting-the-render-mode-for-a-component-under-test">Setting the render mode for a component under test</h2>
+<p>Setting the render mode can be done via the <a class="xref" href="../../api/Bunit.ComponentParameterCollectionBuilder-1.html#Bunit_ComponentParameterCollectionBuilder_1_SetAssignedRenderMode_Microsoft_AspNetCore_Components_IComponentRenderMode_">SetAssignedRenderMode(IComponentRenderMode?)</a> method when writing in a C# file. In a razor file use the <code>@rendermode</code> directive. Both take an <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.icomponentrendermode?view=aspnetcore-9.0"><code>IComponentRenderMode</code></a> object as a parameter. Normally this is one of the following types:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.web.interactiveautorendermode?view=aspnetcore-9.0"><code>InteractiveAutoRenderMode</code></a></li>
+<li><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.web.interactiveserverrendermode?view=aspnetcore-9.0"><code>InteractiveServerRendeMode</code></a></li>
+<li><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.web.interactivewebassemblyrendermode?view=aspnetcore-9.0"><code>InteractiveWebAssemblyRenderMode</code></a></li>
+</ul>
+<p>For ease of use the <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.web.rendermode?view=aspnetcore-9.0"><code>RenderMode</code></a> class defines all three of them.</p>
+<p>For example <code>MovieComponent.razor</code>:</p>
+<pre><code class="lang-razor">@if (AssignedRenderMode is null)
+{
+    // The render mode is Static Server
+    &lt;form action=&quot;/movies&quot;&gt;
+        &lt;input type=&quot;text&quot; name=&quot;titleFilter&quot; /&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;Search&quot; /&gt;
+    &lt;/form&gt;
+}
+else
+{
+    // The render mode is Interactive Server, WebAssembly, or Auto
+    &lt;input @bind=&quot;titleFilter&quot; /&gt;
+    &lt;button @onclick=&quot;FilterMovies&quot;&gt;Search&lt;/button&gt;
+}
+</code></pre>
+<p>The following example shows how to test the above component to check both render modes:</p>
+<div class="tabGroup" id="tabgroup_1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_1_csharp" role="tab" aria-controls="tabpanel_1_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C# test code</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_razor" role="tab" aria-controls="tabpanel_1_razor" data-tab="razor" tabindex="-1">Razor test code</a>
+</li>
+</ul>
+<section id="tabpanel_1_csharp" role="tabpanel" data-tab="csharp">
+
+<pre><code class="lang-csharp">[Fact]
+public void InteractiveServer()
+{
+  // Act
+  var cut = RenderComponent&lt;MovieComponent&gt;(ps =&gt; ps
+    .SetAssignedRenderMode(RenderMode.InteractiveServer));
+  
+  // Assert
+  cut.MarkupMatches(&quot;&quot;&quot;
+                    &lt;input diff:ignoreAttributes /&gt;
+                    &lt;button&gt;Search&lt;/button&gt;
+                    &quot;&quot;&quot;);
+}
+
+[Fact]
+public void StaticRendering()
+{
+  // Act
+  var cut = RenderComponent&lt;MovieComponent&gt;();
+  // This is the same behavior as:
+  // var cut = RenderComponent&lt;MovieComponent&gt;(ps =&gt; ps
+  //  .SetAssignedRenderMode(null));
+  
+  // Assert
+  cut.MarkupMatches(&quot;&quot;&quot;
+                    &lt;form action=&quot;/movies&quot;&gt;
+                    &lt;input type=&quot;text&quot; name=&quot;titleFilter&quot; /&gt;
+                    &lt;input type=&quot;submit&quot; value=&quot;Search&quot; /&gt;
+                    &lt;/form&gt;
+                    &quot;&quot;&quot;);
+}
+</code></pre>
+</section>
+<section id="tabpanel_1_razor" role="tabpanel" data-tab="razor" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-razor">@inherits TestContext
+@code {
+  [Fact]
+  public void InteractiveServer()
+  {
+    // Act
+    var cut = Render(@&lt;MovieComponent @rendermode=&quot;RenderMode.InteractiveServer&quot; /&gt;);
+
+    // Assert
+    cut.MarkupMatches(@&lt;text&gt;
+                        &lt;input diff:ignoreAttributes /&gt;
+                        &lt;button&gt;Search&lt;/button&gt;
+                       &lt;/text&gt;);
+  }
+
+  [Fact]
+  public void StaticRendering()
+  {
+    // Act
+    var cut = Render(@&lt;MovieComponent /&gt;);
+
+    // Assert
+    cut.MarkupMatches(@&lt;form action=&quot;/movies&quot;&gt;
+                          &lt;input type=&quot;text&quot; name=&quot;titleFilter&quot; /&gt;
+                          &lt;input type=&quot;submit&quot; value=&quot;Search&quot; /&gt;
+                        &lt;/form&gt;);
+  }
+}
+</code></pre>
+</section>
+</div>
+<h2 id="setting-the-rendererinfo-during-testing">Setting the <code>RendererInfo</code> during testing</h2>
+<p>To control the <code>ComponentBase.RendererInfo</code> property during testing, use the <a class="xref" href="../../api/Bunit.BunitContext.html#Bunit_BunitContext_SetRendererInfo_Microsoft_AspNetCore_Components_RendererInfo_">SetRendererInfo(RendererInfo?)</a> method on the <code>TestContext</code> class. The <code>SetRendererInfo</code> method takes an nullable <code>RendererInfo</code> object as a parameter. Passing <code>null</code> will set the <code>ComponentBase.RendererInfo</code> to <code>null</code>.</p>
+<p>A component (<code>AssistentComponent.razor</code>) might check if interactivity is given to enable a button:</p>
+<pre><code class="lang-razor">@if (RendererInfo.IsInteractive)
+{
+    &lt;p&gt;Hey I am your assistant&lt;/p&gt;
+}
+else
+{
+    &lt;p&gt;Loading...&lt;/p&gt;
+}
+</code></pre>
+<p>In the test, you can set the <code>RendererInfo</code> to enable or disable the button:</p>
+<pre><code class="lang-csharp">[Fact]
+public void SimulatingPreRenderingOnBlazorServer()
+{
+  // Arrange
+  SetRendererInfo(new RendererInfo(rendererName: &quot;Static&quot;, isInteractive: false));
+
+  // Act
+  var cut = RenderComponent&lt;AssistentComponent&gt;();
+
+  // Assert
+  cut.MarkupMatches(&quot;&lt;p&gt;Loading...&lt;/p&gt;&quot;);
+}
+
+[Fact]
+public void SimulatingInteractiveServerRendering()
+{
+  // Arrange
+  SetRendererInfo(new RendererInfo(rendererMode: &quot;Server&quot;, isInteractive: true));
+
+  // Act
+  var cut = RenderComponent&lt;AssistentComponent&gt;();
+
+  // Assert
+  cut.MarkupMatches(&quot;&lt;p&gt;Hey I am your assistant&lt;/p&gt;&quot;);
+}
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If a component under test uses the <code>ComponentBase.RendererInfo</code> property and the <code>SetRendererInfo</code> on <code>TestContext</code> hasn't been passed in a <code>RendererInfo</code> object, the renderer will throw an exception.</p>
+</div>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/bUnit-dev/bUnit/blob/stable/docs/site/docs/interaction/render-modes.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+        <div class="border-top text-center pt-4">
+          <a class="d-block" href="https://dotnetfoundation.org" title=".NET Foundation">
+            <img width="150" src="/sponsors/dotnetfoundation_v4_purple.svg" alt=".NET Foundation">
+          </a>
+          <p class="pt-1"><small>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>.</small></p>
+        </div>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary bg-body-tertiary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <small>Documentation updated on 2026-02-27T14:38:27.0000000+00:00 in commit a452cce29f</small>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
